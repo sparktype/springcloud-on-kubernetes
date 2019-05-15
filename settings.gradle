@@ -1,0 +1,21 @@
+rootProject.name = 'spring-cloud-java11'
+
+include 'api-base'
+include 'api-user'
+include 'api-client'
+include 'spring-cloud-config'
+include 'spring-cloud-eureka'
+include 'spring-cloud-hystrix'
+include 'spring-cloud-oauth'
+include 'spring-cloud-sidecar'
+include 'spring-cloud-sidecar'
+include 'spring-cloud-zuul'
+
+buildCache {
+  local(DirectoryBuildCache) {
+    directory = new File(rootDir, 'build-cache')
+    removeUnusedEntriesAfterDays = 30
+  }
+}
+
+

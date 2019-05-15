@@ -1,0 +1,15 @@
+configure(subprojects.findAll { it.name != 'api-base' }) {
+  apply plugin: 'com.google.cloud.tools.jib'
+
+  jib {
+    from {
+      image = "${dockerBaseImage}"
+    }
+    to {
+      image = "${dockerGroupName}/${project.name}-java11"
+      tags = [project.version, 'latest']
+      credHelper = 'osxkeychain'
+    }
+  }
+  jib.container.jvmFlags = ArrayList.of("-Djava.security.egd=file:/dev/./urandom")
+}

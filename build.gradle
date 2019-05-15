@@ -1,0 +1,63 @@
+buildscript {
+  ext {
+    springBootVersion = '2.1.4.RELEASE'
+    jibVersion = '1.1.2'
+    aptVersion = '0.21'
+    gradleDir = "$rootProject.projectDir/gradle"
+  }
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+  }
+  dependencies {
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
+    classpath "net.ltgt.gradle:gradle-apt-plugin:${aptVersion}"
+  }
+}
+
+plugins {
+  id "groovy"
+}
+
+ext {
+  set('groovy.version', '2.5.6')
+}
+
+allprojects {
+  repositories {
+    mavenCentral()
+  }
+}
+
+subprojects {
+  apply plugin: 'groovy'
+  apply plugin: 'java'
+  apply plugin: 'org.springframework.boot'
+  apply plugin: 'io.spring.dependency-management'
+
+  sourceCompatibility = '11'
+  group = 'basepack.springcloud'
+
+  dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.spockframework:spock-core:${spockVersion}"
+    testImplementation "org.spockframework:spock-spring:${spockVersion}"
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+  }
+
+  dependencyManagement {
+    imports {
+      mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+  }
+}
+
+apply from: "$gradleDir/mapstruct.gradle"
+
+apply from: "$gradleDir/jib.gradle"
