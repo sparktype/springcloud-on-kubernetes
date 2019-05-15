@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cfg
+spec:
+  rules:
+  - host: cfg.k8s.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: config
+          servicePort: 8888
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: config
+spec:
+  selector:
+    app: config
+  ports:
+  - protocol: TCP
+    port: 8888
+    targetPort: 8888
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config
+  template:
+    metadata:
+      labels:
+        app: config
+    spec:
+      containers:
+      - name: app
+        image: hubtea/spring-cloud-config:latest
+        ports:
+        - containerPort: 8888

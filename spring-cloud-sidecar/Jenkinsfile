@@ -1,0 +1,45 @@
+#!groovy
+
+def label = "buildpod.${env.JOB_NAME}.${env.BUILD_NUMBER}".replace('-', '_').replace('/', '_')
+
+podTemplate(label: label, containers: [
+    containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, alwaysPullImage: true, privileged: true),
+], volumes: [
+    hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
+    persistentVolumeClaim(mountPath: '/home/jenkins/.m2', claimName: 'maven-cache', readOnly: false),
+    persistentVolumeClaim(mountPath: '/var/lib/docker', claimName: 'docker-cache', readOnly: false),
+    persistentVolumeClaim(mountPath: '~/.gradle', claimName: 'gradle-cache', readOnly: false)
+]) {
+
+    node(label) {
+        def git = checkout scm
+        def branch = git.GIT_BRANCH
+        def image
+
+        stage('Test') {
+            try {
+                sh './gradlew check'
+            } finally {
+                junit 'build/test-results/**/*.xml'
+            }
+        }
+
+        stage('Build') {
+            sh './gradlew build -x test'
+        }
+
+        stage('Archiving Artifacts') {
+            archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
+        }
+
+        stage('Build Docker Image') {
+            container(name: 'docker') {
+                image = docker.build("hubtea/spring-cloud-sidecar")
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    image.push("${env.BUILD_NUMBER}")
+                    image.push("latest")
+                }
+            }
+        }
+    }
+}

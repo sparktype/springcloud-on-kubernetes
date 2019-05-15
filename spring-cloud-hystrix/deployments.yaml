@@ -1,0 +1,67 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hystrix
+spec:
+  rules:
+  - host: hystrix.k8s.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hystrix
+          servicePort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: hystrix
+spec:
+  type: ClusterIP
+  selector:
+    app: spring-cloud-hystrix
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hystrix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-cloud-hystrix
+  template:
+    metadata:
+      labels:
+        app: spring-cloud-hystrix
+    spec:
+      containers:
+      - name: app
+        image: hubtea/spring-cloud-hystrix:latest
+        resources:
+          requests:
+            memory: "700Mi"
+          limits:
+            memory: "800Mi"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: spring.profiles.active
+          valueFrom:
+            configMapKeyRef:
+              name: base-config
+              key: spring.profiles.active
+        - name: eureka.client.serviceUrl.defaultZone
+          valueFrom:
+            configMapKeyRef:
+              name: base-config
+              key: spring.cloud.eureka.uri
+        - name: spring.cloud.config.uri
+          valueFrom:
+            configMapKeyRef:
+              name: base-config
+              key: spring.cloud.config.uri

@@ -1,0 +1,48 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: oauth
+spec:
+  type: ClusterIP
+  selector:
+    app: oauth
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oauth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oauth
+  template:
+    metadata:
+      labels:
+        app: oauth
+    spec:
+      containers:
+      - name: app
+        image: hubtea/spring-cloud-oauth:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: spring.profiles.active
+          valueFrom:
+            configMapKeyRef:
+              name: base-config
+              key: spring.profiles.active
+        - name: eureka.client.serviceUrl.defaultZone
+          valueFrom:
+            configMapKeyRef:
+              name: base-config
+              key: spring.cloud.eureka.uri
+        - name: spring.cloud.config.uri
+          valueFrom:
+            configMapKeyRef:
+              name: base-config
+              key: spring.cloud.config.uri

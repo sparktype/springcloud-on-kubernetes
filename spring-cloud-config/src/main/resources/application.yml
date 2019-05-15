@@ -1,0 +1,15 @@
+server:
+  port: 8888
+  http2:
+    enabled: true
+spring:
+  # rabbitmq:
+  #   host: localhost
+  #   port: 5672
+  #   username: cloudbus
+  #   password: 1234
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/hub-tea/spring-cloud-config-repo.git

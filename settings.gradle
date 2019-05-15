@@ -10,6 +10,7 @@ include 'spring-cloud-oauth'
 include 'spring-cloud-sidecar'
 include 'spring-cloud-sidecar'
 include 'spring-cloud-zuul'
+include 'spring-cloud-gateway'
 
 buildCache {
   local(DirectoryBuildCache) {

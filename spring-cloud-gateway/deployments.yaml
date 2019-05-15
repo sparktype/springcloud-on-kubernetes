@@ -1,0 +1,64 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: zuul
+spec:
+  rules:
+  - host: api.k8s.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: zuul
+          servicePort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: zuul
+spec:
+  type: ClusterIP
+  selector:
+    app: zuul
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zuul-deployment
+  labels:
+    app: zuul
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zuul
+  template:
+    metadata:
+      labels:
+        app: zuul
+    spec:
+      containers:
+      - name: app
+        image: hubtea/spring-cloud-zuul:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: spring.profiles.active
+            valueFrom:
+              configMapKeyRef:
+                name: base-configmap
+                key: spring.profiles.active
+        - name: eureka.client.serviceUrl.defaultZone
+            valueFrom:
+              configMapKeyRef:
+                name: base-configmap
+                key: spring.cloud.eureka.uri
+        - name: spring.cloud.config.uri
+          valueFrom:
+            configMapKeyRef:
+              name: base-configmap
+              key: spring.cloud.config.uri

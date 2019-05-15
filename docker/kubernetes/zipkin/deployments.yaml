@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: zipkin
+spec:
+  rules:
+  - host: zipkin.k8s.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: zipkin
+          servicePort: 9411
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: zipkin
+spec:
+  selector:
+    app: zipkin
+  ports:
+  - protocol: TCP
+    port: 9411
+    targetPort: 9411
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zipkin
+  template:
+    metadata:
+      labels:
+        app: zipkin
+    spec:
+      containers:
+      - name: app
+        image: openzipkin/zipkin
+        resources:
+          requests:
+            memory: "450Mi"
+          limits:
+            memory: "550Mi"
+        ports:
+        - containerPort: 9411

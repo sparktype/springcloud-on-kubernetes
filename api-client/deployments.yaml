@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client
+spec:
+  selector:
+    app: client-api
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-api
+  template:
+    metadata:
+      labels:
+        app: client-api
+    spec:
+      containers:
+      - name: app
+        image: hubtea/client-api:latest
+        resources:
+          requests:
+            memory: "950Mi"
+          limits:
+            memory: "1000Mi"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: spring.profiles.active
+          valueFrom:
+            configMapKeyRef:
+              name: base-config
+              key: spring.profiles.active
+        - name: eureka.client.serviceUrl.defaultZone
+          valueFrom:
+            configMapKeyRef:
+              name: base-config
+              key: spring.cloud.eureka.uri
+        - name: spring.cloud.config.uri
+          valueFrom:
+            configMapKeyRef:
+              name: base-config
+              key: spring.cloud.config.uri
+        - name: spring.zipkin.baseUrl
+          valueFrom:
+            configMapKeyRef:
+              name: base-config
+              key: openzipkin.uri

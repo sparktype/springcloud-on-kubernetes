@@ -1,6 +1,6 @@
 buildscript {
   ext {
-    springBootVersion = '2.1.4.RELEASE'
+    springBootVersion = '2.1.5.RELEASE'
     jibVersion = '1.1.2'
     aptVersion = '0.21'
     gradleDir = "$rootProject.projectDir/gradle"
@@ -37,10 +37,15 @@ subprojects {
   apply plugin: 'io.spring.dependency-management'
 
   sourceCompatibility = '11'
-  group = 'basepack.springcloud'
+  group = 'clustercamp.springcloud'
+
+  configurations {
+    compile.exclude module: "spring-boot-starter-tomcat"
+  }
 
   dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
@@ -57,6 +62,7 @@ subprojects {
     }
   }
 }
+
 
 apply from: "$gradleDir/mapstruct.gradle"
 
