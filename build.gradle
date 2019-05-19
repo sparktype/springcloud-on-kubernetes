@@ -1,7 +1,7 @@
 buildscript {
   ext {
     springBootVersion = '2.1.5.RELEASE'
-    jibVersion = '1.1.2'
+    jibVersion = '1.2.0'
     aptVersion = '0.21'
     gradleDir = "$rootProject.projectDir/gradle"
   }

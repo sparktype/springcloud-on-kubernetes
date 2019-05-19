@@ -2,12 +2,14 @@ configure(subprojects.findAll { it.name != 'api-base' }) {
   apply plugin: 'com.google.cloud.tools.jib'
 
   jib {
-    from {
-      image = "${dockerBaseImage}"
-    }
+    from.image = "${dockerBaseImage}"
+
     to {
-      image = "${dockerGroupName}/${project.name}-java11"
-      tags = [project.version, 'latest']
+      image = "${dockerGroupName}/${project.name}"
+      tags = [
+        (dockerBaseArch == '') ? project.version : "${project.version}-${dockerBaseArch}".toString(),
+        'latest'
+      ]
       credHelper = 'osxkeychain'
     }
   }

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -45,17 +44,18 @@ public class ThrottleGatewayFilter implements GatewayFilter {
   @Override
   public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
-    TokenBucket tokenBucket = TokenBuckets.builder().withCapacity(capacity)
-      .withFixedIntervalRefillStrategy(refillTokens, refillPeriod, refillUnit)
-      .build();
-
-    // TODO: get a token bucket for a key
-    log.debug("TokenBucket capacity: " + tokenBucket.getCapacity());
-    boolean consumed = tokenBucket.tryConsume();
-    if (consumed) {
-      return chain.filter(exchange);
-    }
-    exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
-    return exchange.getResponse().setComplete();
+//    TokenBucket tokenBucket = TokenBuckets.builder().withCapacity(capacity)
+//      .withFixedIntervalRefillStrategy(refillTokens, refillPeriod, refillUnit)
+//      .build();
+//
+//    // TODO: get a token bucket for a key
+//    log.debug("TokenBucket capacity: " + tokenBucket.getCapacity());
+//    boolean consumed = tokenBucket.tryConsume();
+//    if (consumed) {
+//      return chain.filter(exchange);
+//    }
+//    exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
+//    return exchange.getResponse().setComplete();
+    return null;
   }
 }
