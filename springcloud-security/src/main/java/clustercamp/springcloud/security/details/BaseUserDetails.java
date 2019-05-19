@@ -1,13 +1,15 @@
-package clustercamp.springcloud.oauth.details;
+package clustercamp.springcloud.security.details;
 
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-@ToString
+@Getter
+@Setter
 public class BaseUserDetails implements UserDetails {
 
   private String password;
@@ -87,5 +89,4 @@ public class BaseUserDetails implements UserDetails {
   void setEnabled(boolean enabled) {
     this.enabled = enabled;
   }
-
 }

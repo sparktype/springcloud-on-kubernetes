@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: api-user-service
+    name: api-client-service
 ---
 spring:
   profiles: ide

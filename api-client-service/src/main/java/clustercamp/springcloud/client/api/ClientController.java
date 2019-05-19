@@ -1,4 +1,4 @@
-package clustercamp.springcloud.client;
+package clustercamp.springcloud.client.api;
 
 import clustercamp.springcloud.base.dto.ClientDto;
 import clustercamp.springcloud.client.service.ClientService;

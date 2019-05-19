@@ -2,7 +2,9 @@ package clustercamp.springcloud.user.domain;
 
 import clustercamp.springcloud.base.jpa.BaseEntity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +12,8 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
 public class User extends BaseEntity {
 
   @Id

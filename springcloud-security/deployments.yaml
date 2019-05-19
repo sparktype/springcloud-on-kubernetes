@@ -1,11 +1,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: oauth
+  name: security
 spec:
   type: ClusterIP
   selector:
-    app: oauth
+    app: security
   ports:
   - protocol: TCP
     port: 8080
@@ -14,20 +14,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oauth
+  name: security
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oauth
+      app: security
   template:
     metadata:
       labels:
-        app: oauth
+        app: security
     spec:
       containers:
       - name: app
-        image: hubtea/spring-cloud-oauth:latest
+        image: hubtea/spring-cloud-security:latest
         ports:
         - containerPort: 8080
         env:
