@@ -1,0 +1,6 @@
+configure(subprojects.findAll { it.name.startsWith('api-') }) {
+  dependencies {
+    implementation("mysql:mysql-connector-java:${mysqlVersion}")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+  }
+}

@@ -18,11 +18,15 @@ public class UserService {
 
   private final UserMapper mapper;
 
-  @HystrixCommand(fallbackMethod = "defaultFallback")
+  @HystrixCommand(fallbackMethod = "detail_")
   public UserDto detail(String userId) {
     return repository.findByUserId(userId)
       .map(mapper::convert)
       .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+  }
+
+  public UserDto detail_(String userId) {
+    return new UserDto();
   }
 
   @Transactional
@@ -34,22 +38,18 @@ public class UserService {
 
   @Transactional
   @HystrixCommand(fallbackMethod = "defaultFallback")
-  public UserDto modify(Long id, UserDto userDto) {
-    return repository.findById(id)
-      .map(c -> {
-        c.setPassword(userDto.getUserPass());
-        return mapper.convert(repository.save(c));
-      })
-      .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-  }
-
-  @Transactional
-  @HystrixCommand(fallbackMethod = "defaultFallback")
   public void remove(Long id) {
     repository.deleteById(id);
   }
 
-  public UserDto defaultFallback() {
-    return new UserDto();
+  @Transactional
+  @HystrixCommand(fallbackMethod = "defaultFallback")
+  public UserDto modify(Long id, UserDto userDto) {
+    return repository.findById(id)
+      .map(c -> {
+        c.setUserPass(userDto.getUserPass());
+        return mapper.convert(repository.save(c));
+      })
+      .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
   }
 }

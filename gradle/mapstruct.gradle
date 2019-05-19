@@ -1,4 +1,4 @@
-configure(subprojects.findAll { it.name == 'api-client' || it.name == 'api-user' }) {
+configure(subprojects.findAll { it.name.startsWith('api-') }) {
   apply plugin: 'net.ltgt.apt'
 
   dependencies {

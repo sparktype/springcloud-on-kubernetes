@@ -2,14 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: user-api-service
----
-spring:
-  profiles:
-    active: dev
-  cloud:
-    config:
-      uri: https://config.cluster.camp
+    name: api-user-service
 ---
 spring:
   profiles:
@@ -20,11 +13,11 @@ spring:
     username: spring
     password: spring1234
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
         format_sql: true
-    generate-ddl: false
+    generate-ddl: true
 eureka:
   client:
     enabled: false

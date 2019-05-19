@@ -13,14 +13,22 @@ import javax.persistence.Id;
 public class User extends BaseEntity {
 
   @Id
-  private Long id;
+  private long id;
 
   private String userId;
 
-  private String userName;
+  private String realName;
 
-  private String password;
+  private String userPass;
 
-  private String email;
+  private String roles;
+
+  private Boolean accountNonExpired;
+
+  private Boolean accountNonLocked;
+
+  private Boolean credentialsNonExpired;
+
+  private Boolean enabled;
 
 }
