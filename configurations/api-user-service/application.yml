@@ -8,7 +8,7 @@ spring:
   profiles: dev
   datasource:
     url: jdbc:mysql://mysql.springcloud.svc.cluster.local:3306/spring?useUnicode=yes&characterEncoding=UTF-8
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: spring
     password: spring1234
   jpa:
