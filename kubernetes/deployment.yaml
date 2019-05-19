@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: springcloud
+  labels:
+    name: springcloud
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: devops
+  labels:
+    name: devops
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springcloud-config
+  namespace: springcloud
+data:
+  application.yaml: |
+    server:
+      port: 8888
+    spring:
+      rabbitmq:
+        host: localhost
+        port: 5672
+        username: admin
+        password: 1234
+      cloud:
+        config:
+          server:
+            git:
+              uri: https://github.com/clustercamp/configurations.git
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springcloud
+  namespace: springcloud
+data:
+  active.profiles: dev
+  springcloud.config.uri: http://springcloud-config.springcloud:8888
+  springcloud.eureka.uri: http://eureka.development.svc.cluster.local:8761/eureka
+  springcloud.eureka.datacenter: Cluster Camp Kubernetes
+  springcloud.eureka.environment: Kubernetes
+  openzipkin.uri:  http://zipkin.development.svc.cluster.local:9411
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: rbac-springcloud-namespace
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: springcloud
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io

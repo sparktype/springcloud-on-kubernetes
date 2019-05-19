@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkin
+  namespace: springcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zipkin
+  template:
+    metadata:
+      labels:
+        app: zipkin
+    spec:
+      containers:
+      - name: app
+        image: cloudcamp/zipkin:latest
+        resources:
+          requests:
+            memory: "450Mi"
+          limits:
+            memory: "550Mi"
+        ports:
+        - containerPort: 9411
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: zipkin
+  namespace: springcloud
+spec:
+  selector:
+    app: zipkin
+  ports:
+    - protocol: TCP
+      port: 9411
+      targetPort: 9411
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: zipkin
+  namespace: springcloud
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    external-dns.alpha.kubernetes.io/target: home.cluster.camp
+spec:
+  rules:
+    - host: zipkin.cluster.camp
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: zipkin
+              servicePort: 9411
