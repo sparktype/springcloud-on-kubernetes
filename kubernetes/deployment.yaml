@@ -6,22 +6,15 @@ metadata:
     name: springcloud
 ---
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: devops
-  labels:
-    name: devops
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: springcloud
   namespace: springcloud
 data:
-  active.profiles: dev
-  springcloud.config.uri: http://springcloud-config.springcloud:8888
-  springcloud.eureka.uri: http://eureka.development.svc.cluster.local:8761/eureka
-  springcloud.eureka.datacenter: Cluster Camp Kubernetes
+  spring.profile: dev
+  springcloud.config.uri: http://config.springcloud.svc.cluster.local:8888
+  springcloud.eureka.uri: http://eureka.springcloud.svc.cluster.local:8761/eureka
+  springcloud.eureka.datacenter: Cluster Camp
   springcloud.eureka.environment: Kubernetes
   openzipkin.uri:  http://zipkin.development.svc.cluster.local:9411
 ---

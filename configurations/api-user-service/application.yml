@@ -7,18 +7,18 @@ spring:
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://mysql:3306/spring?useUnicode=yes&characterEncoding=UTF-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql.springcloud.svc.cluster.local:3306/spring?useUnicode=yes&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
     username: spring
-    password: password
+    password: spring1234
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
         format_sql: true
     generate-ddl: false
 zipkin:
-  baseUrl: http://zipkin.development.svc.cluster.local:9411
+  baseUrl: http://zipkin.springcloud.svc.cluster.local:9411
   sleuth:
     sampler:
       percentage: 0.2
@@ -27,7 +27,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://eureka.development.svc.cluster.local:8761/eureka/
+      defaultZone: http://eureka.springcloud.svc.cluster.local:8761/eureka/
   instance:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
@@ -54,11 +54,3 @@ management:
     web:
       exposure:
         include: '*'
----
-spring:
-  profiles: prd
-  datasource:
-    url: jdbc:mysql://192.168.0.245:3306/spring?useUnicode=yes&characterEncoding=UTF-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: spring
-    password: password

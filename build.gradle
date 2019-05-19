@@ -62,5 +62,6 @@ subprojects {
   }
 }
 
+apply from: "$gradleDir/jpa.gradle"
 apply from: "$gradleDir/mapstruct.gradle"
 apply from: "$gradleDir/jib.gradle"

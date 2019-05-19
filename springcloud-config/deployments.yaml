@@ -65,7 +65,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: springcloud-config
+  name: config
   namespace: springcloud
 spec:
   selector:
@@ -91,6 +91,6 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: springcloud-config
+              serviceName: config
               servicePort: 8888
 

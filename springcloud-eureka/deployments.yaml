@@ -16,11 +16,11 @@ spec:
       containers:
       - name: app
         image: cloudcamp/springcloud-eureka:latest
-        resources:
-          requests:
-            memory: "700Mi"
-          limits:
-            memory: "1000Mi"
+        #        resources:
+        #          requests:
+        #            memory: "700Mi"
+        #          limits:
+        #            memory: "1000Mi"
         ports:
         - containerPort: 8761
         env:
@@ -28,7 +28,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: springcloud
-              key: active.profiles
+              key: spring.profile
         - name: spring.cloud.config.uri
           valueFrom:
             configMapKeyRef:
@@ -53,7 +53,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: springcloud-eureka
+  name: eureka
   namespace: springcloud
 spec:
   selector:
@@ -66,7 +66,7 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: springcloud-eureka
+  name: eureka
   namespace: springcloud
   annotations:
     kubernetes.io/ingress.class: traefik
@@ -79,6 +79,6 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: springcloud-eureka
+              serviceName: eureka
               servicePort: 8761
 

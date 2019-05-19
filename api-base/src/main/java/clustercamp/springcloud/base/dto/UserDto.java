@@ -1,6 +1,5 @@
 package clustercamp.springcloud.base.dto;
 
-import clustercamp.springcloud.base.jpa.YesNo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,11 +17,11 @@ public class UserDto {
 
   private String roles;
 
-  private YesNo accountNonExpired;
+  private Boolean accountNonExpired;
 
-  private YesNo accountNonLocked;
+  private Boolean accountNonLocked;
 
-  private YesNo credentialsNonExpired;
+  private Boolean credentialsNonExpired;
 
-  private YesNo enabled;
+  private Boolean enabled;
 }
