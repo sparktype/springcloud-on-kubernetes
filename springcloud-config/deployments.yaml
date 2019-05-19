@@ -4,15 +4,12 @@ metadata:
   name: springcloud-config
   namespace: springcloud
 data:
-  application.yaml: |
+  application.yaml: |-
     server:
       port: 8888
     spring:
       application:
-        name: springcloud-config
-    spring:
-      profiles:
-        active: dev
+        name: SPRINGCLOUD-CONFIG
       cloud:
         config:
           server:
@@ -41,10 +38,8 @@ spec:
           ports:
             - containerPort: 8888
           env:
-            - name: spring.location.location
-              value: /config
-            - name: spring.profiles.active
-              value: native
+            - name: spring.config.location
+              value: /config/
             - name: spring.cloud.config.server.git.username
               valueFrom:
                 secretKeyRef:
