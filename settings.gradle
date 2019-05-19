@@ -1,16 +1,15 @@
 rootProject.name = 'spring-cloud-java11'
 
 include 'api-base'
-include 'api-user'
-include 'api-client'
-include 'spring-cloud-config'
-include 'spring-cloud-eureka'
-include 'spring-cloud-hystrix'
-include 'spring-cloud-oauth'
-include 'spring-cloud-sidecar'
-include 'spring-cloud-sidecar'
-include 'spring-cloud-zuul'
-include 'spring-cloud-gateway'
+include 'api-user-service'
+include 'api-client-service'
+include 'springcloud-config'
+include 'springcloud-eureka'
+include 'springcloud-hystrix'
+include 'springcloud-security'
+include 'springcloud-zuul'
+include 'springcloud-gateway'
+include 'springcloud-sidecar'
 
 buildCache {
   local(DirectoryBuildCache) {

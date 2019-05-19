@@ -15,27 +15,6 @@ metadata:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: springcloud-config
-  namespace: springcloud
-data:
-  application.yaml: |
-    server:
-      port: 8888
-    spring:
-      rabbitmq:
-        host: localhost
-        port: 5672
-        username: admin
-        password: 1234
-      cloud:
-        config:
-          server:
-            git:
-              uri: https://github.com/clustercamp/configurations.git
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
   name: springcloud
   namespace: springcloud
 data:

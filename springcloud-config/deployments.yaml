@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springcloud-config
+  namespace: springcloud
+data:
+  application.yaml: |
+    server:
+      port: 8888
+    spring:
+      application:
+        name: springcloud-config
+    spring:
+      profiles:
+        active: dev
+      cloud:
+        config:
+          server:
+            git:
+              uri: https://github.com/clustercamp/spring-cloud-java11.git
+              searchPaths: /configurations/{application}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springcloud-config
+  namespace: springcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      springcloud: config
+  template:
+    metadata:
+      labels:
+        springcloud: config
+    spec:
+      containers:
+        - name: app
+          image: cloudcamp/springcloud-config:latest
+          ports:
+            - containerPort: 8888
+          env:
+            - name: spring.location.location
+              value: /config
+            - name: spring.profiles.active
+              value: native
+            - name: spring.cloud.config.server.git.username
+              valueFrom:
+                secretKeyRef:
+                  name: github
+                  key: username
+            - name: spring.cloud.config.server.git.password
+              valueFrom:
+                secretKeyRef:
+                  name: github
+                  key: password
+          volumeMounts:
+            - name: application-config
+              mountPath: "/config"
+              readOnly: true
+      volumes:
+        - name: application-config
+          configMap:
+            name: springcloud-config
+            items:
+              - key: application.yaml
+                path: application.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springcloud-config
+  namespace: springcloud
+spec:
+  selector:
+    springcloud: config
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 8888
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: springcloud-config
+  namespace: springcloud
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    external-dns.alpha.kubernetes.io/target: home.cluster.camp
+spec:
+  rules:
+    - host: config.cluster.camp
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: springcloud-config
+              servicePort: 8888
+

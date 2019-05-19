@@ -1,0 +1,15 @@
+configurations {
+  compile.exclude module: 'spring-boot-starter-undertow'
+}
+
+dependencies {
+  implementation(project(':api-base'))
+  implementation('org.springframework.boot:spring-boot-starter-webflux')
+  implementation('org.springframework.cloud:spring-cloud-starter-config')
+  implementation('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+  implementation('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
+  implementation('org.springframework.cloud:spring-cloud-starter-zipkin')
+  implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+  implementation("mysql:mysql-connector-java:${mysqlVersion}")
+}
+

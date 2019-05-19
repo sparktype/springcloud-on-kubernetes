@@ -19,10 +19,13 @@ metadata:
   namespace: springcloud
 spec:
   ports:
-    - port: 3306
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
   selector:
     app: mysql
-  clusterIP: None
+  type: LoadBalancer
+  loadBalancerIP: 192.168.0.245
 ---
 apiVersion: apps/v1
 kind: Deployment

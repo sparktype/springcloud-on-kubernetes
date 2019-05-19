@@ -1,23 +1,22 @@
 buildscript {
   ext {
     springBootVersion = '2.1.5.RELEASE'
+    springCloudVersion = 'Greenwich.SR1'
     jibVersion = '1.2.0'
     aptVersion = '0.21'
     gradleDir = "$rootProject.projectDir/gradle"
   }
+
   repositories {
     mavenCentral()
     gradlePluginPortal()
   }
+
   dependencies {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
     classpath "net.ltgt.gradle:gradle-apt-plugin:${aptVersion}"
   }
-}
-
-plugins {
-  id "groovy"
 }
 
 ext {
@@ -31,8 +30,8 @@ allprojects {
 }
 
 subprojects {
-  apply plugin: 'groovy'
   apply plugin: 'java'
+  apply plugin: 'groovy'
   apply plugin: 'org.springframework.boot'
   apply plugin: 'io.spring.dependency-management'
 
@@ -40,15 +39,15 @@ subprojects {
   group = 'clustercamp.springcloud'
 
   configurations {
-    compile.exclude module: "spring-boot-starter-tomcat"
+    compile.exclude module: 'spring-boot-starter-tomcat'
   }
 
   dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-undertow"
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
-
     testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation 'io.projectreactor:reactor-test'
+
     testImplementation "org.spockframework:spock-core:${spockVersion}"
     testImplementation "org.spockframework:spock-spring:${spockVersion}"
 
@@ -63,7 +62,5 @@ subprojects {
   }
 }
 
-
 apply from: "$gradleDir/mapstruct.gradle"
-
 apply from: "$gradleDir/jib.gradle"

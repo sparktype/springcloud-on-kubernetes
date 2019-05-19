@@ -1,0 +1,53 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: user-api-service
+---
+spring:
+  profiles:
+    active: dev
+  cloud:
+    config:
+      uri: https://config.cluster.camp
+---
+spring:
+  profiles:
+    active: ide
+  datasource:
+    url: jdbc:mysql://192.168.0.245:3306/spring?useUnicode=yes&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: spring
+    password: spring1234
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: false
+eureka:
+  client:
+    enabled: false
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: true
+        requests-metric-name: http.server.requests
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      exposure:
+        include: '*'
+
+
