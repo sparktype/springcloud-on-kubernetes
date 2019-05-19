@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: cloudcamp/spring-cloud-eureka:latest
+        image: cloudcamp/springcloud-eureka:latest
         resources:
           requests:
             memory: "700Mi"

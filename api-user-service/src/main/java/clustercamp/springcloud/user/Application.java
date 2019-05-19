@@ -1,11 +1,11 @@
 package clustercamp.springcloud.user;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EnableJpaAuditing
-@SpringBootApplication
+@SpringCloudApplication
 public class Application {
 
   public static void main(String[] args) {

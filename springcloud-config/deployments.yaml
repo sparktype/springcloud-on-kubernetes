@@ -1,3 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springcloud-config
+  namespace: springcloud
+data:
+  application.yaml: |
+    server:
+      port: 8888
+    spring:
+      application:
+        name: springcloud-config
+    spring:
+      profiles:
+        active: dev
+      cloud:
+        config:
+          server:
+            git:
+              uri: https://github.com/clustercamp/spring-cloud-java11.git
+              searchPaths: /configurations/{application}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,10 +37,14 @@ spec:
     spec:
       containers:
         - name: app
-          image: cloudcamp/spring-cloud-config:latest
+          image: cloudcamp/springcloud-config:latest
           ports:
             - containerPort: 8888
           env:
+            - name: spring.location.location
+              value: /config
+            - name: spring.profiles.active
+              value: native
             - name: spring.cloud.config.server.git.username
               valueFrom:
                 secretKeyRef:
@@ -29,6 +55,17 @@ spec:
                 secretKeyRef:
                   name: github
                   key: password
+          volumeMounts:
+            - name: application-config
+              mountPath: "/config"
+              readOnly: true
+      volumes:
+        - name: application-config
+          configMap:
+            name: springcloud-config
+            items:
+              - key: application.yaml
+                path: application.yaml
 ---
 apiVersion: v1
 kind: Service

@@ -1,0 +1,64 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: API-GATEWAY
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  zipkin:
+    baseUrl: http://zipkin.development.svc.cluster.local:9411
+  sleuth:
+    sampler:
+      percentage: 0.2
+zuul:
+  debug:
+    include-debug-header: true
+    request: true
+  routes:
+    client:
+      path: /api/client/**
+      stripPrefix: false
+      serviceId: CLIENT-SERVICE
+    user:
+      path: /api/user/**
+      stripPrefix: false
+      serviceId: USER-SERVICE
+    oauth:
+      path: /oauth/**
+      stripPrefix: false
+      sensitiveHeaders:
+      serviceId: OAUTH-SERVICE
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka.development.svc.cluster.local:8761/eureka/
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+    leaseRenewalIntervalInSeconds: 3
+    leaseExpirationDurationInSeconds: 5
+# hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 120000
+hystrix.command.default.execution.timeout.enabled: false
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+security:
+  oauth2:
+    resource:
+      id: API
+      loadBalanced: true
+      jwt:
+        keyValue: -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnY5zPuq27q6Q3yV+Dx3S
+          YnjBbahpysKwQCRAn+rZa+0RjHdfgPmgmwA84vlbDLPfBca1Kv8vkcpdjrPuqY1b
+          +2fQph7bIXBr5grGDL7fYy/fmg5GDLvbvfRdsqyb1vIAUZkk/lcxxFeRqk+SMjxd
+          QPcdAerzy1uivQ+mvUi7phewRW0dujsSLdgfgcSIkAZjI2j9UGjkK1rbbXcQp8v8
+          kZZSd/GTciQwssR8cznFtOuduhF2EUy7rlTZsn5X48yrOo3WaHsWI3/Oc7gaTqHe
+          kxNRWZVtBoOoca4k6YWYPwhQSARMPVLVcs7OsKwhtknYiA+CUcg1cwrksxxbvIMV
+          6wIDAQAB
+          -----END PUBLIC KEY-----
