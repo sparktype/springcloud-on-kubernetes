@@ -1,3 +1,31 @@
 spring:
   application:
-    name: apigw
+    name: zuul
+---
+spring:
+  profiles: ide
+eureka:
+  client:
+    enabled: false
+zuul:
+  routes:
+    resource-server-mvc-1: /resource-server-mvc-1/**
+    authorization-server-1:
+      sensitiveHeaders: Authorization
+      path: /authorization-server-1/**
+      stripPrefix: false
+  add-proxy-headers: true
+security:
+  oauth2:
+    sso:
+      loginPath: /login
+    client:
+      accessTokenUri: http://localhost:8769/authorization-server-1/oauth/token
+      userAuthorizationUri: /authorization-server-1/oauth/authorize
+      clientId: fooClient
+      clientSecret: fooSecret
+    resource:
+      jwt:
+        keyValue: "abc"
+      id: fooScope
+      serviceId: ${PREFIX:}resource

@@ -43,16 +43,18 @@ subprojects {
   }
 
   dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.boot:spring-boot-starter-undertow"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation 'io.projectreactor:reactor-test'
-
-    testImplementation "org.spockframework:spock-core:${spockVersion}"
-    testImplementation "org.spockframework:spock-spring:${spockVersion}"
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-undertow")
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation("io.projectreactor:reactor-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    testImplementation "org.spockframework:spock-core:${spockVersion}"
+    testImplementation "org.spockframework:spock-spring:${spockVersion}"
   }
 
   dependencyManagement {
@@ -62,5 +64,6 @@ subprojects {
   }
 }
 
-apply from: "$gradleDir/jpa.gradle"
+apply from: "$gradleDir/api.gradle"
 apply from: "$gradleDir/jib.gradle"
+apply from: "$gradleDir/mapper.gradle"
