@@ -1,67 +1,74 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: hystrix
-spec:
-  rules:
-  - host: hystrix.k8s.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: hystrix
-          servicePort: 8080
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: hystrix
-spec:
-  type: ClusterIP
-  selector:
-    app: spring-cloud-hystrix
-  ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hystrix
+  name: springcloud-hystrix
+  namespace: springcloud
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spring-cloud-hystrix
+      springcloud: hystrix
   template:
     metadata:
       labels:
-        app: spring-cloud-hystrix
+        springcloud: hystrix
     spec:
       containers:
-      - name: app
-        image: hubtea/spring-cloud-hystrix:latest
-        resources:
-          requests:
-            memory: "700Mi"
-          limits:
-            memory: "800Mi"
-        ports:
-        - containerPort: 8080
-        env:
-        - name: spring.profiles.active
-          valueFrom:
-            configMapKeyRef:
-              name: base-config
-              key: spring.profiles.active
-        - name: eureka.client.serviceUrl.defaultZone
-          valueFrom:
-            configMapKeyRef:
-              name: base-config
-              key: spring.cloud.eureka.uri
-        - name: spring.cloud.config.uri
-          valueFrom:
-            configMapKeyRef:
-              name: base-config
-              key: spring.cloud.config.uri
+        - name: app
+          image: cloudcamp/springcloud-hystrix:latest
+          resources:
+            requests:
+              memory: "700Mi"
+            limits:
+              memory: "800Mi"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: spring.profiles.active
+              valueFrom:
+                configMapKeyRef:
+                  name: springcloud
+                  key: spring.profile
+            - name: spring.cloud.config.uri
+              valueFrom:
+                configMapKeyRef:
+                  name: springcloud
+                  key: springcloud.config.uri
+            - name: eureka.client.serviceUrl.defaultZone
+              valueFrom:
+                configMapKeyRef:
+                  name: springcloud
+                  key: springcloud.eureka.uri
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hystrix
+  namespace: springcloud
+spec:
+  selector:
+    springcloud: hystrix
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: hystrix
+  namespace: springcloud
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    external-dns.alpha.kubernetes.io/target: home.cluster.camp
+spec:
+  rules:
+    - host: hystrix.cluster.camp
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: hystrix
+              servicePort: 8080
+
