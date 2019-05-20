@@ -4,7 +4,7 @@ buildscript {
     springCloudVersion = 'Greenwich.SR1'
     jibVersion = '1.2.0'
     aptVersion = '0.21'
-    gradleDir = "$rootProject.projectDir/gradle"
+    gradleDir = "${rootProject.projectDir}/gradle"
   }
 
   repositories {
@@ -64,6 +64,6 @@ subprojects {
   }
 }
 
-apply from: "$gradleDir/api.gradle"
-apply from: "$gradleDir/jib.gradle"
-apply from: "$gradleDir/mapper.gradle"
+apply from: "${gradleDir}/api.gradle"
+apply from: "${gradleDir}/jib.gradle"
+apply from: "${gradleDir}/mapper.gradle"
