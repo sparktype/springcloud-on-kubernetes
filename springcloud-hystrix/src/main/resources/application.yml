@@ -2,24 +2,10 @@ server:
   port: 8080
 spring:
   application:
-    name: api-user-service
+    name: hystrix
 ---
 spring:
   profiles: ide
-  datasource:
-    url: jdbc:mysql://192.168.0.245:3306/spring?useUnicode=yes&characterEncoding=UTF-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: spring
-    password: spring1234
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    properties:
-      hibernate:
-        format_sql: true
-    generate-ddl: true
-eureka:
-  client:
-    enabled: false
 management:
   metrics:
     web:
@@ -41,5 +27,3 @@ management:
     web:
       exposure:
         include: '*'
-
-

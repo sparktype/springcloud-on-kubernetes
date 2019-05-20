@@ -1,6 +1,5 @@
-package clustercamp.springcloud.oauth.config;
+package clustercamp.springcloud.security.config;
 
-import clustercamp.springcloud.oauth.details.RestClientDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,38 +14,39 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
-@Configuration
-@EnableAuthorizationServer
-@RequiredArgsConstructor
-public class AutorizationConfiguration extends AuthorizationServerConfigurerAdapter {
+import javax.sql.DataSource;
 
-  private final RestClientDetailsService clientDetailsService;
+@Configuration
+@RequiredArgsConstructor
+@EnableAuthorizationServer
+public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 
   private final AuthenticationManager authenticationManager;
 
+  private final DataSource dataSource;
+
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    clients.withClientDetails(clientDetailsService);
-  }
-
-
-  @Override
-  public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-    endpoints.tokenStore(tokenStore())
-      .tokenEnhancer(jwtAccessTokenConverter())
-      .authenticationManager(authenticationManager);
+    clients.jdbc(dataSource);
   }
 
   @Bean
   public TokenStore tokenStore() {
-    return new JwtTokenStore(jwtAccessTokenConverter());
+    return new JwtTokenStore(accessTokenConverter());
   }
 
   @Bean
-  public JwtAccessTokenConverter jwtAccessTokenConverter() {
-    KeyStoreKeyFactory factory = new KeyStoreKeyFactory(new ClassPathResource("msa.jks"), "new1234!".toCharArray());
-    JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-    converter.setKeyPair(factory.getKeyPair("msa"));
+  public JwtAccessTokenConverter accessTokenConverter() {
+    var converter = new JwtAccessTokenConverter();
+    var factory = new KeyStoreKeyFactory(new ClassPathResource("springcloud.jks"), "new1234!".toCharArray());
+    converter.setKeyPair(factory.getKeyPair("springcloud"));
     return converter;
+  }
+
+  @Override
+  public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    endpoints.tokenStore(tokenStore())
+      .accessTokenConverter(accessTokenConverter())
+      .authenticationManager(authenticationManager);
   }
 }

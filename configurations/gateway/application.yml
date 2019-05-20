@@ -27,7 +27,7 @@ zuul:
       stripPrefix: false
       serviceId: USER-SERVICE
     oauth:
-      path: /oauth/**
+      path: /security/**
       stripPrefix: false
       sensitiveHeaders:
       serviceId: OAUTH-SERVICE

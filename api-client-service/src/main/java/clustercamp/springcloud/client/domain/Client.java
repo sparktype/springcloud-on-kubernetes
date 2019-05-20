@@ -1,9 +1,8 @@
 package clustercamp.springcloud.client.domain;
 
+import clustercamp.springcloud.base.jpa.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -18,15 +17,12 @@ import javax.persistence.Id;
 @Setter
 @ToString
 @NoArgsConstructor
-@RequiredArgsConstructor
-public class Client {
+public class Client extends BaseEntity {
 
   @Id
-  @NonNull
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @NonNull
   @Column(unique = true, nullable = false)
   private String clientId;
 
