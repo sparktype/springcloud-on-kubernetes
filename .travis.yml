@@ -17,7 +17,7 @@ env:
     - secure: EYUmkMxYGTrMsBsOn7qA1KEzSz5d21eKnvU5JKcouiOQ+j91cNBMzkSLMHuMIq54Bwcp9bci5BEqQpKEeVUb+MBRBQuiH2ncn+MhIrusi9vuLJUaOVTkmNOUWN1lbO+VH11k905NyKcUf4wOsnnSrZ6oyUATRV5wLPrNVRLim8aMc2gArPxFmLvAsQXbS7VzG2W6+FVphEPDhg9RHafXZYdYmYu2B6fXs68WTiHAMv64+xwBua3cl9AuaB1uYUbat1l7nB+T1EyR/wCRuyrwExTTr4iF5FFfoMXS6kdwLuPpjzqxXrsLqwyRtWDvOzlUX2PajSOmFEB2Z1nva341ok/RSmTHGPCQ7bvYWqKDr3ZqqKZw2IOvZIIunCYl7eBXarUsbl/gIZ5x2AsF3JtfgeILQUOlIQdkvgw2Uw8ulFq0gDWvn4LyjZi3tQzLPJdIkk2dXih6h/Z4ktcwyHNEvOxZJ5rzsPUZNJSPpI40lKFnBSvsbGMAEbiK+0nZ1EA6VPcbPZWmuQbMyVBS3l0Og9XipJ8YjNMrQMBEsAghkrkCRknXgDB4nkwmCxGsVJ64B9Ui3ze02DE24ZVKCvtSZsySetYpMl/eOpeM8GUEdztIPBSBOOkXuFifOYipXf5cwmSPyJQQcF8mHWFfjvrpzRTaQPP/MhPP9nXlGnDvj9Y=
 script:
   - "./gradlew check"
-  - "./gradlew sonarqube -Dsonar.projectKey=spring-cloud-java8 -Dsonar.organization=coolpush-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN"
+  #  - "./gradlew sonarqube -Dsonar.projectKey=spring-cloud-java8 -Dsonar.organization=coolpush-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN"
   - "./gradlew clean build -x test"
   - "./gradlew jib -Djib.to.auth.username=$DOCKER_USER -Djib.to.auth.password=$DOCKER_PASS"
 notifications:

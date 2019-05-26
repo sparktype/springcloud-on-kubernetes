@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: springcloud
+  labels:
+    name: springcloud
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springcloud
+  namespace: springcloud
+data:
+  spring.profile: dev
+  springcloud.config.uri: http://config.springcloud.svc.cluster.local:8888
+  springcloud.eureka.uri: http://eureka.springcloud.svc.cluster.local:8761/eureka
+  openzipkin.uri:  http://zipkin.development.svc.cluster.local:9411
+  springcloud.eureka.datacenter: Cluster Camp
+  springcloud.eureka.environment: Kubernetes
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: rbac-springcloud-namespace
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: springcloud
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io

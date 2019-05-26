@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: eureka
+---
+spring:
+  profiles: ide
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+    leaseExpirationDurationInSeconds: 5
+    leaseRenewalIntervalInSeconds: 3
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

@@ -1,6 +1,6 @@
 .gradle
 /build/
-!gradle/wrapper/gradle-wrapper.jar
+!gradles/wrapper/gradle-wrapper.jar
 
 ### STS ###
 .apt_generated
@@ -311,7 +311,7 @@ javadoc/
 
 # lock file, a part of Oracle Credential Store Framework
 cwallet.sso.lck
-!/gradle/wrapper/gradle-wrapper.jar
+!/gradles/wrapper/gradle-wrapper.jar
 .vscode/settings.json
 .vscode/settings.json
 /.idea/

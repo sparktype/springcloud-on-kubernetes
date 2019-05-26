@@ -1,8 +1,12 @@
 rootProject.name = 'spring-cloud-java11'
 
 include 'api-base'
+include 'api-cart-service'
+include 'api-delivery-service'
+include 'api-manager-service'
+include 'api-order-service'
+include 'api-product-service'
 include 'api-user-service'
-include 'api-client-service'
 include 'springcloud-config'
 include 'springcloud-eureka'
 include 'springcloud-hystrix'
@@ -17,5 +21,3 @@ buildCache {
     removeUnusedEntriesAfterDays = 30
   }
 }
-
-

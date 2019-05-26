@@ -4,7 +4,7 @@ buildscript {
     springCloudVersion = 'Greenwich.SR1'
     jibVersion = '1.2.0'
     aptVersion = '0.21'
-    gradleDir = "$rootProject.projectDir/gradle"
+    gradleDir = "${rootProject.projectDir}/gradle"
   }
 
   repositories {
@@ -35,6 +35,8 @@ subprojects {
   apply plugin: 'org.springframework.boot'
   apply plugin: 'io.spring.dependency-management'
 
+  apply plugin: 'net.ltgt.apt'
+
   sourceCompatibility = '11'
   group = 'clustercamp.springcloud'
 
@@ -43,16 +45,21 @@ subprojects {
   }
 
   dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.boot:spring-boot-starter-undertow"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation 'io.projectreactor:reactor-test'
-
-    testImplementation "org.spockframework:spock-core:${spockVersion}"
-    testImplementation "org.spockframework:spock-spring:${spockVersion}"
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-undertow")
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation("org.mapstruct:mapstruct:${mapstructVersion}")
+    annotationProcessor("org.mapstruct:mapstruct-processor:${mapstructVersion}")
+
+    testImplementation("io.projectreactor:reactor-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    testImplementation "org.spockframework:spock-core:${spockVersion}"
+    testImplementation "org.spockframework:spock-spring:${spockVersion}"
   }
 
   dependencyManagement {
@@ -62,5 +69,6 @@ subprojects {
   }
 }
 
-apply from: "$gradleDir/jpa.gradle"
-apply from: "$gradleDir/jib.gradle"
+apply from: "${gradleDir}/api.gradle"
+apply from: "${gradleDir}/jib.gradle"
+
