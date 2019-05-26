@@ -1,7 +1,6 @@
 package clustercamp.security.service;
 
-import clustercamp.base.dto.ClientDto;
-import clustercamp.security.details.BaseUserDetails;
+import clustercamp.base.dto.UserDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,30 +13,21 @@ public class BaseUserDetailsService implements ReactiveUserDetailsService {
 
   private final WebClient webClient;
 
-  public BaseUserDetailsService(WebClient.Builder builder) {
+  private final UserMapper mapper;
+
+  public BaseUserDetailsService(WebClient.Builder builder, UserMapper mapper) {
     webClient = builder.baseUrl("http://API-USER-SERVICE")
       .defaultHeader(HttpHeaders.USER_AGENT, "ClusterCampOAuth2.0")
       .build();
+    this.mapper = mapper;
   }
 
   @Override
   public Mono<UserDetails> findByUsername(String username) {
-    return webClient.get().uri("/client?clientID={clientId}", username)
+    return webClient.get().uri("/user?userId={username}", username)
       .retrieve()
-      .bodyToMono(ClientDto.class)
-      .onErrorReturn(new ClientDto())
-      .map(u -> {
-        var details = new BaseUserDetails();
-
-//        details (username);
-//        details.setPassword(user.getUserPass());
-//        details.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRoles()));
-//
-//        details.setAccountNonExpired(user.getAccountNonExpired().booleanValue());
-//        details.setAccountNonLocked(user.getAccountNonLocked().booleanValue());
-//        details.setCredentialsNonExpired(user.getCredentialsNonExpired().booleanValue());
-//        details.setEnabled(user.getEnabled().booleanValue());
-        return details;
-      });
+      .bodyToMono(UserDTO.class)
+      .onErrorReturn(new UserDTO())
+      .map(mapper::convert);
   }
 }

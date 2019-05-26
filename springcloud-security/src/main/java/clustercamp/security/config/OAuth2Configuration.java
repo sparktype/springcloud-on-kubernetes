@@ -14,8 +14,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
-import javax.sql.DataSource;
-
 @Configuration
 @RequiredArgsConstructor
 @EnableAuthorizationServer
@@ -23,11 +21,14 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 
   private final AuthenticationManager authenticationManager;
 
-  private final DataSource dataSource;
-
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    clients.jdbc(dataSource);
+    clients.inMemory()
+      .withClient("client")
+      .authorizedGrantTypes("password")
+      .secret("{noop}secret")
+      .scopes("all");
+
   }
 
   @Bean

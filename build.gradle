@@ -35,6 +35,8 @@ subprojects {
   apply plugin: 'org.springframework.boot'
   apply plugin: 'io.spring.dependency-management'
 
+  apply plugin: 'net.ltgt.apt'
+
   sourceCompatibility = '11'
   group = 'clustercamp.springcloud'
 
@@ -49,6 +51,9 @@ subprojects {
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation("org.mapstruct:mapstruct:${mapstructVersion}")
+    annotationProcessor("org.mapstruct:mapstruct-processor:${mapstructVersion}")
 
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -66,4 +71,4 @@ subprojects {
 
 apply from: "${gradleDir}/api.gradle"
 apply from: "${gradleDir}/jib.gradle"
-apply from: "${gradleDir}/mapper.gradle"
+

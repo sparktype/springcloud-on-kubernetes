@@ -1,4 +1,4 @@
-package clustercamp.base.dto;
+package clustercamp.base.jpa;
 
 public interface ModifyAware {
 

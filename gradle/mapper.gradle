@@ -1,8 +1,0 @@
-configure(subprojects.findAll { !it.name.startsWith('springcloud-') }) {
-  apply plugin: 'net.ltgt.apt'
-
-  dependencies {
-    implementation("org.mapstruct:mapstruct:${mapstructVersion}")
-    annotationProcessor("org.mapstruct:mapstruct-processor:${mapstructVersion}")
-  }
-}

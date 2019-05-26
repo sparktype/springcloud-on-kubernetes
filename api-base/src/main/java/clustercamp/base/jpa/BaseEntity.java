@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity {
+public class BaseEntity implements CreateAware, ModifyAware {
 
   @CreatedDate
   @Column(name = "create_at", updatable = false)
@@ -31,10 +31,10 @@ public class BaseEntity {
 
 
   @LastModifiedDate
-  @Column(name = "modify_at", nullable = false)
+  @Column(name = "modify_at")
   private LocalDateTime modifyAt;
 
   @LastModifiedBy
-  @Column(name = "modify_by", nullable = false)
+  @Column(name = "modify_by")
   private String modifyBy;
 }

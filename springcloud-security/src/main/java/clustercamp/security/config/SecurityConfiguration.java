@@ -12,10 +12,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.servlet.http.HttpServletResponse;
 
-
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
 
   @Override
   @Bean

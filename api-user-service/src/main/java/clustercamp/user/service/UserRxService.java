@@ -1,28 +1,29 @@
 package clustercamp.user.service;
 
 import clustercamp.base.dto.UserDTO;
-import clustercamp.user.repository.UserRepository;
+import clustercamp.user.repository.UserRxRepository;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserRxService {
 
-  private final UserRepository repository;
+  private final UserRxRepository repository;
 
   private final UserMapper mapper;
 
   @HystrixCommand(fallbackMethod = "detail_")
-  public UserDTO detail(String userId) {
+  public Mono<UserDTO> detail(String userId) {
     return repository.findByUserId(userId)
-      .map(mapper::convert)
-      .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+      .doOnError(HttpClientErrorException.class (),  ->new HttpClientErrorException(HttpStatus.NOT_FOUND))
+      .map(mapper::convert);
   }
 
   public UserDTO detail_(String userId) {
@@ -52,5 +53,4 @@ public class UserService {
       })
       .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
   }
-
 }

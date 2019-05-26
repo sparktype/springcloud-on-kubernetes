@@ -1,11 +1,15 @@
 package clustercamp.base.dto;
 
-import lombok.Data;
+import clustercamp.base.jpa.CreateAware;
+import clustercamp.base.jpa.ModifyAware;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class UserDTO extends BaseDTO implements CreateAware, ModifyAware {
 
@@ -34,4 +38,5 @@ public class UserDTO extends BaseDTO implements CreateAware, ModifyAware {
   private LocalDateTime modifyAt;
 
   private String modifyBy;
+
 }

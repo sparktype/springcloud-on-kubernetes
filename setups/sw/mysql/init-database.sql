@@ -1,4 +1,7 @@
-GRANT ALL PRIVILEGES ON *.* TO root@'*' IDENTIFIED BY 'spring1234' WITH GRANT OPTION;
+mysql -uroot -p
+
+CREATE USER 'root'@'%' IDENTIFIED BY 'root1234';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 
 create database spring default character set utf8mb4;
 create user 'spring'@'%' identified by 'spring1234';
