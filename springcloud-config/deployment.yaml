@@ -15,7 +15,7 @@ data:
           server:
             git:
               uri: https://github.com/clustercamp/spring-cloud-java11.git
-              searchPaths: /configurations/{application}
+              searchPaths: /configs/{application}
 ---
 apiVersion: apps/v1
 kind: Deployment
