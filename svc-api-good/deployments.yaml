@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-client-service
+  namespace: springcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      api: client-service
+  template:
+    metadata:
+      labels:
+        api: client-service
+    spec:
+      containers:
+        - name: api
+          image: cloudcamp/api-client-service:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: spring.profiles.active
+              valueFrom:
+                configMapKeyRef:
+                  name: springcloud
+                  key: spring.profile
+            - name: spring.cloud.config.uri
+              valueFrom:
+                configMapKeyRef:
+                  name: springcloud
+                  key: springcloud.config.uri
+            - name: eureka.client.serviceUrl.defaultZone
+              valueFrom:
+                configMapKeyRef:
+                  name: springcloud
+                  key: springcloud.eureka.uri
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-client-service
+  namespace: springcloud
+spec:
+  selector:
+    api: client-service
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
