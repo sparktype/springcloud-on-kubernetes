@@ -1,4 +1,4 @@
-configure(subprojects.findAll { it.name.startsWith("api-") && it.name != "api-base" }) {
+configure(subprojects.findAll { it.name.startsWith("svc-api-") && it.name != "svc-api-base" }) {
 
   configurations {
     compile.exclude module: 'spring-boot-starter-undertow'

@@ -1,4 +1,4 @@
-configure(subprojects.findAll { it.name != "api-base" }) {
+configure(subprojects.findAll { it.name != "svc-api-base" }) {
   apply plugin: "com.google.cloud.tools.jib"
 
   jib {

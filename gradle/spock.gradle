@@ -7,7 +7,7 @@ sourceSets {
 }
 
 dependencies {
-  compile "org.codehaus.groovy:groovy-all:2.5.6"
+  compile "org.codehaus.groovy:groovy-all:${ext.groovy.version}"
   testCompile "org.spockframework:spock-core:${spockVersion}"
   testCompile "org.spockframework:spock-spring:${spockVersion}"
   testCompile "org.objenesis:objenesis:3.0.1"

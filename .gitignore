@@ -316,3 +316,4 @@ cwallet.sso.lck
 .vscode/settings.json
 /.idea/
 /build-cache/
+/.project
