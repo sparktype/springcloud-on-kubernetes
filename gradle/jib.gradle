@@ -5,13 +5,26 @@ configure(subprojects.findAll { it.name != "api-base" }) {
     from.image = "${dockerBaseImage}"
 
     to {
+
+      def details = versionDetails()
       image = "${dockerGroupName}/${project.name}"
+
+      def tag = "${project.version}"
+
+      if (details.branchName != 'master') {
+        tag = "${tag}-${details.branchName}"
+      }
+
+      if (dockerBaseArch != '') {
+        tag = "${tag}-${dockerBaseArch}"
+      }
+
       tags = [
-        (dockerBaseArch == '') ? project.version : "${project.version}-${dockerBaseArch}".toString(),
+        tag.toString(),
         'latest'
       ]
     }
-    
+
     container {
       jvmFlags = ["-Djava.security.egd=file:/dev/./urandom"]
     }

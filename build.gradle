@@ -5,7 +5,9 @@ buildscript {
     gradlePath="${rootProject.projectDir}/gradle"
     groovyVersion="2.5.7"
     jibVersion="1.2.0"
-    lombokPluginVersion="3.6.4"
+    lombokPluginVersion = "3.6.4"
+    gitPluginVersion = "0.12.0-rc2"
+    coverallsPluginVersion = "2.8.4"
   }
 
   repositories {
@@ -17,12 +19,10 @@ buildscript {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
     classpath "io.freefair.gradle:lombok-plugin:${lombokPluginVersion}"
+    classpath "gradle.plugin.com.palantir.gradle.gitversion:gradle-git-version:${gitPluginVersion}"
+    classpath "gradle.plugin.com.github.kt3k.coveralls:coveralls-gradle-plugin:${coverallsPluginVersion}"
   }
 }
-
-//ext {
-//  set('groovy.version', '2.5.7')
-//}
 
 allprojects {
   repositories {
@@ -33,12 +33,35 @@ allprojects {
 subprojects {
   apply plugin: "java"
   apply plugin: "groovy"
+  apply plugin: "checkstyle"
+  apply plugin: "jacoco"
   apply plugin: "org.springframework.boot"
   apply plugin: "io.spring.dependency-management"
   apply plugin: "io.freefair.lombok"
+  apply plugin: "com.palantir.git-version"
+  apply plugin: "com.github.kt3k.coveralls"
 
   sourceCompatibility = '11'
   group = 'clustercamp'
+
+  checkstyle {
+    ignoreFailures = true
+    configFile = file("${gradlePath}/checkstyle.xml")
+    reportsDir = file("${buildDir}/checkstyle-output") // 리포트 파일이 위치할 디렉토리 지정
+  }
+
+  jacocoTestReport {
+    reports {
+      xml.enabled = true
+      html.enabled = true
+    }
+  }
+
+  checkstyleMain {
+    reports {
+      xml.destination = file("${checkstyle.reportsDir}/checkstyle-report.xml") // 리포트 파일의 위치 및 파일명 지정
+    }
+  }
 
   configurations {
     compile.exclude module: 'spring-boot-starter-tomcat'
