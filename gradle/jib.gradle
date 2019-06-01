@@ -10,8 +10,10 @@ configure(subprojects.findAll { it.name != "api-base" }) {
         (dockerBaseArch == '') ? project.version : "${project.version}-${dockerBaseArch}".toString(),
         'latest'
       ]
-      credHelper = 'osxkeychain'
     }
-    container.jvmFlags = ["-Djava.security.egd=file:/dev/./urandom"]
+    
+    container {
+      jvmFlags = ["-Djava.security.egd=file:/dev/./urandom"]
+    }
   }
 }
