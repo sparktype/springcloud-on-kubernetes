@@ -2,7 +2,9 @@ package clustercamp.base.jpa;
 
 import java.time.LocalDateTime;
 
-public interface CreateModifyAware {
+public interface BaseAware {
+
+  Long getId();
 
   String getCreateBy();
 

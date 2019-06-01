@@ -1,0 +1,16 @@
+subprojects {
+  apply plugin: 'com.github.kt3k.coveralls'
+  apply plugin: "checkstyle"
+
+  checkstyle {
+    ignoreFailures = true
+    configFile = file("${gradlePath}/checkstyle.xml")
+    reportsDir = file("${buildDir}/checkstyle-output") // 리포트 파일이 위치할 디렉토리 지정
+  }
+
+  checkstyleMain {
+    reports {
+      xml.destination = file("${checkstyle.reportsDir}/checkstyle-report.xml") // 리포트 파일의 위치 및 파일명 지정
+    }
+  }
+}

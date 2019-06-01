@@ -1,7 +1,6 @@
 package clustercamp.base.dto;
 
-import clustercamp.base.jpa.CreateModifyAware;
-import clustercamp.base.jpa.IdentityAware;
+import clustercamp.base.jpa.BaseAware;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GoodDTO implements IdentityAware, CreateModifyAware {
+public class GoodDTO implements BaseAware {
 
   private Long id;
 

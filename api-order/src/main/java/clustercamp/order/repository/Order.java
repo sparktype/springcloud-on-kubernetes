@@ -1,6 +1,6 @@
 package clustercamp.order.repository;
 
-import clustercamp.base.dto.GoodDTO;
+import clustercamp.base.dto.OrderDTO;
 import clustercamp.base.jpa.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,22 +15,24 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 public class Order extends BaseEntity {
 
+  private Long userId;
+
   private Long price;
 
-  public static Order of(GoodDTO goodDTO) {
-    var good = new Order();
-    BeanUtils.copyProperties(goodDTO, good);
-    return good;
+  public static Order of(OrderDTO dto) {
+    var order = new Order();
+    BeanUtils.copyProperties(dto, order);
+    return order;
   }
 
-  public GoodDTO to() {
-    var dto = new GoodDTO();
+  public OrderDTO to() {
+    var dto = new OrderDTO();
     BeanUtils.copyProperties(this, dto);
     return dto;
   }
 
-  public Order from(GoodDTO goodDTO) {
-    BeanUtils.copyProperties(goodDTO, this, "id");
+  public Order from(OrderDTO dto) {
+    BeanUtils.copyProperties(dto, this, "id");
     return this;
   }
 }

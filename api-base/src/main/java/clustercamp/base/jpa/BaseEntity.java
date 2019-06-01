@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity implements CreateModifyAware, IdentityAware {
+public class BaseEntity<T> implements BaseAware {
 
   @Id
   private Long id;

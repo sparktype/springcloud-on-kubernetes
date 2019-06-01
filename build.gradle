@@ -33,35 +33,13 @@ allprojects {
 subprojects {
   apply plugin: "java"
   apply plugin: "groovy"
-  apply plugin: "checkstyle"
-  apply plugin: "jacoco"
   apply plugin: "org.springframework.boot"
   apply plugin: "io.spring.dependency-management"
   apply plugin: "io.freefair.lombok"
   apply plugin: "com.palantir.git-version"
-  apply plugin: "com.github.kt3k.coveralls"
 
   sourceCompatibility = '11'
   group = 'clustercamp'
-
-  checkstyle {
-    ignoreFailures = true
-    configFile = file("${gradlePath}/checkstyle.xml")
-    reportsDir = file("${buildDir}/checkstyle-output") // 리포트 파일이 위치할 디렉토리 지정
-  }
-
-  jacocoTestReport {
-    reports {
-      xml.enabled = true
-      html.enabled = true
-    }
-  }
-
-  checkstyleMain {
-    reports {
-      xml.destination = file("${checkstyle.reportsDir}/checkstyle-report.xml") // 리포트 파일의 위치 및 파일명 지정
-    }
-  }
 
   configurations {
     compile.exclude module: 'spring-boot-starter-tomcat'
@@ -89,4 +67,5 @@ subprojects {
 
 apply from: "${gradlePath}/api.gradle"
 apply from: "${gradlePath}/jib.gradle"
+apply from: "${gradlePath}/checkstyle.gradle"
 
