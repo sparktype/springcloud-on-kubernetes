@@ -51,7 +51,6 @@ subprojects {
     implementation("org.springframework.boot:spring-boot-starter-undertow")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.codehaus.groovy:groovy-all:${groovyVersion}")
-
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
@@ -69,4 +68,5 @@ subprojects {
 apply from: "${gradlePath}/api.gradle"
 apply from: "${gradlePath}/jib.gradle"
 apply from: "${gradlePath}/checkstyle.gradle"
+apply from: "${gradlePath}/bus.gradle"
 
