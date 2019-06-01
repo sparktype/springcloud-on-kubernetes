@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zuul
+  namespace: springcloud
+  labels:
+    app: zuul
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zuul
+  template:
+    metadata:
+      labels:
+        app: zuul
+    spec:
+      containers:
+      - name: app
+        image: cloudcamp/springcloud-zuul:latest
+        ports:
+          - containerPort: 8080
+        env:
+          - name: spring.profiles.active
+            valueFrom:
+              configMapKeyRef:
+                name: springcloud
+                key: spring.profile
+          - name: spring.cloud.config.uri
+            valueFrom:
+              configMapKeyRef:
+                name: springcloud
+                key: springcloud.config.uri
+          - name: eureka.client.serviceUrl.defaultZone
+            valueFrom:
+              configMapKeyRef:
+                name: springcloud
+                key: springcloud.eureka.uri
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zuul
+  namespace: springcloud
+spec:
+  selector:
+    springcloud: zuul
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: zuul
+  namespace: springcloud
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    external-dns.alpha.kubernetes.io/target: home.cluster.camp
+spec:
+  rules:
+    - host: zuul.cluster.camp
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: zuul
+              servicePort: 8080

@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: API-GATEWAY
+    name: ZUUL
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
@@ -18,16 +18,24 @@ zuul:
     include-debug-header: true
     request: true
   routes:
-    client:
-      path: /api/client/**
-      stripPrefix: false
-      serviceId: CLIENT-SERVICE
     user:
-      path: /api/user/**
+      path: /user/**
       stripPrefix: false
-      serviceId: USER-SERVICE
+      serviceId: API-USER
+    good:
+      path: /good/**
+      stripPrefix: false
+      serviceId: API-GOOD
+    sale:
+      path: /sale/**
+      stripPrefix: false
+      serviceId: API-SALE
+    ship:
+      path: /ship/**
+      stripPrefix: false
+      serviceId: API-SHIP
     oauth:
-      path: /security/**
+      path: /oauth/**
       stripPrefix: false
       sensitiveHeaders:
       serviceId: OAUTH-SERVICE
