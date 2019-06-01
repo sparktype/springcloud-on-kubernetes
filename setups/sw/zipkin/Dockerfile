@@ -20,12 +20,13 @@ ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 # 3rd party modules like zipkin-aws will apply profile settings with this
 ENV MODULE_OPTS=
 
+#ARG profile=.mem_profile
 # Add environment settings for supported storage types
-COPY --from=0 /zipkin/ /zipkin/
+COPY /zipkin/ /zipkin/
 WORKDIR /zipkin
 
-RUN ["/busybox/sh", "-c", "ln -s /busybox/* /bin"]
+#RUN ["/busybox/sh", "-c", "ln -s /busybox/* /bin"]
 
 EXPOSE 9410 9411
 
-ENTRYPOINT ["/busybox/sh", "run.sh"]
+ENTRYPOINT ["/bin/sh", "run.sh"]
