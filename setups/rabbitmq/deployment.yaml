@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  namespace: springcloud
+  labels:
+    app: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+        - image: arm64v8/rabbitmq:3.7.15-management-alpine
+          name: rabbitmq
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+  namespace: springcloud
+  labels:
+    app: rabbitmq
+spec:
+  ports:
+    - name: message
+      protocol: TCP
+      port: 5672
+      targetPort: 5672
+    - name: web
+      protocol: TCP
+      port: 15672
+      targetPort: 15672
+  selector:
+    app: rabbitmq
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: rabbitmq
+  namespace: springcloud
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    external-dns.alpha.kubernetes.io/target: home.cluster.camp
+spec:
+  rules:
+    - host: rabbitmq.cluster.camp
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: rabbitmq
+              servicePort: 15672

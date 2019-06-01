@@ -4,7 +4,7 @@ ENV ZIPKIN_REPO https://repository.apache.org/content/repositories/releases/
 ENV ZIPKIN_VERSION 2.14.0
 
 # Add environment settings for supported storage types
-COPY zipkin/ /zipkin/
+COPY zipkin /zipkin/
 WORKDIR /zipkin
 
 RUN apt-get update

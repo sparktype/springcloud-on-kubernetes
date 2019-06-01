@@ -49,6 +49,7 @@ subprojects {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-undertow")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.codehaus.groovy:groovy-all:${groovyVersion}")
 
     testImplementation("io.projectreactor:reactor-test")

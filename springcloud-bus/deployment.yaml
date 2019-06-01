@@ -16,10 +16,6 @@ data:
             git:
               uri: https://github.com/clustercamp/spring-cloud-java11.git
               searchPaths: /configs/{application}
-      rabbitmq:
-        host: rabbitmq.springcloud.svc.cluster.local
-        username: springcloud
-        password: springcloud
 ---
 apiVersion: apps/v1
 kind: Deployment

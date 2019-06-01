@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-user-service
+  name: api-ship
   namespace: springcloud
 spec:
   replicas: 1
   selector:
     matchLabels:
-      api: user-service
+      api: api-ship
   template:
     metadata:
       labels:
-        api: user-service
+        api: api-ship
     spec:
       containers:
         - name: api
-          image: cloudcamp/api-user-service:latest
+          image: cloudcamp/api-ship:latest
           ports:
             - containerPort: 8080
           env:
@@ -38,11 +38,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-user-service
+  name: api-ship
   namespace: springcloud
 spec:
   selector:
-    api: user-service
+    api: api-ship
   ports:
     - protocol: TCP
       port: 8080
