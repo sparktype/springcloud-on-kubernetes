@@ -17,6 +17,11 @@ spring:
       hibernate:
         format_sql: true
     generate-ddl: false
+  rabbitmq:
+    host: rabbitmq.springcloud.svc.cluster.local
+    port: 5672
+    username: springcloud
+    password: springcloud
 zipkin:
   baseUrl: http://zipkin.springcloud.svc.cluster.local:9411
   sleuth:
