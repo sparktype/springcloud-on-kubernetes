@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: API-CLIENT-SERVICE
+    name: API-ORDER
 ---
 spring:
   profiles: dev

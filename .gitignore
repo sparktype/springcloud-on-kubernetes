@@ -317,3 +317,4 @@ cwallet.sso.lck
 /.idea/
 /build-cache/
 /.project
+!/gradle/wrapper/gradle-wrapper.jar
