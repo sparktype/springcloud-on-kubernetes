@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: ZUUL
+---
+spring:
+  profiles: dev
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
