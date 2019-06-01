@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UserDTO implements BaseAware {
 
-  private long id;
+  private Long id;
 
   private String userName;
 

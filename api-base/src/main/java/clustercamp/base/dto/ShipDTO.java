@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ShipDTO implements BaseAware {
 
-  private long id;
+  private Long id;
 
   private LocalDateTime createAt;
 

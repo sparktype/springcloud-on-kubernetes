@@ -14,7 +14,7 @@ import java.util.Collection;
 @NoArgsConstructor
 public class OrderDTO implements BaseAware {
 
-  private long id;
+  private Long id;
 
   private Long userId;
 
