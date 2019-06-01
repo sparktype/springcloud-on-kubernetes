@@ -34,10 +34,7 @@ eureka:
     serviceUrl:
       defaultZone: http://eureka.springcloud.svc.cluster.local:8761/eureka/
   instance:
-    preferIpAddress: true
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-    leaseRenewalIntervalInSeconds: 3
-    leaseExpirationDurationInSeconds: 5
 management:
   metrics:
     web:
