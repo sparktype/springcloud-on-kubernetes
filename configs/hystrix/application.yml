@@ -4,7 +4,7 @@ spring:
   application:
     name: HYSTRIX
 turbine:
-  appConfig: API-USER-SERVICE,API-CLIENT-SERVICE
+  appConfig: API-USER,API-SHIP,API-SALE,API-GOOD
   clusterNameExpression: "'default'"
 eureka:
   client:
