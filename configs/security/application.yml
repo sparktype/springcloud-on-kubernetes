@@ -6,6 +6,11 @@ spring:
   sleuth:
     sampler:
       percentage: 0.2
+  rabbitmq:
+    host: rabbitmq.springcloud.svc.cluster.local
+    port: 5672
+    username: springcloud
+    password: springcloud
 eureka:
   client:
     registerWithEureka: true

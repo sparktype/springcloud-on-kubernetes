@@ -3,11 +3,11 @@ server:
 spring:
   application:
     name: API-GATEWAY
-  http:
-    encoding:
-      charset: UTF-8
-      enabled: true
-      force: true
+  rabbitmq:
+    host: rabbitmq.springcloud.svc.cluster.local
+    port: 5672
+    username: springcloud
+    password: springcloud
   zipkin:
     baseUrl: http://zipkin.development.svc.cluster.local:9411
   sleuth:

@@ -1,6 +1,11 @@
 spring:
   application:
     name: EUREKA
+  rabbitmq:
+    host: rabbitmq.springcloud.svc.cluster.local
+    port: 5672
+    username: springcloud
+    password: springcloud
 server:
   port: 8761
 eureka:
