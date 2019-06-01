@@ -17,8 +17,15 @@ public class UserService {
   private final UserRepository repository;
 
   @HystrixCommand(fallbackMethod = "detail_")
-  public UserDTO detail(String userId) {
-    return repository.findByUserId(userId)
+  public UserDTO detail(String userName) {
+    return repository.findByUserName(userName)
+      .map(User::to)
+      .orElseThrow(Exceptions::notFound);
+  }
+
+  @HystrixCommand(fallbackMethod = "detail_")
+  public UserDTO detail(Long id) {
+    return repository.findById(id)
       .map(User::to)
       .orElseThrow(Exceptions::notFound);
   }

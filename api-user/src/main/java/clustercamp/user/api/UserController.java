@@ -24,8 +24,13 @@ public class UserController {
   private final UserService service;
 
   @GetMapping
-  public ResponseEntity<UserDTO> detail(@RequestParam String userId) {
-    return ResponseEntity.ok(service.detail(userId));
+  public ResponseEntity<UserDTO> detail(@RequestParam String userName) {
+    return ResponseEntity.ok(service.detail(userName));
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<UserDTO> detail(@PathVariable Long id) {
+    return ResponseEntity.ok(service.detail(id));
   }
 
   @PostMapping

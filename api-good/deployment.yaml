@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-sale
+  name: api-good
   namespace: springcloud
 spec:
   replicas: 1
   selector:
     matchLabels:
-      api: api-sale
+      api: api-good
   template:
     metadata:
       labels:
-        api: api-sale
+        api: api-good
     spec:
       containers:
         - name: api
-          image: cloudcamp/api-sale:latest
+          image: cloudcamp/api-good:latest
           ports:
             - containerPort: 8080
           env:
@@ -38,11 +38,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-sale
+  name: api-good
   namespace: springcloud
 spec:
   selector:
-    api: api-sale
+    api: api-good
   ports:
     - protocol: TCP
       port: 8080
