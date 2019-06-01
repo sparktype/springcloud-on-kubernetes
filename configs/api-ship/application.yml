@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: API-SHIP2
+    name: API-SHIP
 ---
 spring:
   profiles: dev
