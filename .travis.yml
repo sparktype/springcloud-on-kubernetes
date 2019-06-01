@@ -7,12 +7,20 @@ branches:
     - develop
 cache:
   directories:
-    - "$HOME/.m2/repository"
-    - "$HOME/.gradle"
+    - "$HOME/.m2"
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
 env:
   global:
-    - secure: u37gl+5dOP65wm52rww+yanRJIyhJ4fBTd2l7KzHVC3jEaq5dfuiY6vi+/nMy/tLOO3zwMT1LQks19EHKhf1b3vds+Cpsl2AV+lEGM+VeGIjQL+XMvYGqCGoWAgdWNZ7gbFyZEub/ccdH0fJy7kygGxhxPN/X6I8BzlblvFcZ9bOKY+jAZ8SgmthYlPqbe4Buwm3WIRiEVkB8r11i9cNhVqHpW/3DAbLmfrVF+4n4G9rE30w4bz/gZwNhMtVSHtth0e0Zz0MwSB+T0kaVx+Nlhg83H0S1EiGOOFpbrzTErbJCPcBB4QbvtUvcnsNbpwgBd6EmVZh5k+/p3hzfNnIzoa/AwNqG6hSOelDtk9pVbrYsuJhuCTwaek1P281hZvTKSGi5rHnNxVUNrFesC7z/XkWlDU5cpS/MEPPjY+C79nUkDPqDl6R9Krop58C3UYbAa6CxM5RHDO6rP2X8VH+e7rVsLQ/O6TjEmxLxsN4rt5Yg5RagPhD9W5F9VTYalJif/y3OiaSgDGiVzOl8I9lJb7T9pKIjMhyk9t5+phMLEz9DpLGmOh8bPDc4a62Kd0mN12X90XTAtQKf1V9S/nbOF+YFhCKANfrBuZDomRw3AMdPPDfQUJIWCDTiX2GbdgWt6RTg37emiiqEOm5LTyrxOM5YARskY9D6a+ZcyE1t5k=
-    - secure: CntQX0592ZEoJDOz5ZhMFZF60+6SDFAULz/enwjAjWX9fDj/A+2dhOiVy8avLprzJd34aKjD5Lr3NuRTkU1httKycU5HvM0Rtlt6G6p4jxkDOGu1yiCH7Xmf/xCRIcS8NVNajk/RWwJztps/vCToKy3qztD5bRo+cVCx2lhb11Axm5dgzoLoKnESbVvauSd701HUA+FL2Z+iJztBVE4TtMXpyU9H4sAI2jYDAy+oNKntMy+929M0MVlAI4TjD1q0N7TeMA5lUV+qx0rNyVArGNZr1IitWkv+6+JzAB2GGkMe6IuNpKd8Sk3H2keZQYYMGU8q5+LeCVVheeDOQl29Cf09LVy4bIyD8GdOCpdOBd/G2r/24boRZwBUHyBigAhPm86hnyFF3R8DSX3aa/NfzABIJaPO9kIYm9o4+zTVxzMR9sQQm+wYYA+CGR5oiiKUzMxPUDe9Iiy2t6uGxjfBBxIsoETDaGSRpyHwH76q2El3FYVpypl4fkIuShDjSy8p4/KXkijOLL1Dwv2HC4e7XrH192WSGamrWU58FJHWnOjoEw57fMUoSBMsIx01lzyfz9h+vVew9VqZqdPT3iEFQZFXAt92z8qVEPu2/1hNZdrezclkWJs0anZNf1++BM5TXsWkdbu7w86gEIW8jQJ/p2iKFQEJsN3cMuzoCenr7zw=
+    - TERM=dumb
+    - secure: g7bJ2EJPsMJ0ErYq2IVd1mPRL39schphsrPZtkicaolth5U3JfxUlc9jtNF2zbuBjY3dSrF/hqXdLkVn8AEIdGDf0FcX9ErP9jRotj9Ll0nF1yoAk5IDlhvLeETbiM+XPR8P1prSaKHz0lL4YGKR2kExjRLEQFJilLvoJoVuDP2K49KTpyGEPitw80RyH00lU50Rc8DNcqGQAVO1JHLjvLn782LPTBs4WNct9sIjKrGS+4qFdNNivq49sr4YP2hn9AhbPRBKDBFBmBZrgsRri7s5ZC28/En+LYZoYEfvNjQi9s3TpBl/NSLXau14ZQCBr3Q6GihfCjzmInD0VE7tM0galhHl+NVM5uRiEwy5QONyeNFhibBMPAmDif8KW/HvP9UGTxhq0pGn5C5IyBj6PVdvKlQA13HCB+HsJ1sCxoPj/Ge6wyt7EMREq87YQXmNtD79Tf4zbX9E9njGpUFSau+jyCL1LouxqV/AGtcWlrBfKaZm8Q9dq+agTv5qlEKHZ4RuwOluv3h3lGJQybBtl0cUaZLItkSNqDoHM/3ewrQOXkdAITC3JVylqAb9A51ZMRsC89UPRtF3k/e7rqZQogeiHOLXstQVUgTyU1sKH1bwZCHKQWLpbKO4NCo9yFtNR20V5VGXL3uYEOEFccsMMU8K+Q0Zd+BqUrir96XsTuo=
+    - secure: FN33pzlyDmxuTw2PW3i4LNJ5Q+H+X1JK6DHctTuXLUSXvP68rdDZgE9umgjbBY3aCMq9Wb2Z2e6DxgnHnyZczvLtwvOM1DE7xC6Gnb0hQtYAg/m5wd+Li/t0XOrJFdFwUNYwe24jw+szG7l6sEJdByTaZs0xy5ZeBLJGTLmOmjk5Ddz7bBMeex23vhliDS45H3qiAUq9KdVSBl8lt1KrVWRfWRYsIgZVpa/K96skhPPAoh/nzmov6XI+ZTwrvgOXcG8xXnmxM7sR9xyI2TEcHMAox/HpDSYXGFcL1b6ImX/AjcfkGRjcHQBcEcfw/hG/YOyK6YbQyIJx/5IeeeaxLK9boOc6GDsKzVS0n740ozEJTuFhJO8tYARiPGJrmjGG+1bhydFBmzRXXiu0CM9kTu19gQ+1OkRrpjyQbK+0jGM9o1l+zzvoqYtmEbGaEJ7mMJiMRguPbcLsllLlZgWezdsdUOtaGWsol/z54rFZGu/AC7CspXsvRSQpzWmjfkDLbDQSnYIQ4qVuIYjK1d8yppj7RE//4OO7TiLm7zAw7sc9rjiCyEZ7LOnwiDPJtgho+BlIz0dZauPUAVfhcKS4dWkfsUhmDBlbbiE0mTVHLQcoCubfYAnEJBbuyXohnvkJUbLqMBegoLOvvx9zmFiJ6tmDkGKE4TpZqhoJbXClyNY=
+install: true
 script:
   - "./gradlew check"
   - "./gradlew jib -Djib.to.auth.username=$DOCKER_USER -Djib.to.auth.password=$DOCKER_PASS"
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+  - rm -fr $HOME/.gradle/caches/*/fileHashes/
+  - rm -fr $HOME/.gradle/caches/jars-3/
