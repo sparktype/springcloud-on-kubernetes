@@ -9,11 +9,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: zuul
+      springcloud: zuul
   template:
     metadata:
       labels:
-        app: zuul
+        springcloud: zuul
     spec:
       containers:
       - name: app
