@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-docker build -t cloudcamp/zipkin .
-docker tag cloudcamp/zipkin cloudcamp/zipkin:latest
-docker push cloudcamp/zipkin:latest
+docker build -t cloudcamp/zipkin:2.14.0 .
+docker push cloudcamp/zipkin:2.14.0
