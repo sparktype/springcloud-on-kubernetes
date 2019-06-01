@@ -2,7 +2,7 @@ rootProject.name = 'spring-cloud-java11'
 
 include 'api-base'
 include 'api-good'
-include 'api-order'
+include 'api-sale'
 include 'api-ship'
 include 'api-user'
 include 'springcloud-config'

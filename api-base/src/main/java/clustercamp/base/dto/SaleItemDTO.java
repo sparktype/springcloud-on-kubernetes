@@ -6,21 +6,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderDTO implements BaseAware {
+public class SaleItemDTO implements BaseAware {
 
   private Long id;
 
-  private Long userId;
+  private GoodDTO good;
+
+  private Integer count;
 
   private Long price;
-
-  private Collection<OrderDetailDTO> orderDetails;
 
   private LocalDateTime createAt;
 
@@ -29,4 +27,5 @@ public class OrderDTO implements BaseAware {
   private LocalDateTime modifyAt;
 
   private String modifyBy;
+
 }

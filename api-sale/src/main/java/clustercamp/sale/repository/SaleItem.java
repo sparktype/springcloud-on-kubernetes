@@ -1,6 +1,6 @@
-package clustercamp.order.repository;
+package clustercamp.sale.repository;
 
-import clustercamp.base.dto.OrderDetailDTO;
+import clustercamp.base.dto.SaleItemDTO;
 import clustercamp.base.jpa.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderDetail extends BaseEntity {
+public class SaleItem extends BaseEntity {
 
   private Long goodId;
 
@@ -21,19 +21,19 @@ public class OrderDetail extends BaseEntity {
 
   private Long price;
 
-  public static OrderDetail of(OrderDetailDTO dto) {
-    var domain = new OrderDetail();
+  public static SaleItem of(SaleItemDTO dto) {
+    var domain = new SaleItem();
     BeanUtils.copyProperties(dto, domain);
     return domain;
   }
 
-  public OrderDetailDTO to() {
-    var dto = new OrderDetailDTO();
+  public SaleItemDTO to() {
+    var dto = new SaleItemDTO();
     BeanUtils.copyProperties(this, dto);
     return dto;
   }
 
-  public OrderDetail from(OrderDetailDTO dto) {
+  public SaleItem from(SaleItemDTO dto) {
     BeanUtils.copyProperties(dto, this, "id");
     return this;
   }

@@ -1,8 +1,8 @@
-package clustercamp.order.api;
+package clustercamp.sale.api;
 
 
-import clustercamp.base.dto.OrderDTO;
-import clustercamp.order.service.OrderService;
+import clustercamp.base.dto.SaleDTO;
+import clustercamp.sale.service.SaleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,19 +17,19 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/sale")
 @RequiredArgsConstructor
-public class OrderController {
+public class SaleController {
 
-  private final OrderService service;
+  private final SaleService service;
 
   @GetMapping("/{id}")
-  public ResponseEntity<OrderDTO> detail(@PathVariable Long id) {
+  public ResponseEntity<SaleDTO> detail(@PathVariable Long id) {
     return ResponseEntity.ok(service.detail(id));
   }
 
   @PostMapping
-  public ResponseEntity<OrderDTO> create(@RequestBody OrderDTO dto) {
+  public ResponseEntity<SaleDTO> create(@RequestBody SaleDTO dto) {
     var created = service.create(dto);
 
     return ResponseEntity.created(MvcUriComponentsBuilder.fromController(getClass())
@@ -40,7 +40,7 @@ public class OrderController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<OrderDTO> modify(@PathVariable Long id, @RequestBody OrderDTO dto) {
+  public ResponseEntity<SaleDTO> modify(@PathVariable Long id, @RequestBody SaleDTO dto) {
     var modified = service.modify(id, dto);
 
     return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequestUri()

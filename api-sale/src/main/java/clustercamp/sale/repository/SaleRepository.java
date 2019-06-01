@@ -1,8 +1,8 @@
-package clustercamp.order.repository;
+package clustercamp.sale.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderDetailRepository extends CrudRepository<OrderDetail, Long> {
+public interface SaleRepository extends CrudRepository<Sale, Long> {
 }
