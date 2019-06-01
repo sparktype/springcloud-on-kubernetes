@@ -15,6 +15,10 @@ public class ShipDTO implements BaseAware {
 
   private Long id;
 
+  private Long saleId;
+
+  private String status;
+
   private LocalDateTime createAt;
 
   private String createBy;

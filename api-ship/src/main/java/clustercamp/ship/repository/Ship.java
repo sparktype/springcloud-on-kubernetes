@@ -16,16 +16,14 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 public class Ship extends BaseEntity {
 
-  private String name;
+  private Long saleId;
 
-  private String description;
-
-  private Long price;
+  private String status;
 
   public static Ship of(ShipDTO dto) {
-    var ship = new Ship();
-    BeanUtils.copyProperties(dto, ship);
-    return ship;
+    var domain = new Ship();
+    BeanUtils.copyProperties(dto, domain);
+    return domain;
   }
 
   public ShipDTO to() {
