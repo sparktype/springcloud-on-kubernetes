@@ -1,18 +1,11 @@
+server:
+  port: 8080
 spring:
   application:
     name: zuul
 ---
-server:
-  port: 8080
 spring:
   profiles: ide
-  application:
-    name: ZUUL
-  http:
-    encoding:
-      charset: UTF-8
-      enabled: true
-      force: true
   zipkin:
     baseUrl: http://zipkin.development.svc.cluster.local:9411
   sleuth:
