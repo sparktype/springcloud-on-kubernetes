@@ -12,6 +12,6 @@ configure(subprojects.findAll { it.name != "svc-api-base" }) {
       ]
       credHelper = 'osxkeychain'
     }
-    container.jvmFlags = ArrayList.of("-Djava.security.egd=file:/dev/./urandom")
+    container.jvmFlags = ["-Djava.security.egd=file:/dev/./urandom"]
   }
 }

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: cloudcamp/zipkin:latest
+        image: cloudcamp/zipkin:2.14.0
         resources:
           requests:
             memory: "450Mi"

@@ -1,6 +1,6 @@
 package clustercamp.ship.repository;
 
-import clustercamp.base.dto.GoodDTO;
+import clustercamp.base.dto.ShipDTO;
 import clustercamp.base.jpa.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,20 +22,20 @@ public class Ship extends BaseEntity {
 
   private Long price;
 
-  public static Ship of(GoodDTO goodDTO) {
-    var good = new Ship();
-    BeanUtils.copyProperties(goodDTO, good);
-    return good;
+  public static Ship of(ShipDTO dto) {
+    var ship = new Ship();
+    BeanUtils.copyProperties(dto, ship);
+    return ship;
   }
 
-  public GoodDTO to() {
-    var dto = new GoodDTO();
+  public ShipDTO to() {
+    var dto = new ShipDTO();
     BeanUtils.copyProperties(this, dto);
     return dto;
   }
 
-  public Good from(GoodDTO goodDTO) {
-    BeanUtils.copyProperties(goodDTO, this, "id");
+  public Ship from(ShipDTO dto) {
+    BeanUtils.copyProperties(dto, this, "id");
     return this;
   }
 }
