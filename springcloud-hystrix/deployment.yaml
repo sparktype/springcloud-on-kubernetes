@@ -1,8 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springcloud-hystrix
+  name: hystrix
   namespace: springcloud
+  labels:
+    framework: springcloud
+    app: springcloud-hystrix
 spec:
   replicas: 1
   selector:
@@ -15,7 +18,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: cloudcamp/springcloud-hystrix:latest
+          image: cloudcamp/springcloud-hystrix:1.0.1-arm64v8
           resources:
             requests:
               memory: "700Mi"
@@ -27,18 +30,18 @@ spec:
             - name: spring.profiles.active
               valueFrom:
                 configMapKeyRef:
-                  name: springcloud
-                  key: spring.profile
+                  name: clustercamp
+                  key: active.profiles
             - name: spring.cloud.config.uri
               valueFrom:
                 configMapKeyRef:
-                  name: springcloud
-                  key: springcloud.config.uri
+                  name: clustercamp
+                  key: config.host
             - name: eureka.client.serviceUrl.defaultZone
               valueFrom:
                 configMapKeyRef:
-                  name: springcloud
-                  key: springcloud.eureka.uri
+                  name: clustercamp
+                  key: eureka.host
 ---
 apiVersion: v1
 kind: Service
