@@ -28,7 +28,7 @@ spring:
       type: web
   sleuth:
     sampler:
-      probability: 1.0
+      probability: 0.2
 eureka:
   client:
     registerWithEureka: true

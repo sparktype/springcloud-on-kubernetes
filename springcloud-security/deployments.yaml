@@ -1,20 +1,11 @@
-kind: Service
-apiVersion: v1
-metadata:
-  name: security
-spec:
-  type: ClusterIP
-  selector:
-    app: security
-  ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: security
+  namespace: springcloud
+  labels:
+    framework: springcloud
+    app: springcloud-security
 spec:
   replicas: 1
   selector:
@@ -46,3 +37,15 @@ spec:
             configMapKeyRef:
               name: base-config
               key: spring.cloud.config.uri
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: security
+spec:
+  selector:
+    app: security
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
