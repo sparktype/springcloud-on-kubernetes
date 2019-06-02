@@ -27,4 +27,10 @@ public class ShipDTO implements BaseAware {
 
   private String modifyBy;
 
+
+  public static ShipDTO of(Long id) {
+    var dto = new ShipDTO();
+    dto.setId(id);
+    return dto;
+  }
 }

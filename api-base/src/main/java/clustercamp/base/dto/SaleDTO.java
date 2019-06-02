@@ -29,4 +29,11 @@ public class SaleDTO implements BaseAware {
   private LocalDateTime modifyAt;
 
   private String modifyBy;
+
+
+  public static SaleDTO of(Long id) {
+    var dto = new SaleDTO();
+    dto.setId(id);
+    return dto;
+  }
 }

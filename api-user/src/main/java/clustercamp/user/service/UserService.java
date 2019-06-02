@@ -2,6 +2,7 @@ package clustercamp.user.service;
 
 import clustercamp.base.dto.UserDTO;
 import clustercamp.base.exception.Exceptions;
+import clustercamp.base.exception.HttpNotFoundException;
 import clustercamp.user.repository.User;
 import clustercamp.user.repository.UserRepository;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -16,14 +17,16 @@ public class UserService {
 
   private final UserRepository repository;
 
-  @HystrixCommand(commandKey = "user.detailById", fallbackMethod = "_detail")
+  @HystrixCommand(commandKey = "user.detailByName", fallbackMethod = "_detail",
+    ignoreExceptions = HttpNotFoundException.class)
   public UserDTO detail(String userName) {
     return repository.findByUserName(userName)
       .map(User::to)
       .orElseThrow(Exceptions::notFound);
   }
 
-  @HystrixCommand(commandKey = "user.detailByName", fallbackMethod = "_detail")
+  @HystrixCommand(commandKey = "user.detailById", fallbackMethod = "_detail",
+    ignoreExceptions = HttpNotFoundException.class)
   public UserDTO detail(Long id) {
     return repository.findById(id)
       .map(User::to)
@@ -39,22 +42,18 @@ public class UserService {
   }
 
   @Transactional
-  @HystrixCommand(commandKey = "user.create", fallbackMethod = "defaultFallback")
+  @HystrixCommand(commandKey = "user.create")
   public UserDTO create(UserDTO dto) {
     return repository.save(User.of(dto)).to();
   }
 
 
   @Transactional
-  @HystrixCommand(commandKey = "user.modify", fallbackMethod = "_modify")
+  @HystrixCommand(commandKey = "user.modify", ignoreExceptions = HttpNotFoundException.class)
   public UserDTO modify(Long id, UserDTO dto) {
     return repository.findById(id)
       .map(user -> repository.save(user.from(dto)).to())
       .orElseThrow(Exceptions::notFound);
-  }
-
-  public UserDTO _modify(Long id, UserDTO dto) {
-    return UserDTO.of(id);
   }
 
   @Transactional
