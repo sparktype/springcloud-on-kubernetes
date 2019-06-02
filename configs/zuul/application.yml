@@ -43,7 +43,7 @@ zuul:
       path: /oauth/**
       stripPrefix: false
       sensitiveHeaders:
-      serviceId: OAUTH-SERVICE
+      serviceId: SECURITY
 eureka:
   client:
     registerWithEureka: true
