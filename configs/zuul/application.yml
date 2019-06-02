@@ -48,6 +48,7 @@ zuul:
       stripPrefix: false
       sensitiveHeaders:
       serviceId: SECURITY
+  add-proxy-headers: true
 eureka:
   client:
     registerWithEureka: true
