@@ -26,18 +26,22 @@ zuul:
     user:
       path: /user/**
       stripPrefix: false
+      sensitiveHeaders:
       serviceId: API-USER
     good:
       path: /good/**
       stripPrefix: false
+      sensitiveHeaders:
       serviceId: API-GOOD
     sale:
       path: /sale/**
       stripPrefix: false
+      sensitiveHeaders:
       serviceId: API-SALE
     ship:
       path: /ship/**
       stripPrefix: false
+      sensitiveHeaders:
       serviceId: API-SHIP
     oauth:
       path: /oauth/**
