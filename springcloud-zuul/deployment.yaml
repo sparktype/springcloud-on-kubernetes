@@ -4,7 +4,8 @@ metadata:
   name: zuul
   namespace: springcloud
   labels:
-    app: zuul
+    framework: springcloud
+    app: springcloud-zuul
 spec:
   replicas: 1
   selector:
@@ -17,7 +18,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: cloudcamp/springcloud-zuul:latest
+        image: cloudcamp/springcloud-zuul:1.0.1-arm64v8
         ports:
           - containerPort: 8080
         env:
