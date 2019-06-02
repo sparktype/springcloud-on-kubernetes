@@ -21,45 +21,34 @@ eureka:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 zuul:
-  sensitiveHeaders: Cookie,Set-Cookie
   routes:
     user:
-      path: /api/user/**
+      path: /user/**
       stripPrefix: false
+      sensitiveHeaders:
       serviceId: USER-SERVICE
     oauth:
       path: /oauth/**
       stripPrefix: false
       sensitiveHeaders:
       serviceId: OAUTH-SERVICE
-
-    resource-server-mvc-1: /resource-server-mvc-1/**
-    authorization-server-1:
-      sensitiveHeaders: Authorization
-      path: /authorization-server-1/**
-      stripPrefix: false
   add-proxy-headers: true
 security:
   oauth2:
-    sso:
-      loginPath: /login
-    client:
-      accessTokenUri: http://localhost:8769/authorization-server-1/oauth/token
-      userAuthorizationUri: /authorization-server-1/oauth/authorize
-      clientId: fooClient
-      clientSecret: fooSecret
     resource:
+      id: API
+      loadBalanced: true
       jwt:
-        keyValue: "abc"
-      id: fooScope
-      serviceId: ${PREFIX:}resource
+        keyValue: -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3t2SxlBs8BFtUwE684jy
+          lLx8M49TnqPibkZwsWWKPDjcLZDa2yTaM9/wjtdyF5drpHf+Y6oG9ZQZb8pgMXaY
+          M2JvW9FlEh61Ju/2yA5wr/PP0qQChwoq9Y8jrZViY5ZLo56BzSjUU89tKfn34UQJ
+          zlWuOmZGuIadW6q9BP9HC6MhZ3yxMJy02iHeaHWjwCF0A3L+1BTglPsSlhp6Afx/
+          uHX9oqcoiuZlBr6s7rSFsKkWQWJ1Chx/bI7I5LGApVjb4WU4s9dV6+zt1Z4j+52b
+          5uX77igsAzNBXehcFMKfRO/htGdnoLzz1j+aPwqzod1IzZr2j89+g+9ruaK6CaWG
+          VQIDAQAB
+          -----END PUBLIC KEY-----
 
-
-
-
-
-#
-#
 ## hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 120000
 #hystrix.command.default.execution.timeout.enabled: false
 #ribbon:
