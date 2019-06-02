@@ -4,33 +4,24 @@ spring:
   application:
     name: security
 ---
-server:
-  port: 8082
 spring:
   profiles: ide
+  rabbitmq:
+    host: rabbitmq.springcloud.svc.cluster.local
+    port: 5672
+    username: springcloud
+    password: springcloud
 eureka:
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: https://eureka.cluster.camp/eureka/
   instance:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-    leaseRenewalIntervalInSeconds: 3
-    leaseExpirationDurationInSeconds: 5
 management:
-  metrics:
-    web:
-      server:
-        auto-time-requests: true
-        requests-metric-name: http.server.requests
-    export:
-      prometheus:
-        enabled: true
   endpoint:
-    prometheus:
-      enabled: true
     metrics:
       enabled: true
   endpoints:
@@ -39,4 +30,7 @@ management:
         include: '*'
     web:
       exposure:
-        include: '*'
+        include: bus-env, bus-refresh, service-registry, hystrix.stream
+logging:
+  level:
+    root: info

@@ -2,21 +2,28 @@ server:
   port: 8080
 spring:
   application:
-    name: OAUTH
-  sleuth:
-    sampler:
-      percentage: 0.2
+    name: SECURITY
+---
+spring:
+  profiles: dev
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
     username: springcloud
     password: springcloud
+  zipkin:
+    baseUrl: http://zipkin.springcloud.svc.cluster.local:9411
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 0.2
 eureka:
   client:
     registerWithEureka: true
     fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka.springcloud.svc.cluster.local:8761/eureka/
   instance:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-    leaseRenewalIntervalInSeconds: 3
-    leaseExpirationDurationInSeconds: 5

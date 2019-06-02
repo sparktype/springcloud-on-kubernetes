@@ -1,21 +1,19 @@
 package clustercamp.security.config;
 
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.servlet.http.HttpServletResponse;
 
 @Configuration
-@EnableWebFluxSecurity
+@Order(1)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
 
   @Override
   @Bean
@@ -31,19 +29,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
       .and()
       .authorizeRequests()
-      .antMatchers("/**").authenticated()
-      .and()
-      .httpBasic();
+      .antMatchers("/oauth/**").permitAll()
+      .anyRequest().authenticated();
+  }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.inMemoryAuthentication()
+      .withUser("leonardo")
+      .password(passwordEncoder().encode("1234567890"))
+      .roles("USER");
   }
 
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
-  }
-
-  @Bean
-  @LoadBalanced
-  public WebClient.Builder webClientBuilder() {
-    return WebClient.builder();
   }
 }

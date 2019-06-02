@@ -47,7 +47,6 @@ public class UserService {
     return repository.save(User.of(dto)).to();
   }
 
-
   @Transactional
   @HystrixCommand(commandKey = "user.modify", ignoreExceptions = HttpNotFoundException.class)
   public UserDTO modify(Long id, UserDTO dto) {
