@@ -24,8 +24,11 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springcloud-config
+  name: config
   namespace: springcloud
+  labels:
+    framework: springcloud
+    app: springcloud-config
 spec:
   replicas: 1
   selector:

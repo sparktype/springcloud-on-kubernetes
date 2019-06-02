@@ -4,7 +4,7 @@ metadata:
   name: zipkin
   namespace: springcloud
 spec:
-  replicas: quick-start.sh
+  replicas: 1
   selector:
     matchLabels:
       app: zipkin
@@ -19,16 +19,6 @@ spec:
           ports:
             - containerPort: 9411
           env:
-            - name: spring.profiles.active
-              valueFrom:
-                configMapKeyRef:
-                  name: clustercamp
-                  key: active.profiles
-            - name: spring.cloud.config.uri
-              valueFrom:
-                configMapKeyRef:
-                  name: clustercamp
-                  key: config.host
             - name: eureka.client.serviceUrl.defaultZone
               valueFrom:
                 configMapKeyRef:

@@ -13,9 +13,11 @@ spring:
     password: springcloud
   zipkin:
     baseUrl: http://zipkin.springcloud.svc.cluster.local:9411
+    sender:
+      type: web
   sleuth:
     sampler:
-      percentage: 0.2
+      probability: 1.0
 zuul:
   debug:
     include-debug-header: true

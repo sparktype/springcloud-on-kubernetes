@@ -1,8 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springcloud-eureka
+  name: eureka
   namespace: springcloud
+  labels:
+    framework: springcloud
+    app: springcloud-eureka
 spec:
   replicas: 1
   selector:
