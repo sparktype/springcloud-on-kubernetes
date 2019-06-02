@@ -1,8 +1,8 @@
 configure(subprojects.findAll { it.name.startsWith("api-") && it.name != "api-base" }) {
 
-  configurations {
-    compile.exclude module: 'spring-boot-starter-undertow'
-  }
+//  configurations {
+//    compile.exclude module: 'spring-boot-starter-undertow'
+//  }
 
   dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-config")
