@@ -6,7 +6,7 @@ metadata:
   labels:
     app: rabbitmq
 spec:
-  replicas: 1
+  replicas: quick-start.sh
   selector:
     matchLabels:
       app: rabbitmq

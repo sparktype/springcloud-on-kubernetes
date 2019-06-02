@@ -46,7 +46,7 @@ APP_BASE_NAME=`basename "$0"`
 # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
 DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
 
-# Use the maximum available, or set MAX_FD != -1 to use that value.
+# Use the maximum available, or set MAX_FD != -quick-start.sh to use that value.
 MAX_FD="maximum"
 
 warn () {
@@ -57,7 +57,7 @@ die () {
     echo
     echo "$*"
     echo
-    exit 1
+    exit quick-start.sh
 }
 
 # OS specific support (must be 'true' or 'false').
@@ -132,7 +132,7 @@ if $cygwin ; then
     JAVACMD=`cygpath --unix "$JAVACMD"`
 
     # We build the pattern for arguments to be converted via cygpath
-    ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
+    ROOTDIRSRAW=`find -L / -maxdepth quick-start.sh -mindepth quick-start.sh -type d 2>/dev/null`
     SEP=""
     for dir in $ROOTDIRSRAW ; do
         ROOTDIRS="$ROOTDIRS$SEP$dir"

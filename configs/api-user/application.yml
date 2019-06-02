@@ -22,11 +22,13 @@ spring:
     port: 5672
     username: springcloud
     password: springcloud
+  zipkin:
+    baseUrl: http://zipkin.springcloud.svc.cluster.local:9411
+    sender:
+      type: web
   sleuth:
     sampler:
       probability: 1.0
-    web:
-      skip-pattern: (^cleanup.*)
 eureka:
   client:
     registerWithEureka: true

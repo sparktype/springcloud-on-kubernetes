@@ -15,12 +15,12 @@ spec:
     spec:
       containers:
       - name: app
-        image: cloudcamp/springcloud-eureka:latest
-          resources:
-            requests:
-              memory: "300Mi"
-            limits:
-              memory: "300Mi"
+        image: cloudcamp/springcloud-eureka:1.0.1-arm64v8
+        resources:
+          requests:
+            memory: "300Mi"
+          limits:
+            memory: "300Mi"
         ports:
         - containerPort: 8761
         env:

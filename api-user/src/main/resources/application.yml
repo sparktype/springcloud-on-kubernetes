@@ -4,12 +4,8 @@ spring:
   application:
     name: api-user
 ---
-server:
-  port: 8081
 spring:
   profiles: ide
-  application:
-    name: API-USER
   datasource:
     url: jdbc:mysql://192.168.1.50:3306/spring?useUnicode=yes&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,15 +17,18 @@ spring:
       hibernate:
         format_sql: true
     generate-ddl: true
+    show-sql: true
   rabbitmq:
     host: localhost
     username: springcloud
     password: springcloud
+  zipkin:
+    baseUrl: http://localhost:9411/
+    sender:
+      type: web
   sleuth:
     sampler:
       probability: 1.0
-    web:
-      skip-pattern: (^cleanup.*)
 eureka:
   client:
     registerWithEureka: true
@@ -42,17 +41,7 @@ eureka:
     leaseRenewalIntervalInSeconds: 3
     leaseExpirationDurationInSeconds: 5
 management:
-  metrics:
-    web:
-      server:
-        auto-time-requests: true
-        requests-metric-name: http.server.requests
-    export:
-      prometheus:
-        enabled: true
   endpoint:
-    prometheus:
-      enabled: true
     metrics:
       enabled: true
   endpoints:
@@ -61,8 +50,7 @@ management:
         include: '*'
     web:
       exposure:
-        include: '*'
+        include: bus-env, bus-refresh, service-registry, hystrix.stream
 logging:
-  level:
-    root: info
-    clustercamp: debug
+  pattern:
+    level: "%5p [${spring.zipkin.service.name:${spring.application.name:-}},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]"

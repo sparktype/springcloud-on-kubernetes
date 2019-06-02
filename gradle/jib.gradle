@@ -19,10 +19,7 @@ configure(subprojects.findAll { it.name != "api-base" }) {
         tag = "${tag}-${dockerBaseArch}"
       }
 
-      tags = [
-        tag.toString(),
-        'latest'
-      ]
+      tags = [tag.toString(), 'latest']
     }
 
     container {

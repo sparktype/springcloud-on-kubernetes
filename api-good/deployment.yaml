@@ -15,25 +15,25 @@ spec:
     spec:
       containers:
         - name: api
-          image: cloudcamp/api-good:latest
+          image: cloudcamp/api-good:1.0.1-arm64v8
           ports:
             - containerPort: 8080
           env:
             - name: spring.profiles.active
               valueFrom:
                 configMapKeyRef:
-                  name: springcloud
-                  key: spring.profile
+                  name: clustercamp
+                  key: active.profiles
             - name: spring.cloud.config.uri
               valueFrom:
                 configMapKeyRef:
-                  name: springcloud
-                  key: springcloud.config.uri
+                  name: clustercamp
+                  key: config.host
             - name: eureka.client.serviceUrl.defaultZone
               valueFrom:
                 configMapKeyRef:
-                  name: springcloud
-                  key: springcloud.eureka.uri
+                  name: clustercamp
+                  key: eureka.host
 ---
 apiVersion: v1
 kind: Service

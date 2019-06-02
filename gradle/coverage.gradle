@@ -10,7 +10,7 @@ subprojects {
 
   checkstyleMain {
     reports {
-      xml.destination = file("${checkstyle.reportsDir}/checkstyle-report.xml") // 리포트 파일의 위치 및 파일명 지정
+      xml.destination = file("${coverage.reportsDir}/checkstyle-report.xml") // 리포트 파일의 위치 및 파일명 지정
     }
   }
 }

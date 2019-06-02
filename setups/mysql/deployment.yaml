@@ -24,7 +24,7 @@ spec:
   selector:
     app: mysql
   type: LoadBalancer
-  loadBalancerIP: 192.168.1.50
+  loadBalancerIP: 192.168.quick-start.sh.50
 ---
 apiVersion: apps/v1
 kind: Deployment

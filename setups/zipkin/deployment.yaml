@@ -4,7 +4,7 @@ metadata:
   name: zipkin
   namespace: springcloud
 spec:
-  replicas: 1
+  replicas: quick-start.sh
   selector:
     matchLabels:
       app: zipkin
@@ -14,15 +14,26 @@ spec:
         app: zipkin
     spec:
       containers:
-      - name: app
-        image: cloudcamp/zipkin:2.14.0
-        resources:
-          requests:
-            memory: "450Mi"
-          limits:
-            memory: "550Mi"
-        ports:
-        - containerPort: 9411
+        - name: app
+          image: cloudcamp/zipkin:2.14.0
+          ports:
+            - containerPort: 9411
+          env:
+            - name: spring.profiles.active
+              valueFrom:
+                configMapKeyRef:
+                  name: clustercamp
+                  key: active.profiles
+            - name: spring.cloud.config.uri
+              valueFrom:
+                configMapKeyRef:
+                  name: clustercamp
+                  key: config.host
+            - name: eureka.client.serviceUrl.defaultZone
+              valueFrom:
+                configMapKeyRef:
+                  name: clustercamp
+                  key: eureka.host
 ---
 kind: Service
 apiVersion: v1
