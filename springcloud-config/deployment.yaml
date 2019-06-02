@@ -9,7 +9,7 @@ data:
       port: 8888
     spring:
       application:
-        name: SPRINGCLOUD-CONFIG
+        name: CONFIG
       cloud:
         config:
           server:
@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: cloudcamp/springcloud-config:latest
+          image: cloudcamp/springcloud-config:1.0.1-arm64v8
           ports:
             - containerPort: 8888
           env:
@@ -82,7 +82,7 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: springcloud-config
+  name: config
   namespace: springcloud
   annotations:
     kubernetes.io/ingress.class: traefik

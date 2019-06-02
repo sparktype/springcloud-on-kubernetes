@@ -38,4 +38,16 @@ public class UserDTO implements BaseAware {
 
   private String modifyBy;
 
+
+  public static UserDTO of(Long id) {
+    var dto = new UserDTO();
+    dto.setId(id);
+    return dto;
+  }
+
+  public static UserDTO of(String userName) {
+    var dto = new UserDTO();
+    dto.setUserName(userName);
+    return dto;
+  }
 }

@@ -8,15 +8,15 @@ metadata:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: springcloud
+  name: clustercamp
   namespace: springcloud
 data:
-  spring.profile: dev
-  springcloud.config.uri: http://config.springcloud.svc.cluster.local:8888
-  springcloud.eureka.uri: http://eureka.springcloud.svc.cluster.local:8761/eureka
-  openzipkin.uri:  http://zipkin.development.svc.cluster.local:9411
-  springcloud.eureka.datacenter: Cluster Camp
-  springcloud.eureka.environment: Kubernetes
+  active.profiles: dev
+  config.host: http://config.springcloud.svc.cluster.local:8888
+  zipkin.host: http://zipkin.springcloud.svc.cluster.local:9411
+  eureka.host: http://eureka.springcloud.svc.cluster.local:8761/eureka
+  eureka.datacenter: Cluster Camp
+  eureka.environment: Kubernetes on Arm64v8
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

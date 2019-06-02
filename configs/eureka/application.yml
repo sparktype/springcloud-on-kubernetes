@@ -1,13 +1,16 @@
+server:
+  port: 8761
 spring:
   application:
     name: EUREKA
+---
+spring:
+  profiles: dev
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
     username: springcloud
     password: springcloud
-server:
-  port: 8761
 eureka:
   instance:
     hostname: localhost

@@ -10,9 +10,17 @@ configure(subprojects.findAll { it.name.startsWith("api-") && it.name != "api-ba
     implementation("org.springframework.cloud:spring-cloud-starter-bus-amqp")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
+    implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
     implementation("org.springframework.cloud:spring-cloud-starter-zipkin")
 
     implementation("mysql:mysql-connector-java:${mysqlVersion}")
   }
+
+
+//  dependencyManagement {
+//    imports {
+//      mavenBom "org.springframework.cloud:spring-cloud-dependencies:${sleuthVersion}"
+//    }
+//  }
 
 }

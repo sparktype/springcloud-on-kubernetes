@@ -34,6 +34,10 @@ spec:
                 configMapKeyRef:
                   name: springcloud
                   key: springcloud.eureka.uri
+            - name: zipkin.
+
+              zipkin:
+                uri:
 ---
 apiVersion: v1
 kind: Service

@@ -16,39 +16,39 @@ spec:
       containers:
       - name: app
         image: cloudcamp/springcloud-eureka:latest
-        #        resources:
-        #          requests:
-        #            memory: "700Mi"
-        #          limits:
-        #            memory: "1000Mi"
+          resources:
+            requests:
+              memory: "300Mi"
+            limits:
+              memory: "300Mi"
         ports:
         - containerPort: 8761
         env:
         - name: spring.profiles.active
           valueFrom:
             configMapKeyRef:
-              name: springcloud
-              key: spring.profile
+              name: clustercamp
+              key: active.profiles
         - name: spring.cloud.config.uri
           valueFrom:
             configMapKeyRef:
-              name: springcloud
-              key: springcloud.config.uri
+              name: clustercamp
+              key: config.host
         - name: eureka.datacenter
           valueFrom:
             configMapKeyRef:
-              name: springcloud
-              key: springcloud.eureka.datacenter
+              name: clustercamp
+              key: eureka.datacenter
         - name: eureka.environment
           valueFrom:
             configMapKeyRef:
-              name: springcloud
-              key: springcloud.eureka.environment
+              name: clustercamp
+              key: eureka.environment
         - name: eureka.client.serviceUrl.defaultZone
           valueFrom:
             configMapKeyRef:
-              name: springcloud
-              key: springcloud.eureka.uri
+              name: clustercamp
+              key: eureka.host
 ---
 apiVersion: v1
 kind: Service

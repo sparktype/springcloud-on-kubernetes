@@ -16,37 +16,49 @@ public class UserService {
 
   private final UserRepository repository;
 
-  @HystrixCommand(fallbackMethod = "detail_")
+  @HystrixCommand(commandKey = "user.detailById", fallbackMethod = "_detail")
   public UserDTO detail(String userName) {
     return repository.findByUserName(userName)
       .map(User::to)
       .orElseThrow(Exceptions::notFound);
   }
 
-  @HystrixCommand(fallbackMethod = "detail_")
+  @HystrixCommand(commandKey = "user.detailByName", fallbackMethod = "_detail")
   public UserDTO detail(Long id) {
     return repository.findById(id)
       .map(User::to)
       .orElseThrow(Exceptions::notFound);
   }
 
+  public UserDTO _detail(Long id) {
+    return UserDTO.of(id);
+  }
+
+  public UserDTO _detail(String userName) {
+    return UserDTO.of(userName);
+  }
+
   @Transactional
-  @HystrixCommand(fallbackMethod = "defaultFallback")
+  @HystrixCommand(commandKey = "user.create", fallbackMethod = "defaultFallback")
   public UserDTO create(UserDTO dto) {
     return repository.save(User.of(dto)).to();
   }
 
 
   @Transactional
-  @HystrixCommand(fallbackMethod = "defaultFallback")
+  @HystrixCommand(commandKey = "user.modify", fallbackMethod = "_modify")
   public UserDTO modify(Long id, UserDTO dto) {
     return repository.findById(id)
       .map(user -> repository.save(user.from(dto)).to())
       .orElseThrow(Exceptions::notFound);
   }
 
+  public UserDTO _modify(Long id, UserDTO dto) {
+    return UserDTO.of(id);
+  }
+
   @Transactional
-  @HystrixCommand(fallbackMethod = "defaultFallback")
+  @HystrixCommand(commandKey = "user.delete")
   public void remove(Long id) {
     repository.deleteById(id);
   }
