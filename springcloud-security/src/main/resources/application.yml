@@ -6,11 +6,29 @@ spring:
 ---
 spring:
   profiles: ide
+  datasource:
+    url: jdbc:mysql://192.168.1.50:3306/spring?useUnicode=yes&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: spring
+    password: spring1234
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: true
+    show-sql: true
   rabbitmq:
-    host: rabbitmq.springcloud.svc.cluster.local
-    port: 5672
+    host: localhost
     username: springcloud
     password: springcloud
+  zipkin:
+    baseUrl: http://localhost:9411/
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
 eureka:
   client:
     registerWithEureka: true
@@ -31,6 +49,3 @@ management:
     web:
       exposure:
         include: bus-env, bus-refresh, service-registry, hystrix.stream
-logging:
-  level:
-    root: info

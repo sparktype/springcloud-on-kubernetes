@@ -1,6 +1,5 @@
 package clustercamp.ship.service;
 
-import clustercamp.base.dto.ShipDTO;
 import clustercamp.base.exception.Exceptions;
 import clustercamp.base.exception.HttpNotFoundException;
 import clustercamp.ship.repository.Ship;
@@ -19,28 +18,26 @@ public class ShipService {
 
   @HystrixCommand(commandKey = "ship.detail", fallbackMethod = "_detail",
     ignoreExceptions = HttpNotFoundException.class)
-  public ShipDTO detail(Long id) {
+  public Ship detail(Long id) {
     return repository.findById(id)
-      .map(Ship::to)
       .orElseThrow(Exceptions::notFound);
   }
 
-  public ShipDTO _detail(Long id) {
-    return ShipDTO.of(id);
+  public Ship _detail(Long id) {
+    return Ship.of(id);
   }
 
   @Transactional
   @HystrixCommand(commandKey = "ship.create")
-  public ShipDTO create(ShipDTO dto) {
-    return repository.save(Ship.of(dto)).to();
+  public Ship create(Ship request) {
+    return repository.save(request);
   }
-
 
   @Transactional
   @HystrixCommand(commandKey = "ship.modify", ignoreExceptions = HttpNotFoundException.class)
-  public ShipDTO modify(Long id, ShipDTO dto) {
+  public Ship modify(Long id, Ship request) {
     return repository.findById(id)
-      .map(ship -> repository.save(ship.from(dto)).to())
+      .map(ship -> repository.save(ship.from(request)))
       .orElseThrow(Exceptions::notFound);
   }
 

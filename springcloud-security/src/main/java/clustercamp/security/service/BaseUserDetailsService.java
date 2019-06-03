@@ -1,22 +1,24 @@
 package clustercamp.security.service;
 
-//@Component
-//public class BaseUserDetailsService implements ReactiveUserDetailsService {
-//
-//  private final WebClient webClient;
-//
-//  public BaseUserDetailsService(WebClient.Builder builder) {
-//    webClient = builder.baseUrl("http://API-USER-SERVICE")
-//      .defaultHeader(HttpHeaders.USER_AGENT, "ClusterCampOAuth2.0")
-//      .build();
-//  }
-//
-//  @Override
-//  public Mono<UserDetails> findByUsername(String username) {
-////    return webClient.get().uri("/user?userId={username}", username)
-////      .retrieve()
-////      .bodyToMono(UserDTO.class);
-////      .
-//    return null;
-//  }
-//}
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
+
+import clustercamp.security.repository.User;
+import clustercamp.security.repository.UserRepository;
+
+@Component
+public class BaseUserDetailsService implements UserDetailsService {
+
+  @Autowired
+  private UserRepository repository;
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    return repository.findByUsername(username)
+      .map(User::to)
+      .orElseThrow(() -> new UsernameNotFoundException(String.format("{username} not found", username)));
+  }
+}

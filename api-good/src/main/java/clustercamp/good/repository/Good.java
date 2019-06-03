@@ -1,13 +1,12 @@
 package clustercamp.good.repository;
 
-import clustercamp.base.dto.GoodDTO;
-import clustercamp.base.jpa.BaseEntity;
+import javax.persistence.Entity;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
 
-import javax.persistence.Entity;
+import clustercamp.base.jpa.BaseEntity;
 
 
 @Entity
@@ -22,20 +21,16 @@ public class Good extends BaseEntity {
 
   private Long price;
 
-  public static Good of(GoodDTO goodDTO) {
+  public static Good of(Long id) {
     var good = new Good();
-    BeanUtils.copyProperties(goodDTO, good);
+    good.setId(id);
     return good;
   }
 
-  public GoodDTO to() {
-    var dto = new GoodDTO();
-    BeanUtils.copyProperties(this, dto);
-    return dto;
-  }
-
-  public Good from(GoodDTO goodDTO) {
-    BeanUtils.copyProperties(goodDTO, this, "id");
+  public Good from(Good request) {
+    name = request.getName();
+    description = request.getDescription();
+    price = request.getPrice();
     return this;
   }
 }
