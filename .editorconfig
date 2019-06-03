@@ -1,19 +1,27 @@
-root = true
-
 [*]
 charset = utf-8
 end_of_line = lf
+insert_final_newline = false
 indent_style = space
-indent_size = 2
-insert_final_newline = true
-trim_trailing_whitespace = true
-max_line_length = 120
+indent_size = 4
 
-[{messages.*, spring.schemas, spring.handlers, messages, *.properties}]
+[{.eslintrc, .babelrc, jest.config, .stylelintrc, *.bowerrc, *.jsb3, *.jsb2, *.json}]
 indent_style = space
 indent_size = 2
 
-[.editorconfig]
+[*.java]
+indent_style = space
+indent_size = 2
+
+[*.aj]
+indent_style = space
+indent_size = 2
+
+[{tsconfig.lib.json, tsconfig.app.json, tsconfig.e2e.json, tsconfig.json, tsconfig.spec.json}]
+indent_style = space
+indent_size = 2
+
+[*.js.map]
 indent_style = space
 indent_size = 2
 
@@ -21,12 +29,3 @@ indent_size = 2
 indent_style = space
 indent_size = 2
 
-[{*.groovy, *.gradle}]
-charset = utf-8
-end_of_line = lf
-indent_style = space
-indent_size = 2
-insert_final_newline = true
-trim_trailing_whitespace = true
-max_line_length = 120
-quote_type = single
