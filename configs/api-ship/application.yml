@@ -11,6 +11,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: spring
     password: spring1234
+    initialization-mode: never
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
