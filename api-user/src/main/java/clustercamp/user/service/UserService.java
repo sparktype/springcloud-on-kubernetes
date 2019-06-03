@@ -1,15 +1,15 @@
 package clustercamp.user.service;
 
-import clustercamp.base.dto.UserDTO;
-import clustercamp.base.exception.Exceptions;
-import clustercamp.base.exception.HttpNotFoundException;
-import clustercamp.user.repository.User;
-import clustercamp.user.repository.UserRepository;
+import javax.transaction.Transactional;
+
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import clustercamp.base.exception.Exceptions;
+import clustercamp.base.exception.HttpNotFoundException;
+import clustercamp.user.repository.User;
+import clustercamp.user.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -17,41 +17,28 @@ public class UserService {
 
   private final UserRepository repository;
 
-  @HystrixCommand(commandKey = "user.detailByName", fallbackMethod = "_detail",
-    ignoreExceptions = HttpNotFoundException.class)
-  public UserDTO detail(String userName) {
-    return repository.findByUserName(userName)
-      .map(User::to)
-      .orElseThrow(Exceptions::notFound);
-  }
-
   @HystrixCommand(commandKey = "user.detailById", fallbackMethod = "_detail",
     ignoreExceptions = HttpNotFoundException.class)
-  public UserDTO detail(Long id) {
+  public User detail(Long id) {
     return repository.findById(id)
-      .map(User::to)
       .orElseThrow(Exceptions::notFound);
   }
 
-  public UserDTO _detail(Long id) {
-    return UserDTO.of(id);
-  }
-
-  public UserDTO _detail(String userName) {
-    return UserDTO.of(userName);
+  public User _detail(Long id) {
+    return User.of(id);
   }
 
   @Transactional
   @HystrixCommand(commandKey = "user.create")
-  public UserDTO create(UserDTO dto) {
-    return repository.save(User.of(dto)).to();
+  public User create(User request) {
+    return repository.save(request);
   }
 
   @Transactional
   @HystrixCommand(commandKey = "user.modify", ignoreExceptions = HttpNotFoundException.class)
-  public UserDTO modify(Long id, UserDTO dto) {
+  public User modify(Long id, User request) {
     return repository.findById(id)
-      .map(user -> repository.save(user.from(dto)).to())
+      .map(user -> repository.save(user.from(request)))
       .orElseThrow(Exceptions::notFound);
   }
 

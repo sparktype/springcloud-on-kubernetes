@@ -1,6 +1,5 @@
 package clustercamp.sale.service;
 
-import clustercamp.base.dto.SaleDTO;
 import clustercamp.base.exception.Exceptions;
 import clustercamp.base.exception.HttpNotFoundException;
 import clustercamp.sale.repository.Sale;
@@ -19,27 +18,26 @@ public class SaleService {
 
   @HystrixCommand(commandKey = "sale.detail", fallbackMethod = "_detail",
     ignoreExceptions = HttpNotFoundException.class)
-  public SaleDTO detail(Long id) {
+  public Sale detail(Long id) {
     return repository.findById(id)
-      .map(Sale::to)
       .orElseThrow(Exceptions::notFound);
   }
 
-  public SaleDTO _detail(Long id) {
-    return SaleDTO.of(id);
+  public Sale _detail(Long id) {
+    return Sale.of(id);
   }
 
   @Transactional
   @HystrixCommand(commandKey = "sale.create")
-  public SaleDTO create(SaleDTO dto) {
-    return repository.save(Sale.of(dto)).to();
+  public Sale create(Sale request) {
+    return repository.save(request);
   }
 
   @Transactional
   @HystrixCommand(commandKey = "sale.modify", ignoreExceptions = HttpNotFoundException.class)
-  public SaleDTO modify(Long id, SaleDTO dto) {
+  public Sale modify(Long id, Sale request) {
     return repository.findById(id)
-      .map(sale -> repository.save(sale.from(dto)).to())
+      .map(sale -> repository.save(sale.from(request)))
       .orElseThrow(Exceptions::notFound);
   }
 

@@ -1,11 +1,9 @@
 package clustercamp.sale.repository;
 
-import clustercamp.base.dto.SaleDTO;
 import clustercamp.base.jpa.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
 
 import javax.persistence.Entity;
 
@@ -19,20 +17,14 @@ public class Sale extends BaseEntity {
 
   private Long price;
 
-  public static Sale of(SaleDTO dto) {
-    var order = new Sale();
-    BeanUtils.copyProperties(dto, order);
-    return order;
+  public static Sale of(Long id) {
+    var sale = new Sale();
+    sale.setId(id);
+    return sale;
   }
 
-  public SaleDTO to() {
-    var dto = new SaleDTO();
-    BeanUtils.copyProperties(this, dto);
-    return dto;
-  }
-
-  public Sale from(SaleDTO dto) {
-    BeanUtils.copyProperties(dto, this, "id");
+  public Sale from(Sale request) {
+    price = request.getPrice();
     return this;
   }
 }
