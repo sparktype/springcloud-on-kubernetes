@@ -6,6 +6,7 @@ spring:
 ---
 spring:
   profiles: ide
+  data-initial: false
   datasource:
     url: jdbc:mysql://192.168.1.50:3306/spring?useUnicode=yes&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -38,8 +39,6 @@ eureka:
   instance:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-    leaseRenewalIntervalInSeconds: 3
-    leaseExpirationDurationInSeconds: 5
 security:
   oauth2:
     resource:
@@ -63,7 +62,4 @@ management:
         include: '*'
     web:
       exposure:
-        include: bus-env, bus-refresh, service-registry, hystrix.stream
-logging:
-  pattern:
-    level: "%5p [${spring.zipkin.service.name:${spring.application.name:-}},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]"
+        include: '*'
