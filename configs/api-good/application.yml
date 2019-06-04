@@ -6,6 +6,7 @@ spring:
 ---
 spring:
   profiles: dev
+  data-initial: false
   datasource:
     url: jdbc:mysql://mysql.springcloud.svc.cluster.local:3306/spring?useUnicode=yes&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
