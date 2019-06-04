@@ -1,9 +1,9 @@
 buildscript {
   ext {
     springBootVersion = "2.1.5.RELEASE"
-    springCloudVersion="Greenwich.SR1"
-    gradlePath="${rootProject.projectDir}/gradle"
-    groovyVersion="2.5.7"
+    springCloudVersion = "Greenwich.SR1"
+    gradlePath = "${rootProject.projectDir}/gradle"
+    groovyVersion = "3.0.0-beta-1"
     jibVersion = "1.2.0"
     lombokPluginVersion = "3.6.4"
     gitPluginVersion = "0.12.0-rc2"
@@ -18,9 +18,9 @@ buildscript {
   dependencies {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
-    classpath "io.freefair.gradle:lombok-plugin:${lombokPluginVersion}"
     classpath "gradle.plugin.com.palantir.gradle.gitversion:gradle-git-version:${gitPluginVersion}"
     classpath "gradle.plugin.com.github.kt3k.coveralls:coveralls-gradle-plugin:${coverallsPluginVersion}"
+    classpath "io.freefair.gradle:lombok-plugin:${lombokPluginVersion}"
   }
 }
 
@@ -54,8 +54,9 @@ subprojects {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
 
-    testImplementation "org.spockframework:spock-core:${spockVersion}"
-    testImplementation "org.spockframework:spock-spring:${spockVersion}"
+    testImplementation("org.codehaus.groovy:groovy-all:${groovyVersion}")
+    testImplementation("org.spockframework:spock-core:${spockVersion}")
+    testImplementation("org.spockframework:spock-spring:${spockVersion}")
   }
 
   dependencyManagement {

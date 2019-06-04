@@ -28,20 +28,8 @@ eureka:
   instance:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-    leaseRenewalIntervalInSeconds: 3
-    leaseExpirationDurationInSeconds: 5
 management:
-  metrics:
-    web:
-      server:
-        auto-time-requests: true
-        requests-metric-name: http.server.requests
-    export:
-      prometheus:
-        enabled: true
   endpoint:
-    prometheus:
-      enabled: true
     metrics:
       enabled: true
   endpoints:
