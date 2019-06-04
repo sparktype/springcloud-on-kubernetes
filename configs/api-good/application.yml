@@ -53,6 +53,9 @@ eureka:
     preferIpAddress: true
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
   endpoint:
     metrics:
       enabled: true
