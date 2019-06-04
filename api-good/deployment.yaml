@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: cloudcamp/api-good:1.0.5-arm64v8
+          image: cloudcamp/api-good:1.0.6-arm64v8
           ports:
             - containerPort: 8080
           env:

@@ -53,17 +53,7 @@ security:
           VQIDAQAB
           -----END PUBLIC KEY-----
 management:
-  metrics:
-    web:
-      server:
-        auto-time-requests: true
-        requests-metric-name: http.server.requests
-    export:
-      prometheus:
-        enabled: true
   endpoint:
-    prometheus:
-      enabled: true
     metrics:
       enabled: true
   endpoints:

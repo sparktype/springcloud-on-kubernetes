@@ -2,6 +2,7 @@ package clustercamp.user;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -21,6 +22,7 @@ public class Application {
   }
 
   @Bean
+  @ConditionalOnProperty(name = "spring.data-initial", havingValue = "true")
   public CommandLineRunner loadData(UserRepository repository, PasswordEncoder encoder) {
 
     return args -> {
