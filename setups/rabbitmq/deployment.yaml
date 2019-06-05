@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rabbitmq-pvc
+  namespace: springcloud
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nvme
+  resources:
+    requests:
+      storage: 10Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,7 +19,7 @@ metadata:
   labels:
     app: rabbitmq
 spec:
-  replicas: quick-start.sh
+  replicas: 1
   selector:
     matchLabels:
       app: rabbitmq
@@ -16,21 +29,42 @@ spec:
         app: rabbitmq
     spec:
       affinity:
-        podAffinity:
+        nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - web-store
-                topologyKey: "kubernetes.io/hostname"
+                      - master
       containers:
-        - image: arm64v8/rabbitmq:3.7.15-management-alpine
-          name: rabbitmq
+        - name: rabbitmq
+          image: arm64v8/rabbitmq:3.7.15-management-alpine
+          imagePullPolicy: Always
           ports:
-            - containerPort: 5672
-            - containerPort: 15672
+            - name: http
+              protocol: TCP
+              containerPort: 15672
+            - name: amqp
+              protocol: TCP
+              containerPort: 5672
+          readinessProbe:           # This readiness probe will delay the startup of the nex pod for 30 seconds. It ensures
+            exec:                   # the node is most probably in a state that let the next node connect to this one.
+              command: ["true"]     # Doing a real liveness or readiness probe will result in a stuck statfult set if the
+            initialDelaySeconds: 30 # cluster is in a "pause_minority" state. In this state all health checks provided
+            timeoutSeconds: 5       # by rabbitmq will fail, but the node should _not_ be restarted.
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              value: admin
+            - name: RABBITMQ_DEFAULT_PASS
+              value: admin
+          volumeMounts:
+            - name: rabbitmq-storage
+              mountPath: /var/lib/rabbitmq
+      volumes:
+        - name: rabbitmq-storage
+          persistentVolumeClaim:
+            claimName: rabbitmq-pvc
 ---
 apiVersion: v1
 kind: Service

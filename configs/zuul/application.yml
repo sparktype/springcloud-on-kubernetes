@@ -77,6 +77,9 @@ security:
           VQIDAQAB
           -----END PUBLIC KEY-----
 management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
   endpoint:
     metrics:
       enabled: true

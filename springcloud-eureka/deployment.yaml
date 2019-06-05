@@ -15,6 +15,10 @@ spec:
     metadata:
       labels:
         springcloud: eureka
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port:   '8761'
+        prometheus.io/path: '/actuator/prometheus'
     spec:
       containers:
       - name: app
