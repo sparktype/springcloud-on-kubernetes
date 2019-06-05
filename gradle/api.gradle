@@ -7,7 +7,6 @@ configure(subprojects.findAll { it.name.startsWith("api-") && it.name != "api-ba
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
     implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
     implementation("org.springframework.cloud:spring-cloud-starter-oauth2")
-    implementation("io.micrometer:micrometer-registry-prometheus:${micrometerVersion}")
     implementation("mysql:mysql-connector-java:${mysqlVersion}")
   }
 }

@@ -62,3 +62,14 @@ security:
                   kxNRWZVtBoOoca4k6YWYPwhQSARMPVLVcs7OsKwhtknYiA+CUcg1cwrksxxbvIMV
                   6wIDAQAB
                   -----END PUBLIC KEY-----
+management:
+  endpoint:
+    metrics:
+      enabled: true
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      exposure:
+        include: '*'

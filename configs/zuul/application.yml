@@ -76,3 +76,14 @@ security:
           5uX77igsAzNBXehcFMKfRO/htGdnoLzz1j+aPwqzod1IzZr2j89+g+9ruaK6CaWG
           VQIDAQAB
           -----END PUBLIC KEY-----
+management:
+  endpoint:
+    metrics:
+      enabled: true
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      exposure:
+        include: '*'
