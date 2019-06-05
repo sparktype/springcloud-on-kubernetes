@@ -1,2 +1,30 @@
 server:
   port: 8888
+---
+spring:
+  profiles: ide
+  application:
+    name: CONFIG
+  cloud:
+    bus:
+      enabled: false
+    config:
+      server:
+        git:
+          uri: https://github.com/clustercamp/spring-cloud-java11.git
+          searchPaths: /configs/{application}
+
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoint:
+    metrics:
+      enabled: true
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      exposure:
+        include: '*'

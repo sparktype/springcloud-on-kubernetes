@@ -63,3 +63,4 @@ subprojects {
 
 apply from: "${gradlePath}/api.gradle"
 apply from: "${gradlePath}/jib.gradle"
+apply from: "${gradlePath}/micrometer.gradle"

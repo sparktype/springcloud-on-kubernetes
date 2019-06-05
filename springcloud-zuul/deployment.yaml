@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: cloudcamp/springcloud-zuul:1.0.3-arm64v8
+        image: dockercamp/springcloud-zuul:1.0.3-arm64v8
         ports:
           - containerPort: 8080
         env:

@@ -20,6 +20,20 @@ data:
         host: rabbitmq.springcloud.svc.cluster.local
         username: springcloud
         password: springcloud
+    management:
+      metrics:
+        tags:
+          application: ${spring.application.name}
+      endpoint:
+        metrics:
+          enabled: true
+      endpoints:
+        jmx:
+          exposure:
+            include: '*'
+        web:
+          exposure:
+            include: '*'
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -41,7 +55,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: cloudcamp/springcloud-config:1.0.1-arm64v8
+          image: dockercamp/springcloud-config:1.0.1-arm64v8
           ports:
             - containerPort: 8888
           env:

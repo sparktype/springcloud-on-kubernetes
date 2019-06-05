@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: hubtea/spring-cloud-zuul:latest
+        image: dockercamp/spring-cloud-zuul:latest
         ports:
         - containerPort: 8080
         env:
