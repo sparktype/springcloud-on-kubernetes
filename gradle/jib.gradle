@@ -5,6 +5,7 @@ configure(subprojects.findAll { it.name != "api-base" }) {
   jib {
 
     def details = versionDetails()
+
     def tag = "${project.version}"
 
     if (details.branchName != null && details.branchName != 'master') {
