@@ -1,5 +1,6 @@
 package clustercamp.good.config;
 
+import io.micrometer.core.instrument.binder.hystrix.HystrixMetricsBinder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +18,11 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     http.authorizeRequests()
       .antMatchers("/actuator/**").permitAll()
       .antMatchers("/**").authenticated();
+  }
+
+  @Bean
+  public HystrixMetricsBinder hystrixMetricsBinder(){
+    return new HystrixMetricsBinder();
   }
 
   @Bean

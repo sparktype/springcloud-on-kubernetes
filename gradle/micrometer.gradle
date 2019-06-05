@@ -1,0 +1,5 @@
+configure(subprojects.findAll { it.name != "api-base" }) {
+  dependencies {
+    implementation("io.micrometer:micrometer-registry-prometheus:${micrometerVersion}")
+  }
+}
