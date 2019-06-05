@@ -35,7 +35,6 @@ subprojects {
   apply plugin: "org.springframework.boot"
   apply plugin: "io.spring.dependency-management"
   apply plugin: "io.freefair.lombok"
-  apply plugin: "com.palantir.git-version"
 
   sourceCompatibility = '11'
   group = 'clustercamp'
@@ -63,4 +62,4 @@ subprojects {
 
 apply from: "${gradlePath}/api.gradle"
 apply from: "${gradlePath}/jib.gradle"
-apply from: "${gradlePath}/micrometer.gradle"
+apply from: "${gradlePath}/metric.gradle"

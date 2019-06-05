@@ -1,29 +1,27 @@
 configure(subprojects.findAll { it.name != "api-base" }) {
   apply plugin: "com.google.cloud.tools.jib"
+  apply plugin: "com.palantir.git-version"
 
   jib {
-    from.image = "${dockerBaseImage}"
 
-    to {
+    def details = versionDetails()
+    def tag = "${project.version}"
 
-      def details = versionDetails()
-      image = "${dockerGroupName}/${project.name}"
-
-      def tag = "${project.version}"
-
-      if (details.branchName != 'master') {
-        tag = "${tag}-${details.branchName}"
-      }
-
-      if (dockerBaseArch != '') {
-        tag = "${tag}-${dockerBaseArch}"
-      }
-
-      tags = [tag.toString(), 'latest']
+    if (details.branchName != null && details.branchName != 'master') {
+      tag = "${tag}-${details.branchName}"
     }
 
-    container {
-      jvmFlags = ["-Djava.security.egd=file:/dev/./urandom"]
+    if (dockerBaseArch != '') {
+      tag = "${tag}-${dockerBaseArch}"
+    }
+
+    from {
+      image = "${dockerBaseImage}"
+    }
+
+    to {
+      image = "${dockerGroupName}/${project.name}"
+      tags = [tag.toString(), 'latest']
     }
   }
 }
