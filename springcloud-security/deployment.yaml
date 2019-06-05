@@ -15,10 +15,14 @@ spec:
     metadata:
       labels:
         app: security
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8080'
+        prometheus.io/path: '/actuator/prometheus'
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-security:1.0.5-arm64v8
+          image: dockercamp/springcloud-security:1.0.6-arm64v8
           ports:
             - containerPort: 8080
           env:

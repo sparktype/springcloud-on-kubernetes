@@ -15,15 +15,14 @@ spec:
     metadata:
       labels:
         springcloud: hystrix
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port:   '8080'
+        prometheus.io/path: '/actuator/prometheus'
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-hystrix:1.0.1-arm64v8
-          resources:
-            requests:
-              memory: "700Mi"
-            limits:
-              memory: "800Mi"
+          image: dockercamp/springcloud-hystrix:1.0.2-arm64v8
           ports:
             - containerPort: 8080
           env:
@@ -74,4 +73,3 @@ spec:
             backend:
               serviceName: hystrix
               servicePort: 8080
-
