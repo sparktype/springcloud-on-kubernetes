@@ -6,4 +6,7 @@ dependencies {
   implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
   implementation("org.springframework.cloud:spring-cloud-starter-oauth2")
   implementation("org.springframework.cloud:spring-cloud-starter-security")
+  implementation("io.springfox:springfox-swagger2:${swaggerVersion}")
+  implementation("io.springfox:springfox-swagger-ui:${swaggerVersion}")
+  implementation("io.springfox:springfox-bean-validators:${swaggerVersion}")
 }
