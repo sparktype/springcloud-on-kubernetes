@@ -9,7 +9,7 @@ spec:
   storageClassName: nvme
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi
 ---
 apiVersion: v1
 kind: Service
@@ -24,7 +24,7 @@ spec:
   selector:
     app: mysql
   type: LoadBalancer
-  loadBalancerIP: 192.168.quick-start.sh.50
+  loadBalancerIP: 192.168.1.50
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -42,6 +42,15 @@ spec:
       labels:
         app: mysql
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - master
       containers:
         - image: mysql/mysql-server
           name: mysql

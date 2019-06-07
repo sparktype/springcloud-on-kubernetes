@@ -2,14 +2,13 @@ package clustercamp.user.service;
 
 import javax.transaction.Transactional;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import clustercamp.base.exception.Exceptions;
 import clustercamp.base.exception.HttpNotFoundException;
 import clustercamp.user.repository.User;
 import clustercamp.user.repository.UserRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +16,8 @@ public class UserService {
 
   private final UserRepository repository;
 
-  @HystrixCommand(commandKey = "user.detailById", fallbackMethod = "_detail",
-    ignoreExceptions = HttpNotFoundException.class)
+  @HystrixCommand(commandKey = "user.detail", fallbackMethod = "_detail", ignoreExceptions =
+    HttpNotFoundException.class)
   public User detail(Long id) {
     return repository.findById(id)
       .orElseThrow(Exceptions::notFound);
