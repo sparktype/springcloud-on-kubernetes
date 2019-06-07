@@ -1,50 +1,36 @@
 package clustercamp.zuul.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
-
-@Configuration
-@EnableOAuth2Sso
-@EnableResourceServer
-@Order(value = 0)
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-  private static final String[] PATHS = {
-    "/v2/api-docs",
-    "/swagger-resources/**",
-    "/configuration/ui",
-    "/configuration/security",
-    "/swagger-ui.html",
-    "/webjars/**"
-  };
-
-  @Autowired
-  private ResourceServerTokenServices resourceServerTokenServices;
-
-  @Override
-  public void configure(HttpSecurity http) throws Exception {
-    http.csrf().disable()
-      .authorizeRequests()
-      .antMatchers(PATHS).permitAll()
-      .antMatchers("/actuator/**", "/login").permitAll()
-      .anyRequest().authenticated();
-  }
-
+//@Configuration
+//@EnableResourceServer
+//@Order(value = 0)
+//public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+//
+//  private static final String[] PATHS = {
+//    "/v2/api-docs",
+//    "/swagger-resources/**",
+//    "/configuration/ui",
+//    "/configuration/security",
+//    "/swagger-ui.html",
+//    "/webjars/**"
+//  };
 //  @Autowired
 //  private ResourceServerTokenServices resourceServerTokenServices;
-
+//
+//  @Override
+//  public void configure(HttpSecurity http) throws Exception {
+//    http.csrf().disable()
+//      .authorizeRequests()
+//      .antMatchers(PATHS).permitAll()
+//      .antMatchers("/actuator/**", "/login").permitAll()
+//      .anyRequest().authenticated();
+//  }
+//
 //  @Bean
 //  @Primary
 //  public OAuth2ClientContextFilter oauth2ClientContextFilterWithPath() {
 //    return new OAuth2ClientFilter();
 //  }
-
+//
 //  @Override
 //  protected void configure(HttpSecurity http) throws Exception {
 //    http.csrf().disable()
@@ -56,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //      .and().addFilterAfter(oAuth2AuthenticationProcessingFilter(), AbstractPreAuthenticatedProcessingFilter.class)
 //      .logout().permitAll().logoutSuccessUrl("/");
 //  }
-
+//
 //  private OAuth2AuthenticationProcessingFilter oAuth2AuthenticationProcessingFilter() {
 //    OAuth2AuthenticationProcessingFilter oAuth2AuthenticationProcessingFilter = new OAuth2AuthenticationProcessingFilter();
 //    oAuth2AuthenticationProcessingFilter.setAuthenticationManager(oauthAuthenticationManager());
@@ -73,4 +59,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //
 //    return oAuth2AuthenticationManager;
 //  }
-}
+//}
