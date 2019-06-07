@@ -15,6 +15,15 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 @Order(value = 0)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+  private static final String[] PATHS = {
+    "/v2/api-docs",
+    "/swagger-resources/**",
+    "/configuration/ui",
+    "/configuration/security",
+    "/swagger-ui.html",
+    "/webjars/**"
+  };
+
   @Autowired
   private ResourceServerTokenServices resourceServerTokenServices;
 
@@ -22,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   public void configure(HttpSecurity http) throws Exception {
     http.csrf().disable()
       .authorizeRequests()
+      .antMatchers(PATHS).permitAll()
       .antMatchers("/actuator/**", "/login").permitAll()
       .anyRequest().authenticated();
   }

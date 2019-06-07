@@ -1,6 +1,6 @@
 package clustercamp.sale.config;
 
-import io.micrometer.core.instrument.binder.hystrix.HystrixMetricsBinder;
+import clustercamp.base.constant.Swagger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,13 +16,14 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
   @Override
   public void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-      .antMatchers("/actuator/**").permitAll()
-      .antMatchers("/**").authenticated();
-  }
-
-  @Bean
-  public HystrixMetricsBinder hystrixMetricsBinder(){
-    return new HystrixMetricsBinder();
+      .antMatchers(Swagger.PATHS).permitAll()
+      .antMatchers("/", "/actuator/**", "/csrf", "/version").permitAll()
+      .and()
+      .authorizeRequests()
+      .anyRequest()
+      .authenticated()
+      .and()
+      .csrf().disable();
   }
 
   @Bean
