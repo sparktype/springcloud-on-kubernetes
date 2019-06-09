@@ -1,4 +1,4 @@
-rootProject.name = 'spring-cloud-java11'
+rootProject.name = 'springcloud-java'
 
 include 'api-base'
 include 'api-good'
