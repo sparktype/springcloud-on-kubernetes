@@ -7,7 +7,7 @@ metadata:
     framework: springcloud
     app: springcloud-zuul
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       springcloud: zuul
@@ -17,26 +17,26 @@ spec:
         springcloud: zuul
     spec:
       containers:
-      - name: app
-        image: dockercamp/springcloud-zuul:1.0.3-arm64v8
-        ports:
-          - containerPort: 8080
-        env:
-          - name: spring.profiles.active
-            valueFrom:
-              configMapKeyRef:
-                name: clustercamp
-                key: active.profiles
-          - name: spring.cloud.config.uri
-            valueFrom:
-              configMapKeyRef:
-                name: clustercamp
-                key: config.host
-          - name: eureka.client.serviceUrl.defaultZone
-            valueFrom:
-              configMapKeyRef:
-                name: clustercamp
-                key: eureka.host
+        - name: app
+          image: dockercamp/springcloud-zuul:1.0.6-arm64v8
+          ports:
+            - containerPort: 8080
+          env:
+            - name: spring.profiles.active
+              valueFrom:
+                configMapKeyRef:
+                  name: clustercamp
+                  key: active.profiles
+            - name: spring.cloud.config.uri
+              valueFrom:
+                configMapKeyRef:
+                  name: clustercamp
+                  key: config.host
+            - name: eureka.client.serviceUrl.defaultZone
+              valueFrom:
+                configMapKeyRef:
+                  name: clustercamp
+                  key: eureka.host
 ---
 apiVersion: v1
 kind: Service
