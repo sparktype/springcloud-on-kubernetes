@@ -1,5 +1,7 @@
 package clustercamp.user;
 
+import clustercamp.user.repository.User;
+import clustercamp.user.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -7,13 +9,8 @@ import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-
-import clustercamp.user.repository.User;
-import clustercamp.user.repository.UserRepository;
 
 @EnableJpaAuditing
-@EnableResourceServer
 @SpringCloudApplication
 public class Application {
 
@@ -22,9 +19,8 @@ public class Application {
   }
 
   @Bean
-  @ConditionalOnProperty(name = "spring.data-initial", havingValue = "true")
+  @ConditionalOnProperty(name = "app.initial.data", havingValue = "true")
   public CommandLineRunner loadData(UserRepository repository, PasswordEncoder encoder) {
-
     return args -> {
       var user = new User();
       user.setRealname("Leonardo Park");

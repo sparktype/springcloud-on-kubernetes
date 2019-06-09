@@ -6,7 +6,6 @@ spring:
 ---
 spring:
   profiles: ide
-  data-initial: false
   datasource:
     url: jdbc:mysql://192.168.1.50:3306/spring?useUnicode=yes&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -30,6 +29,9 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
+app:
+  initial:
+    data: false
 eureka:
   client:
     registerWithEureka: true
@@ -42,6 +44,7 @@ eureka:
 security:
   oauth2:
     resource:
+      id: API-USER
       jwt:
         keyValue: -----BEGIN PUBLIC KEY-----
           MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3t2SxlBs8BFtUwE684jy
