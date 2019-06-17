@@ -1,4 +1,4 @@
-configure(subprojects.findAll { it.name.startsWith("springboot-") }) {
+configure(subprojects.findAll { it.name == "springboot-admin" }) {
 
   springBoot {
     buildInfo()

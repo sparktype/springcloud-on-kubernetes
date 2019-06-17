@@ -1,4 +1,6 @@
-configure(subprojects.findAll { it.name.startsWith("api-") && it.name != "api-base" }) {
+configure(subprojects.findAll {
+  it.name.startsWith("api-") && it.name != "api-base"
+}) {
 
   springBoot {
     buildInfo()
@@ -12,6 +14,7 @@ configure(subprojects.findAll { it.name.startsWith("api-") && it.name != "api-ba
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
     implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
     implementation("org.springframework.cloud:spring-cloud-starter-oauth2")
+    implementation("de.codecentric:spring-boot-admin-starter-client:${bootAdminVersion}")
     implementation("io.springfox:springfox-swagger2:${swaggerVersion}")
     implementation("io.springfox:springfox-swagger-ui:${swaggerVersion}")
     implementation("io.springfox:springfox-bean-validators:${swaggerVersion}")
