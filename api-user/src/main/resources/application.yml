@@ -6,6 +6,12 @@ spring:
 ---
 spring:
   profiles: ide
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
+        instance:
+          prefer-ip: true
   datasource:
     url: jdbc:mysql://192.168.1.50:3306/spring?useUnicode=yes&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -62,6 +68,8 @@ management:
   endpoint:
     metrics:
       enabled: true
+    health:
+      show-details: ALWAYS
   endpoints:
     jmx:
       exposure:

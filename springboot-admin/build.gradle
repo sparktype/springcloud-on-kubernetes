@@ -1,0 +1,4 @@
+dependencies {
+  implementation("de.codecentric:spring-boot-admin-server:${bootAdminVersion}")
+  implementation("de.codecentric:spring-boot-admin-server-ui:${bootAdminVersion}")
+}
