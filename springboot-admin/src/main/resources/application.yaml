@@ -1,0 +1,32 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: admin
+    admin:
+      enabled: true
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: https://eureka.cluster.camp/eureka/
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      startup: ${random.int}
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoint:
+    metrics:
+      enabled: true
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      exposure:
+        include: '*'
