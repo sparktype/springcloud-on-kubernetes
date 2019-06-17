@@ -66,6 +66,8 @@ management:
   endpoint:
     metrics:
       enabled: true
+    health:
+      show-details: ALWAYS
   endpoints:
     jmx:
       exposure:

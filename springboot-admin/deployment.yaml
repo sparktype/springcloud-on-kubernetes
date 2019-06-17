@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: dockercamp/springboot-admin:1.0.0-arm64v8
+          image: dockercamp/springboot-admin:1.0.1-arm64v8
           ports:
             - containerPort: 8080
           env:
@@ -71,4 +71,4 @@ spec:
           - path: /
             backend:
               serviceName: admin
-              servicePort: 8761
+              servicePort: 8080
