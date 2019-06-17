@@ -1,19 +1,19 @@
 server:
   port: 8080
+  use-forward-headers: true
 spring:
   application:
-    name: admin
+    name: ADMIN
+  boot:
     admin:
-      enabled: true
+      ui:
+        public-url: https://admin.cluster.camp
 eureka:
   client:
     registryFetchIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: https://eureka.cluster.camp/eureka/
   instance:
     preferIpAddress: true
     leaseRenewalIntervalInSeconds: 10
-    health-check-url-path: /actuator/health
     metadata-map:
       startup: ${random.int}
 management:

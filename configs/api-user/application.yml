@@ -9,7 +9,7 @@ spring:
   boot:
     admin:
       client:
-        url: http://admin.springcloud.svc.cluster.local:8080
+        url: http://192.168.1.60:8080
         instance:
           prefer-ip: true
   datasource:

@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: dockercamp/springboot-admin:1.0.1-arm64v8
+          image: dockercamp/springboot-admin:1.0.3-arm64v8
           ports:
             - containerPort: 8080
           env:
@@ -30,11 +30,6 @@ spec:
                 configMapKeyRef:
                   name: clustercamp
                   key: active.profiles
-            - name: spring.cloud.config.uri
-              valueFrom:
-                configMapKeyRef:
-                  name: clustercamp
-                  key: config.host
             - name: eureka.client.serviceUrl.defaultZone
               valueFrom:
                 configMapKeyRef:
@@ -53,6 +48,8 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.60
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
