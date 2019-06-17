@@ -6,6 +6,9 @@ spring:
 ---
 spring:
   profiles: dev
+  boot:
+    admin:
+      context-path: /admin
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
@@ -16,6 +19,9 @@ eureka:
     hostname: localhost
     leaseExpirationDurationInSeconds: 5
     leaseRenewalIntervalInSeconds: 3
+    health-check-url-path: /actuator/health
+      metadata-map:
+        startup: ${random.int}
   client:
     registerWithEureka: false
     fetchRegistry: false

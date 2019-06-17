@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: dockercamp/springboot-admin:1.0.3-arm64v8
+          image: dockercamp/springboot-admin:1.0.4-arm64v8
           ports:
             - containerPort: 8080
           env:

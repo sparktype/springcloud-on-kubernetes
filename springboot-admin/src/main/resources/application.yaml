@@ -4,16 +4,16 @@ server:
 spring:
   application:
     name: ADMIN
-  boot:
-    admin:
-      ui:
-        public-url: https://admin.cluster.camp
+#  boot:
+#    admin:
+#      ui:
+#        public-url: https://admin.cluster.camp
 eureka:
   client:
     registryFetchIntervalSeconds: 5
   instance:
-    preferIpAddress: true
     leaseRenewalIntervalInSeconds: 10
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
     metadata-map:
       startup: ${random.int}
 management:
