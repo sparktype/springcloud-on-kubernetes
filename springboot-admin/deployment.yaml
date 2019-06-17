@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-user
+  name: admin
   namespace: springcloud
   labels:
     category: micro-service
@@ -9,11 +9,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      api: api-user
+      api: admin
   template:
     metadata:
       labels:
-        api: api-user
+        api: admin
       annotations:
         prometheus.io/scrape: 'true'
         prometheus.io/port:   '8080'
@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: dockercamp/api-user:1.0.7-arm64v8
+          image: dockercamp/springboot-admin:1.0.0-arm64v8
           ports:
             - containerPort: 8080
           env:
@@ -44,12 +44,31 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-user
+  name: admin
   namespace: springcloud
 spec:
   selector:
-    api: api-user
+    api: admin
   ports:
     - protocol: TCP
       port: 8080
       targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: admin
+  namespace: springcloud
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    external-dns.alpha.kubernetes.io/target: home.cluster.camp
+spec:
+  rules:
+    - host: admin.cluster.camp
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: admin
+              servicePort: 8761

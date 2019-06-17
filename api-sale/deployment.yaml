@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: dockercamp/api-sale:1.0.7-arm64v8
+          image: dockercamp/api-sale:1.0.8-arm64v8
           ports:
             - containerPort: 8080
           env:
