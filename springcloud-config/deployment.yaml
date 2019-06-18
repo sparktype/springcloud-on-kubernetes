@@ -10,6 +10,12 @@ data:
     spring:
       application:
         name: CONFIG
+      boot:
+          admin:
+            client:
+              url: http://eureka.springcloud.svc.cluster.local:8761/admin
+              instance:
+                preferIp: true
       cloud:
         config:
           server:
