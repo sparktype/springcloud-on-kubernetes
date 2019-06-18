@@ -23,7 +23,7 @@ spring:
       type: web
   sleuth:
     sampler:
-      probability: 1.0
+      probability: 0.2
 zuul:
   debug:
     include-debug-header: true

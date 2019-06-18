@@ -18,6 +18,7 @@ data:
               searchPaths: /configs/{application}
       rabbitmq:
         host: rabbitmq.springcloud.svc.cluster.local
+        port: 5672
         username: springcloud
         password: springcloud
     management:
