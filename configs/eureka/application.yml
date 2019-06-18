@@ -9,6 +9,8 @@ spring:
   boot:
     admin:
       context-path: /admin
+      ui:
+        publicUrl: eureka.cluster.camp/admin
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672

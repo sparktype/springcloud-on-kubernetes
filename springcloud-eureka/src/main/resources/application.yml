@@ -7,6 +7,10 @@ spring:
 ---
 spring:
   profiles: ide
+  boot:
+    admin:
+      ui:
+        publicUrl: eureka.cluster.camp/admin
 eureka:
   instance:
     hostname: localhost
