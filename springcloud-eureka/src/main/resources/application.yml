@@ -11,6 +11,7 @@ server:
   port: 8761
 eureka:
   instance:
+    hostname: localhost
     leaseRenewalIntervalInSeconds: 10
     health-check-url-path: /actuator/health
     metadata-map:
