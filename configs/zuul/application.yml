@@ -6,6 +6,12 @@ spring:
 ---
 spring:
   profiles: dev
+  boot:
+    admin:
+      client:
+        url: http://eureka.springcloud.svc.cluster.local:8761/admin
+        instance:
+          preferIp: true
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
