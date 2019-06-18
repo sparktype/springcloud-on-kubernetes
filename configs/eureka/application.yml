@@ -8,7 +8,9 @@ spring:
   profiles: dev
   boot:
     admin:
-      context-path: /boot-admin/
+      contextPath: /sba
+      ui:
+        publicUrl: https://eureka.cluster.camp/sba
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672

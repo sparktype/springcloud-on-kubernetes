@@ -8,10 +8,10 @@ spring:
   profiles: ide
   boot:
     admin:
-      context-path: /admin
+      contextPath: /sba
+      ui:
+        publicUrl: https://eureka.cluster.camp/sba
 eureka:
-  dashboard:
-    path: /
   instance:
     hostname: localhost
     leaseRenewalIntervalInSeconds: 10
