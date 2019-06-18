@@ -51,7 +51,7 @@ metadata:
     framework: springcloud
     app: springcloud-config
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       springcloud: config
@@ -66,7 +66,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-config:1.0.3-arm64v8
+          image: dockercamp/springcloud-config:1.0.4-arm64v8
           ports:
             - containerPort: 8888
           env:
