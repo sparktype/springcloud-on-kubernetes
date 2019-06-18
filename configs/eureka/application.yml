@@ -18,8 +18,6 @@ spring:
     username: springcloud
     password: springcloud
 eureka:
-  instance:
-    hostname: localhost
   server:
     waitTimeInMsWhenSyncEmpty: 0
   client:

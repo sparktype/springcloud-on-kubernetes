@@ -1,5 +1,6 @@
 server:
   port: 8761
+  use-forward-headers: true
 spring:
   application:
     name: eureka
@@ -9,8 +10,6 @@ spring:
   boot:
     admin:
       contextPath: /sba
-      ui:
-        publicUrl: https://eureka.cluster.camp/sba
 eureka:
   instance:
     hostname: localhost
