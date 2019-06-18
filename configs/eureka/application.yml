@@ -1,5 +1,6 @@
 server:
   port: 8761
+  use-forward-headers: true
 spring:
   application:
     name: EUREKA
