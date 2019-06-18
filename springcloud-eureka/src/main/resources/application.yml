@@ -7,9 +7,6 @@ spring:
 ---
 spring:
   profiles: ide
-  boot:
-    admin:
-      contextPath: /sba
 eureka:
   instance:
     hostname: localhost

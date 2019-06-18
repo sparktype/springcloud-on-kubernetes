@@ -1,28 +1,28 @@
 server:
   port: 8761
-  use-forward-headers: true
 spring:
   application:
     name: EUREKA
 ---
 spring:
   profiles: dev
-  boot:
-    admin:
-      contextPath: /sba
-      ui:
-        publicUrl: http://eureka.cluster.camp/sba
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
     username: springcloud
     password: springcloud
 eureka:
-  server:
-    waitTimeInMsWhenSyncEmpty: 0
+  instance:
+    hostname: localhost
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      startup: ${random.int}
   client:
     registerWithEureka: false
     fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 management:
   metrics:
     tags:

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: admin
+  name: sba
   namespace: springcloud
   labels:
     category: micro-service
@@ -9,11 +9,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      api: admin
+      api: sba
   template:
     metadata:
       labels:
-        api: admin
+        api: sba
       annotations:
         prometheus.io/scrape: 'true'
         prometheus.io/port:   '8080'
@@ -39,11 +39,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin
+  name: sba
   namespace: springcloud
 spec:
   selector:
-    api: admin
+    api: sba
   ports:
     - protocol: TCP
       port: 8080
@@ -54,7 +54,7 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: admin
+  name: sba
   namespace: springcloud
   annotations:
     kubernetes.io/ingress.class: traefik
@@ -62,10 +62,10 @@ metadata:
     external-dns.alpha.kubernetes.io/target: home.cluster.camp
 spec:
   rules:
-    - host: admin.cluster.camp
+    - host: sba.cluster.camp
       http:
         paths:
           - path: /
             backend:
-              serviceName: admin
+              serviceName: sba
               servicePort: 8080
