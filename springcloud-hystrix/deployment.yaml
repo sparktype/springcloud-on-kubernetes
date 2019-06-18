@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-hystrix:1.0.2-arm64v8
+          image: dockercamp/springcloud-hystrix:1.0.3-arm64v8
           ports:
             - containerPort: 8080
           env:

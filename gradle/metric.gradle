@@ -1,5 +1,6 @@
 configure(subprojects.findAll { it.name != "api-base" }) {
   dependencies {
+    implementation("de.codecentric:spring-boot-admin-starter-client:${bootAdminVersion}")
     implementation("io.micrometer:micrometer-registry-prometheus:${micrometerVersion}")
   }
 }

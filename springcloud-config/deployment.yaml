@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-config:1.0.2-arm64v8
+          image: dockercamp/springcloud-config:1.0.3-arm64v8
           ports:
             - containerPort: 8888
           env:
