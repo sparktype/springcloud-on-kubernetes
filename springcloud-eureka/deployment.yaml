@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-eureka:1.0.3-arm64v8
+          image: dockercamp/springcloud-eureka:1.0.4-arm64v8
           ports:
             - containerPort: 8761
           env:
@@ -46,11 +46,6 @@ spec:
                 configMapKeyRef:
                   name: clustercamp
                   key: eureka.environment
-            - name: eureka.client.serviceUrl.defaultZone
-              valueFrom:
-                configMapKeyRef:
-                  name: clustercamp
-                  key: eureka.host
 ---
 apiVersion: v1
 kind: Service
@@ -83,4 +78,3 @@ spec:
             backend:
               serviceName: eureka
               servicePort: 8761
-
