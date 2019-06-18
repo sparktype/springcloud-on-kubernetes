@@ -8,7 +8,7 @@ spring:
   profiles: dev
   boot:
     admin:
-      contextPaht: /sba
+      contextPath: /sba
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
