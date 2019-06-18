@@ -10,7 +10,7 @@ spring:
     admin:
       context-path: /admin
       ui:
-        public-url: eureka.cluster.camp
+        public-url: https://eureka.cluster.camp/admin
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
