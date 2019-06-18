@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-eureka:1.0.2-arm64v8
+          image: dockercamp/springcloud-eureka:1.0.3-arm64v8
           resources:
             requests:
               memory: "300Mi"

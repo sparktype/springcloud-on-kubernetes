@@ -16,9 +16,6 @@ spring:
     password: springcloud
 eureka:
   instance:
-    hostname: localhost
-    leaseExpirationDurationInSeconds: 5
-    leaseRenewalIntervalInSeconds: 3
     health-check-url-path: /actuator/health
       metadata-map:
         startup: ${random.int}
