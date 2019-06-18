@@ -14,7 +14,7 @@ data:
         config:
           server:
             git:
-              uri: https://github.com/clustercamp/spring-cloud-java11.git
+              uri: https://github.com/clustercamp/springcloud-java.git
               searchPaths: /configs/{application}
       rabbitmq:
         host: rabbitmq.springcloud.svc.cluster.local
