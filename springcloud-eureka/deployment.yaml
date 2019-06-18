@@ -67,7 +67,7 @@ metadata:
   namespace: springcloud
   annotations:
     kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/rule-type: "PathStrip"
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
     external-dns.alpha.kubernetes.io/target: home.cluster.camp
 spec:
   rules:
