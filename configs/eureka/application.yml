@@ -6,6 +6,9 @@ spring:
 ---
 spring:
   profiles: dev
+  boot:
+    admin:
+      contextPaht: /sba
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
@@ -14,7 +17,6 @@ spring:
 eureka:
   instance:
     hostname: localhost
-    leaseRenewalIntervalInSeconds: 10
     health-check-url-path: /actuator/health
     metadata-map:
       startup: ${random.int}
