@@ -15,14 +15,19 @@ spring:
     username: springcloud
     password: springcloud
 eureka:
+  dashboard:
+    path: /
   instance:
+    hostname: localhost
     leaseRenewalIntervalInSeconds: 10
     health-check-url-path: /actuator/health
-      metadata-map:
-        startup: ${random.int}
+    metadata-map:
+      startup: ${random.int}
   client:
     registerWithEureka: false
     fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 management:
   metrics:
     tags:
