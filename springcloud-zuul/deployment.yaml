@@ -7,7 +7,7 @@ metadata:
     framework: springcloud
     app: springcloud-zuul
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       springcloud: zuul
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-zuul:1.0.8-arm64v8
+          image: dockercamp/springcloud-zuul:1.0.9-arm64v8
           ports:
             - containerPort: 8080
           env:

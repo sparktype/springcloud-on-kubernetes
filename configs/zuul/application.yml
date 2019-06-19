@@ -31,7 +31,7 @@ zuul:
   routes:
     user:
       path: /user/**
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
       serviceId: API-USER
     api-user:
@@ -39,7 +39,7 @@ zuul:
       serviceId: API-USER
     good:
       path: /good/**
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
       serviceId: API-GOOD
     api-good:
@@ -47,7 +47,7 @@ zuul:
       serviceId: API-GOOD
     sale:
       path: /sale/**
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
       serviceId: API-SALE
     api-sale:
@@ -55,7 +55,7 @@ zuul:
       serviceId: API-SALE
     ship:
       path: /ship/**
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
       serviceId: API-SHIP
     api-ship:
