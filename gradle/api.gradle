@@ -1,6 +1,4 @@
-configure(subprojects.findAll {
-  it.name.startsWith("api-") && it.name != "api-base"
-}) {
+configure(subprojects.findAll { it.name.startsWith("api-") && it.name != "api-base" }) {
 
   springBoot {
     buildInfo()

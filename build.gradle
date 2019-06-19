@@ -1,12 +1,8 @@
 buildscript {
   ext {
-    springBootVersion = "2.1.5.RELEASE"
+    springBootVersion = "2.1.6.RELEASE"
     springCloudVersion = "Greenwich.SR1"
     gradlePath = "${rootProject.projectDir}/gradle"
-    lombokPluginVersion = "3.6.4"
-    gitPluginVersion = "0.12.0-rc2"
-    coverallsPluginVersion = "2.8.4"
-    jibVersion = "1.2.0"
   }
 
   repositories {
@@ -18,7 +14,6 @@ buildscript {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
     classpath "gradle.plugin.com.palantir.gradle.gitversion:gradle-git-version:${gitPluginVersion}"
-//    classpath "gradle.plugin.com.github.kt3k.coveralls:coveralls-gradle-plugin:${coverallsPluginVersion}"
     classpath "io.freefair.gradle:lombok-plugin:${lombokPluginVersion}"
   }
 }

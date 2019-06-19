@@ -1,22 +1,16 @@
 subprojects {
-  apply plugin: "groovy"
   apply plugin: 'com.github.kt3k.coveralls'
   apply plugin: "checkstyle"
 
   checkstyle {
     ignoreFailures = true
     configFile = file("${gradlePath}/checkstyle.xml")
-    reportsDir = file("${buildDir}/checkstyle-output") // 리포트 파일이 위치할 디렉토리 지정
+    reportsDir = file("${buildDir}/checkstyle-output")
   }
 
   checkstyleMain {
     reports {
-      xml.destination = file("${coverage.reportsDir}/checkstyle-report.xml") // 리포트 파일의 위치 및 파일명 지정
+      xml.destination = file("${coverage.reportsDir}/checkstyle-report.xml")
     }
-  }
-  dependencies {
-    testImplementation("org.codehaus.groovy:groovy-all:${groovyVersion}")
-    testImplementation("org.spockframework:spock-core:${spockVersion}")
-    testImplementation("org.spockframework:spock-spring:${spockVersion}")
   }
 }
