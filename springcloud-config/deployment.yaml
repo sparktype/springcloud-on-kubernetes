@@ -115,7 +115,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
-    external-dns.alpha.kubernetes.io/target: home.cluster.camp
+    external-dns.alpha.kubernetes.io/target: home.proxy.camp
 spec:
   rules:
     - host: config.cluster.camp
