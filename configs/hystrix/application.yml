@@ -10,6 +10,7 @@ spring:
     admin:
       client:
         url: http://eureka.springcloud.svc.cluster.local:8761/admin
+        service-base-url: hystrix.cluster.camp
         instance:
           preferIp: true
   rabbitmq:
