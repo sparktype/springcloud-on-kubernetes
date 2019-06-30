@@ -16,14 +16,14 @@ spec:
         api: api-sale
       annotations:
         prometheus.io/scrape: 'true'
-        prometheus.io/port:   '8080'
+        prometheus.io/port:   '80'
         prometheus.io/path: '/actuator/prometheus'
     spec:
       containers:
         - name: api
           image: dockercamp/api-sale:1.0.9-arm64v8
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           env:
             - name: spring.profiles.active
               valueFrom:
@@ -51,8 +51,8 @@ spec:
     api: api-sale
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 80
+      targetPort: 80
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -71,4 +71,4 @@ spec:
           - path: /
             backend:
               serviceName: api-sale
-              servicePort: 8080
+              servicePort: 80

@@ -10,6 +10,7 @@ spring:
     admin:
       client:
         url: http://eureka.springcloud.svc.cluster.local:8761/admin
+        service-base-url: api-ship.cluster.camp
         instance:
           preferIp: true
   datasource:
@@ -56,7 +57,7 @@ eureka:
     serviceUrl:
       defaultZone: http://eureka.springcloud.svc.cluster.local:8761/eureka/
   instance:
-    preferIpAddress: true
+    hostname: api-ship.cluster.camp
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 management:
   metrics:

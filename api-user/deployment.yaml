@@ -16,14 +16,14 @@ spec:
         api: api-user
       annotations:
         prometheus.io/scrape: 'true'
-        prometheus.io/port:   '8080'
+        prometheus.io/port:   '80'
         prometheus.io/path: '/actuator/prometheus'
     spec:
       containers:
         - name: api
           image: dockercamp/api-user:1.0.10-arm64v8
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           env:
             - name: spring.profiles.active
               valueFrom:
