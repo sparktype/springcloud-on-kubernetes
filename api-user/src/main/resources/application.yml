@@ -10,6 +10,7 @@ spring:
     admin:
       client:
         url: http://localhost:9090
+        service-base-url: http://localhost:9090
         instance:
           prefer-ip: true
           service-base-url: https://zuul.cluster.camp/user

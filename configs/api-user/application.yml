@@ -10,6 +10,7 @@ spring:
     admin:
       client:
         url: http://eureka.springcloud.svc.cluster.local:8761/admin
+        service-base-url: api-user.cluster.camp
         instance:
           preferIp: true
   datasource:
