@@ -12,11 +12,3 @@ include 'springcloud-security'
 include 'springcloud-zuul'
 include 'springcloud-gateway'
 include 'springcloud-sidecar'
-
-buildCache {
-  local(DirectoryBuildCache) {
-    directory = new File(rootDir, 'build-cache')
-    removeUnusedEntriesAfterDays = 30
-  }
-}
-

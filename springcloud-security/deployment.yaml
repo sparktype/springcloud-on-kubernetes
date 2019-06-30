@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-security:1.0.8-arm64v8
+          image: dockercamp/springcloud-security:1.0.9-arm64v8
           ports:
             - containerPort: 80
           env:
