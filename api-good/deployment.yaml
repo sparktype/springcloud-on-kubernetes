@@ -53,3 +53,22 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: api-good
+  namespace: springcloud
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    external-dns.alpha.kubernetes.io/target: home.proxy.camp
+spec:
+  rules:
+    - host: api-good.cluster.camp
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: api-good
+              servicePort: 8080
