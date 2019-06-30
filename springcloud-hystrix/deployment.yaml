@@ -17,14 +17,14 @@ spec:
         springcloud: hystrix
       annotations:
         prometheus.io/scrape: 'true'
-        prometheus.io/port:   '8080'
+        prometheus.io/port:   '80'
         prometheus.io/path: '/actuator/prometheus'
     spec:
       containers:
         - name: app
           image: dockercamp/springcloud-hystrix:1.0.5-arm64v8
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           env:
             - name: spring.profiles.active
               valueFrom:
@@ -52,8 +52,8 @@ spec:
     springcloud: hystrix
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 80
+      targetPort: 80
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -72,4 +72,4 @@ spec:
           - path: /
             backend:
               serviceName: hystrix
-              servicePort: 8080
+              servicePort: 80
