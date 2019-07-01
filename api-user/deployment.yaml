@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: dockercamp/api-user:1.0.11-arm64v8
+          image: dockercamp/api-user:1.1.0-arm64v8
           ports:
             - containerPort: 80
           env:
