@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: cloudcamp/zipkin:2.14.0
+          image: dockercamp/zipkin:latest
           ports:
             - containerPort: 9411
           env:

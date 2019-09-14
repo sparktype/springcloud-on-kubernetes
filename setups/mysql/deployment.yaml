@@ -50,7 +50,7 @@ spec:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - master
+                      - node1
       containers:
         - image: mysql/mysql-server
           name: mysql

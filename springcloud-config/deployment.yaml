@@ -66,7 +66,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-config:1.1.0-arm64v8
+          image: dockercamp/springcloud-config:1.2.0-arm64v8
           ports:
             - containerPort: 8888
           env:
@@ -114,8 +114,8 @@ metadata:
   namespace: springcloud
   annotations:
     kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
-    external-dns.alpha.kubernetes.io/target: home.proxy.camp
+    traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
+    external-dns.alpha.kubernetes.io/target: home.cluster.camp
 spec:
   rules:
     - host: config.cluster.camp

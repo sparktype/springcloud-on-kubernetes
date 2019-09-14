@@ -1,7 +1,7 @@
 buildscript {
   ext {
-    springBootVersion = "2.1.6.RELEASE"
-    springCloudVersion = "Greenwich.SR2"
+    springBootVersion = "2.1.8.RELEASE"
+    springCloudVersion = "Greenwich.SR3"
     gradlePath = "${rootProject.projectDir}/gradle"
   }
 
@@ -13,7 +13,7 @@ buildscript {
   dependencies {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
-    classpath "gradle.plugin.com.palantir.gradle.gitversion:gradle-git-version:${gitPluginVersion}"
+    classpath "com.palantir.gradle.gitversion:gradle-git-version:${gitPluginVersion}"
     classpath "io.freefair.gradle:lombok-plugin:${lombokPluginVersion}"
   }
 }
@@ -39,15 +39,15 @@ subprojects {
   }
 
   dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("org.springframework.boot:spring-boot-starter-undertow")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-webflux"
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
 
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.projectreactor:reactor-test")
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "io.projectreactor:reactor-test"
   }
 
   dependencyManagement {
