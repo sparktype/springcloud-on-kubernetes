@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-eureka:1.2.0-arm64v8
+          image: dockercamp/springcloud-eureka:1.3.0-arm64v8
           ports:
             - containerPort: 8761
           env:

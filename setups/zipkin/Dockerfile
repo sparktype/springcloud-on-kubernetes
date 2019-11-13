@@ -1,7 +1,7 @@
 FROM arm64v8/alpine:3.10
 
 ENV ZIPKIN_REPO https://repo1.maven.org/maven2
-ENV ZIPKIN_VERSION 2.15.0
+ENV ZIPKIN_VERSION 2.18.3
 
 # Add environment settings for supported storage types
 COPY zipkin/ /zipkin/
@@ -14,7 +14,7 @@ RUN apk add unzip curl --no-cache && \
     rm zipkin-server.jar && \
     apk del unzip
 
-FROM arm64v8/openjdk:11.0.4-jre-slim-buster
+FROM arm64v8/openjdk:11.0.5-jre-slim-buster
 MAINTAINER Zipkin "https://zipkin.io/"
 
 # Use to set heap, trust store or other system properties.

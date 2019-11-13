@@ -1,16 +1,8 @@
 configure(subprojects.findAll { it.name != "api-base" }) {
   apply plugin: "com.google.cloud.tools.jib"
-  apply plugin: "com.palantir.git-version"
 
   jib {
-
-    def details = versionDetails()
-
     def tag = "${project.version}"
-
-    if (details.branchName != null && details.branchName != 'master') {
-      tag = "${tag}-${details.branchName}"
-    }
 
     if (dockerBaseArch != '') {
       tag = "${tag}-${dockerBaseArch}"

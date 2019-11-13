@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-docker build -t dockercamp/zipkin:2.15.0 . --build-arg .mem_profile
-docker push dockercamp/zipkin:2.15.0
-docker tag dockercamp/zipkin:2.15.0 dockercamp/zipkin:latest
+export ZIPKIN_VERSION=2.18.3
+docker build -t dockercamp/zipkin:$ZIPKIN_VERSION . --build-arg .mem_profile
+docker push dockercamp/zipkin:$ZIPKIN_VERSION
+docker tag dockercamp/zipkin:$ZIPKIN_VERSION dockercamp/zipkin:latest
 docker push dockercamp/zipkin:latest
 
