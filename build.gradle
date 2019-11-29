@@ -1,7 +1,7 @@
 buildscript {
   ext {
     springBootVersion = "2.1.10.RELEASE"
-    springCloudVersion = "Greenwich.SR3"
+    springCloudVersion = "Greenwich.SR4"
     gradlePath = "${rootProject.projectDir}/gradle"
   }
 
