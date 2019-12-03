@@ -5,3 +5,14 @@
 
 # springcloud-java
 Building micro service with spring cloud and Java on kuberntes
+
+
+## Build 
+```shell script
+$ ./gradlew clean build
+```
+
+## Build Image with JIB
+```shell script
+$ ./gradlew jib 
+``` 

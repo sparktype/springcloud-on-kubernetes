@@ -29,7 +29,7 @@ public class UserController {
     return ResponseEntity.ok(service.detail(id));
   }
 
-  @PostMapping
+  @PostMapping("/")
   public ResponseEntity<User> create(@RequestBody User request) {
     var userDto = service.create(request);
 

@@ -2,6 +2,7 @@ package clustercamp.sale.api;
 
 import clustercamp.sale.repository.Sale;
 import clustercamp.sale.service.SaleService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,11 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+@Api(value = "Sale")
 @RestController
+@RequestMapping("/sale")
 @RequiredArgsConstructor
 public class SaleController {
 
@@ -25,7 +29,7 @@ public class SaleController {
     return ResponseEntity.ok(service.detail(id));
   }
 
-  @PostMapping
+  @PostMapping("/")
   public ResponseEntity<Sale> create(@RequestBody Sale request) {
     var created = service.create(request);
     return ResponseEntity.created(MvcUriComponentsBuilder.fromController(getClass())
