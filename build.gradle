@@ -1,7 +1,7 @@
 buildscript {
   ext {
-    springBootVersion = "2.1.10.RELEASE"
-    springCloudVersion = "Greenwich.SR4"
+    springBootVersion = "2.2.2.RELEASE"
+    springCloudVersion = "Hoxton.RELEASE"
     gradlePath = "${rootProject.projectDir}/gradle"
   }
 
@@ -12,13 +12,18 @@ buildscript {
 
   dependencies {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.22.1"
     classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
+
   }
 }
 
 allprojects {
   apply plugin: "java"
-  apply plugin: "groovy"
+
+  group = "clustercamp"
+
+  sourceCompatibility = "11"
 
   repositories {
     mavenCentral()
@@ -28,11 +33,16 @@ allprojects {
 subprojects {
   apply plugin: "org.springframework.boot"
   apply plugin: "io.spring.dependency-management"
-
-  sourceCompatibility = "11"
-  group = "clustercamp"
-
+  
   configurations {
+    developmentOnly
+    runtimeClasspath {
+      extendsFrom developmentOnly
+    }
+    compileOnly {
+      extendsFrom annotationProcessor
+    }
+
     compile.exclude module: 'spring-boot-starter-tomcat'
   }
 
@@ -43,11 +53,14 @@ subprojects {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    compileOnly "org.projectlombok:lombok"
-    annotationProcessor "org.projectlombok:lombok"
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+      exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
     testImplementation "io.projectreactor:reactor-test"
   }
 
@@ -56,8 +69,11 @@ subprojects {
       mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
   }
+
+  test {
+    useJUnitPlatform()
+  }
 }
 
 apply from: "${gradlePath}/api.gradle"
-apply from: "${gradlePath}/jib.gradle"
-apply from: "${gradlePath}/metric.gradle"
+apply from: "${gradlePath}/docker.gradle"

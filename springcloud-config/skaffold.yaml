@@ -1,0 +1,13 @@
+apiVersion: skaffold/v1
+kind: Config
+metadata:
+  name: springcloud-config
+build:
+  artifacts:
+    - image: dockercamp/springcloud-config
+      custom:
+        buildCommand: docker buildx build --platform linux/amd64,linux/arm64 -t dockercamp:springcloud-config .
+deploy:
+  kubectl:
+    manifests:
+      - deployment.yaml

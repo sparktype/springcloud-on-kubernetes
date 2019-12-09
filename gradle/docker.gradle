@@ -1,0 +1,32 @@
+configure(subprojects.findAll { it.name != "api-base" }) {
+  apply plugin: "com.google.cloud.tools.jib"
+  apply plugin: "com.palantir.docker"
+
+  task unpackForDocker(type: Copy) {
+    dependsOn 'build'
+    from zipTree(tasks.bootJar.outputs.files.singleFile)
+    into "$buildDir/dependency/"
+  }
+
+  bootJar {
+    finalizedBy unpackForDocker
+  }
+
+  docker {
+    name "${dockerGroupName}/${project.name}:${project.version}"
+    dockerfile file('Dockerfile')
+    pull true
+    noCache true
+  }
+
+  jib {
+    from {
+      image = "${dockerBaseImage}"
+    }
+
+    to {
+      image = "${dockerGroupName}/${project.name}"
+      tags = ["${project.version}", 'latest']
+    }
+  }
+}
