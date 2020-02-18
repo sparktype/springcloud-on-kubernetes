@@ -1,6 +1,8 @@
 
 .DEFAULT_GOAL := build
 
+VERSION:=HOXTON-1.3.0
+
 build:
 	./gradlew build
 
