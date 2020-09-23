@@ -1,11 +1,18 @@
 server:
-  port: 8080
+  port: 80
 spring:
   application:
     name: HYSTRIX
 ---
 spring:
   profiles: dev
+  boot:
+    admin:
+      client:
+        url: http://eureka.springcloud.svc.cluster.local:8761/admin
+        service-base-url: hystrix.cluster.camp
+        instance:
+          preferIp: true
   rabbitmq:
     host: rabbitmq.springcloud.svc.cluster.local
     port: 5672
@@ -19,7 +26,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
   instance:
-    preferIpAddress: true
+    hostname: hystrix.cluster.camp
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 management:
   metrics:

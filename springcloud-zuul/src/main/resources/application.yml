@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9090
 spring:
   application:
     name: zuul
@@ -24,7 +24,7 @@ zuul:
   routes:
     user:
       path: /user/**
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
       serviceId: API-USER
     api-user:
@@ -32,7 +32,7 @@ zuul:
       serviceId: API-USER
     good:
       path: /good/**
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
       serviceId: API-GOOD
     api-good:
@@ -40,7 +40,7 @@ zuul:
       serviceId: API-GOOD
     sale:
       path: /sale/**
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
       serviceId: API-SALE
     api-sale:
@@ -48,7 +48,7 @@ zuul:
       serviceId: API-SALE
     ship:
       path: /ship/**
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
       serviceId: API-SHIP
     api-ship:
@@ -89,23 +89,7 @@ management:
     web:
       exposure:
         include: '*'
-## hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 120000
-#hystrix.command.default.execution.timeout.enabled: false
-#ribbon:
-#  ConnectTimeout: 3000
-#  ReadTimeout: 60000
-#security:
-#  oauth2:
-#    resource:
-#      id: API
-#      loadBalanced: true
-#      jwt:
-#        keyValue: -----BEGIN PUBLIC KEY-----
-#          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnY5zPuq27q6Q3yV+Dx3S
-#          YnjBbahpysKwQCRAn+rZa+0RjHdfgPmgmwA84vlbDLPfBca1Kv8vkcpdjrPuqY1b
-#          +2fQph7bIXBr5grGDL7fYy/fmg5GDLvbvfRdsqyb1vIAUZkk/lcxxFeRqk+SMjxd
-#          QPcdAerzy1uivQ+mvUi7phewRW0dujsSLdgfgcSIkAZjI2j9UGjkK1rbbXcQp8v8
-#          kZZSd/GTciQwssR8cznFtOuduhF2EUy7rlTZsn5X48yrOo3WaHsWI3/Oc7gaTqHe
-#          kxNRWZVtBoOoca4k6YWYPwhQSARMPVLVcs7OsKwhtknYiA+CUcg1cwrksxxbvIMV
-#          6wIDAQAB
-#          -----END PUBLIC KEY-----
+
+logging:
+  level:
+    - com.netflix.zuul: debug

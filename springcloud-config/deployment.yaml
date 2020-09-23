@@ -10,14 +10,21 @@ data:
     spring:
       application:
         name: CONFIG
+      boot:
+          admin:
+            client:
+              url: http://eureka.springcloud.svc.cluster.local:8761/admin
+              instance:
+                preferIp: true
       cloud:
         config:
           server:
             git:
-              uri: https://github.com/clustercamp/spring-cloud-java11.git
+              uri: https://github.com/clustercamp/springcloud-java.git
               searchPaths: /configs/{application}
       rabbitmq:
         host: rabbitmq.springcloud.svc.cluster.local
+        port: 5672
         username: springcloud
         password: springcloud
     management:
@@ -59,7 +66,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-config:1.0.2-arm64v8
+          image: dockercamp/springcloud-config:1.3.0-arm64v8
           ports:
             - containerPort: 8888
           env:
@@ -107,7 +114,7 @@ metadata:
   namespace: springcloud
   annotations:
     kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
     external-dns.alpha.kubernetes.io/target: home.cluster.camp
 spec:
   rules:

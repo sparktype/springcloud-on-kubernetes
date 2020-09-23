@@ -2,6 +2,7 @@ package clustercamp.ship.api;
 
 import clustercamp.ship.repository.Ship;
 import clustercamp.ship.service.ShipService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+@Api(value = "Ship")
 @RestController
 @RequestMapping("/ship")
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class ShipController {
     return ResponseEntity.ok(service.detail(id));
   }
 
-  @PostMapping
+  @PostMapping("/")
   public ResponseEntity<Ship> create(@RequestBody Ship request) {
     var created = service.create(request);
 

@@ -1,18 +1,33 @@
+server:
+  port: 8761
+  use-forward-headers: true
 spring:
   application:
     name: eureka
 ---
 spring:
   profiles: ide
-server:
-  port: 8761
+  boot:
+    admin:
+      ui:
+        publicUrl: eureka.cluster.camp/admin
 eureka:
   instance:
     hostname: localhost
-    leaseExpirationDurationInSeconds: 5
-    leaseRenewalIntervalInSeconds: 3
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      startup: ${random.int}
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

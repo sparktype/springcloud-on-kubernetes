@@ -5,7 +5,6 @@ include 'api-good'
 include 'api-sale'
 include 'api-ship'
 include 'api-user'
-include 'springboot-admin'
 include 'springcloud-config'
 include 'springcloud-eureka'
 include 'springcloud-hystrix'
@@ -13,11 +12,3 @@ include 'springcloud-security'
 include 'springcloud-zuul'
 include 'springcloud-gateway'
 include 'springcloud-sidecar'
-
-buildCache {
-  local(DirectoryBuildCache) {
-    directory = new File(rootDir, 'build-cache')
-    removeUnusedEntriesAfterDays = 30
-  }
-}
-

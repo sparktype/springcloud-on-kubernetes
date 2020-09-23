@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-user-pvc
+  namespace: springcloud
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nvme
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-user
+  namespace: springcloud
+spec:
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  selector:
+    app: mysql-user
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.70
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-user
+  namespace: springcloud
+spec:
+  selector:
+    matchLabels:
+      app: mysql-user
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql-user
+    spec:
+      containers:
+        - image: mysql/mysql-server
+          name: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "root1234"
+            - name: MYSQL_DATABASE
+              value: "userdb"
+            - name: MYSQL_USER
+              value: "spring"
+            - name: MYSQL_PASSWORD
+              value: "spring1234"
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-user-pvc

@@ -17,14 +17,14 @@ spec:
         app: security
       annotations:
         prometheus.io/scrape: 'true'
-        prometheus.io/port: '8080'
+        prometheus.io/port: '80'
         prometheus.io/path: '/actuator/prometheus'
     spec:
       containers:
         - name: app
-          image: dockercamp/springcloud-security:1.0.6-arm64v8
+          image: dockercamp/springcloud-security:1.2.0-arm64v8
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           env:
             - name: spring.profiles.active
               valueFrom:
@@ -52,5 +52,24 @@ spec:
     app: security
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 80
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: security
+  namespace: springcloud
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    external-dns.alpha.kubernetes.io/target: home.proxy.camp
+spec:
+  rules:
+    - host: security.cluster.camp
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: security
+              servicePort: 80

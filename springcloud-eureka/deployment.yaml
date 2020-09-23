@@ -21,41 +21,31 @@ spec:
         prometheus.io/path: '/actuator/prometheus'
     spec:
       containers:
-      - name: app
-        image: dockercamp/springcloud-eureka:1.0.1-arm64v8
-        resources:
-          requests:
-            memory: "300Mi"
-          limits:
-            memory: "300Mi"
-        ports:
-        - containerPort: 8761
-        env:
-        - name: spring.profiles.active
-          valueFrom:
-            configMapKeyRef:
-              name: clustercamp
-              key: active.profiles
-        - name: spring.cloud.config.uri
-          valueFrom:
-            configMapKeyRef:
-              name: clustercamp
-              key: config.host
-        - name: eureka.datacenter
-          valueFrom:
-            configMapKeyRef:
-              name: clustercamp
-              key: eureka.datacenter
-        - name: eureka.environment
-          valueFrom:
-            configMapKeyRef:
-              name: clustercamp
-              key: eureka.environment
-        - name: eureka.client.serviceUrl.defaultZone
-          valueFrom:
-            configMapKeyRef:
-              name: clustercamp
-              key: eureka.host
+        - name: app
+          image: dockercamp/springcloud-eureka:1.3.0-arm64v8
+          ports:
+            - containerPort: 8761
+          env:
+            - name: spring.profiles.active
+              valueFrom:
+                configMapKeyRef:
+                  name: clustercamp
+                  key: active.profiles
+            - name: spring.cloud.config.uri
+              valueFrom:
+                configMapKeyRef:
+                  name: clustercamp
+                  key: config.host
+            - name: eureka.datacenter
+              valueFrom:
+                configMapKeyRef:
+                  name: clustercamp
+                  key: eureka.datacenter
+            - name: eureka.environment
+              valueFrom:
+                configMapKeyRef:
+                  name: clustercamp
+                  key: eureka.environment
 ---
 apiVersion: v1
 kind: Service
@@ -78,7 +68,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
-    external-dns.alpha.kubernetes.io/target: home.cluster.camp
+    external-dns.alpha.kubernetes.io/target: home.proxy.camp
 spec:
   rules:
     - host: eureka.cluster.camp
@@ -88,4 +78,3 @@ spec:
             backend:
               serviceName: eureka
               servicePort: 8761
-

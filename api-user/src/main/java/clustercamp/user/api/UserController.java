@@ -17,8 +17,8 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping("/user")
 @RequiredArgsConstructor
+@RequestMapping("/user")
 @Api(value = "User")
 public class UserController {
 
@@ -29,7 +29,7 @@ public class UserController {
     return ResponseEntity.ok(service.detail(id));
   }
 
-  @PostMapping
+  @PostMapping("/")
   public ResponseEntity<User> create(@RequestBody User request) {
     var userDto = service.create(request);
 

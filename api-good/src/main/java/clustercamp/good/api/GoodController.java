@@ -2,6 +2,7 @@ package clustercamp.good.api;
 
 import clustercamp.good.repository.Good;
 import clustercamp.good.service.GoodService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+@Api(value = "Good")
 @RestController
 @RequestMapping("/good")
 @RequiredArgsConstructor
@@ -27,9 +29,10 @@ public class GoodController {
     return ResponseEntity.ok(service.detail(id));
   }
 
-  @PostMapping
+  @PostMapping("/")
   public ResponseEntity<Good> create(@RequestBody Good request) {
     var created = service.create(request);
+
     return ResponseEntity.created(
       MvcUriComponentsBuilder.fromController(getClass())
         .path("/{id}").buildAndExpand(created.getId()).toUri()
@@ -43,7 +46,7 @@ public class GoodController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity remove(@PathVariable Long id) {
+  public ResponseEntity<Void> remove(@PathVariable Long id) {
     service.remove(id);
     return ResponseEntity.noContent().build();
   }

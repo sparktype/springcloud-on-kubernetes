@@ -1,4 +1,18 @@
-[![Build Status](https://travis-ci.org/clustercamp/spring-cloud-java11.svg?branch=master)](https://travis-ci.org/clustercamp/spring-cloud-java11)
-[![Coverage Status](https://coveralls.io/repos/github/clustercamp/spring-cloud-java11/badge.svg?branch=master)](https://coveralls.io/github/clustercamp/spring-cloud-java11?branch=master)
+![](https://github.com/clustercamp/springcloud-java/workflows/build/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/clustercamp/springcloud-java/badge.svg?branch=master)](https://coveralls.io/github/clustercamp/springcloud-java?branch=master)
+
+![Logo](https://repository-images.githubusercontent.com/177172824/907da800-f91e-11e9-8a13-415ff32e13cd)
+
 # springcloud-java
-Building micro service with spring cloud and Java
+Building micro service with spring cloud and Java on kuberntes
+
+
+## Build 
+```shell script
+$ ./gradlew clean build
+```
+
+## Build Image with JIB
+```shell script
+$ ./gradlew jib 
+``` 

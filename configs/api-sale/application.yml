@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 80
 spring:
   application:
     name: API-SALE
@@ -9,9 +9,10 @@ spring:
   boot:
     admin:
       client:
-        url: http://admin.springcloud.svc.cluster.local:8080
+        url: http://eureka.springcloud.svc.cluster.local:8761/admin
+        service-base-url: api-sale.cluster.camp
         instance:
-          prefer-ip: true
+          preferIp: true
   datasource:
     url: jdbc:mysql://mysql.springcloud.svc.cluster.local:3306/spring?useUnicode=yes&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -56,7 +57,7 @@ eureka:
     serviceUrl:
       defaultZone: http://eureka.springcloud.svc.cluster.local:8761/eureka/
   instance:
-    preferIpAddress: true
+    hostname: api-sale.cluster.camp
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 management:
   metrics:
@@ -65,6 +66,8 @@ management:
   endpoint:
     metrics:
       enabled: true
+    health:
+      show-details: ALWAYS
   endpoints:
     jmx:
       exposure:
