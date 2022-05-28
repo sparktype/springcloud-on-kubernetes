@@ -1,14 +1,10 @@
-rootProject.name = 'springcloud-java'
+rootProject.name = 'spring-msa-on-k8s'
 
-include 'api-base'
-include 'api-good'
-include 'api-sale'
-include 'api-ship'
-include 'api-user'
-include 'springcloud-config'
-include 'springcloud-eureka'
-include 'springcloud-hystrix'
-include 'springcloud-security'
-include 'springcloud-zuul'
-include 'springcloud-gateway'
-include 'springcloud-sidecar'
+include 'commons'
+include 'gateway'
+include 'product-service'
+include 'sales-service'
+include 'shipping-service'
+include 'user-service'
+
+

@@ -1,0 +1,8 @@
+springBoot {
+  buildInfo()
+}
+
+dependencies {
+  implementation(project(":commons"))
+  implementation("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
+}
