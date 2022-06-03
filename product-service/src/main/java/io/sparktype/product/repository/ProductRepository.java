@@ -1,8 +1,8 @@
-package clustercamp.good.repository;
+package io.sparktype.product.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GoodRepository extends CrudRepository<Good, Long> {
+public interface ProductRepository extends CrudRepository<Product, Long> {
 }

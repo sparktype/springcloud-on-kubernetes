@@ -3,8 +3,8 @@ rootProject.name = 'spring-msa-on-k8s'
 include 'commons'
 include 'gateway'
 include 'product-service'
-include 'sales-service'
-include 'shipping-service'
-include 'user-service'
+//include 'sales-service'
+//include 'shipping-service'
+//include 'user-service'
 
 

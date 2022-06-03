@@ -1,19 +1,17 @@
-package clustercamp.good.repository;
+package io.sparktype.product.repository;
 
-import javax.persistence.Entity;
-
+import io.sparktype.commons.jpa.TimeAware;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import io.sparktype.commons.jpa.TimeAware;
-
+import javax.persistence.Entity;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Good extends TimeAware {
+public class Product extends TimeAware {
 
   private String name;
 
@@ -21,13 +19,13 @@ public class Good extends TimeAware {
 
   private Long price;
 
-  public static Good of(Long id) {
-    var good = new Good();
+  public static Product of(Long id) {
+    var good = new Product();
     good.setId(id);
     return good;
   }
 
-  public Good from(Good request) {
+  public Product from(Product request) {
     name = request.getName();
     description = request.getDescription();
     price = request.getPrice();

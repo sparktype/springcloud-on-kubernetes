@@ -2,7 +2,6 @@ buildscript {
   ext {
     springBootVersion = "2.6.8"
     springCloudVersion = "2021.0.3"
-    gradlePath = "${rootProject.projectDir}/gradle"
   }
 
   repositories {
@@ -19,23 +18,13 @@ buildscript {
 allprojects {
   apply plugin: "java"
   apply plugin: "groovy"
-
+  apply plugin: "io.spring.dependency-management"
+  
   sourceCompatibility = "17"
   group = "sparktype"
 
   repositories {
     mavenCentral()
-  }
-}
-
-subprojects {
-  apply plugin: "org.springframework.boot"
-  apply plugin: "io.spring.dependency-management"
-
-  dependencies {
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
   }
 
   dependencyManagement {
@@ -43,4 +32,17 @@ subprojects {
       mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
   }
+}
+
+subprojects {
+  apply plugin: "org.springframework.boot"
+
+
+  dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+  }
+
+
 }
