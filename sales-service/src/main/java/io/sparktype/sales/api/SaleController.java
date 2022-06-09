@@ -1,8 +1,7 @@
-package clustercamp.sale.api;
+package io.sparktype.sales.api;
 
-import clustercamp.sale.repository.Sale;
-import clustercamp.sale.service.SaleService;
-import io.swagger.annotations.Api;
+import io.sparktype.sales.repository.Sale;
+import io.sparktype.sales.service.SaleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@Api(value = "Sale")
+
 @RestController
 @RequestMapping("/sale")
 @RequiredArgsConstructor
@@ -33,16 +32,16 @@ public class SaleController {
   public ResponseEntity<Sale> create(@RequestBody Sale request) {
     var created = service.create(request);
     return ResponseEntity.created(MvcUriComponentsBuilder.fromController(getClass())
-      .path("/{id}")
-      .buildAndExpand(created.getId())
-      .toUri()
+        .path("/{id}")
+        .buildAndExpand(created.getId())
+        .toUri()
     ).body(created);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<Sale> modify(@PathVariable Long id, @RequestBody Sale request) {
     return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequestUri().build(id))
-      .body(service.modify(id, request));
+        .body(service.modify(id, request));
   }
 
   @DeleteMapping("/{id}")

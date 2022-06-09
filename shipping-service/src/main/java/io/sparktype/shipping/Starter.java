@@ -1,15 +1,15 @@
-package clustercamp.ship;
+package io.sparktype.shipping;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EnableJpaAuditing
-@SpringCloudApplication
-public class Application {
+@SpringBootApplication
+public class Starter {
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(Starter.class, args);
   }
 
 }

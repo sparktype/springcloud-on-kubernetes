@@ -1,11 +1,10 @@
-package clustercamp.ship.repository;
+package io.sparktype.shipping.repository;
 
 import io.sparktype.commons.jpa.TimeAware;
+import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Entity;
 
 
 @Entity

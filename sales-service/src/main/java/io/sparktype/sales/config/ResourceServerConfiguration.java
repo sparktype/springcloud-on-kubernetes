@@ -1,4 +1,4 @@
-package clustercamp.sale.config;
+package io.sparktype.sales.config;
 
 import io.sparktype.commons.Swagger;
 import org.springframework.context.annotation.Bean;
@@ -16,14 +16,14 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
   @Override
   public void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-      .antMatchers(Swagger.PATHS).permitAll()
-      .antMatchers("/", "/actuator/**", "/csrf", "/version").permitAll()
-      .and()
-      .authorizeRequests()
-      .anyRequest()
-      .authenticated()
-      .and()
-      .csrf().disable();
+        .antMatchers(Swagger.PATHS).permitAll()
+        .antMatchers("/", "/actuator/**", "/csrf", "/version").permitAll()
+        .and()
+        .authorizeRequests()
+        .anyRequest()
+        .authenticated()
+        .and()
+        .csrf().disable();
   }
 
   @Bean

@@ -1,13 +1,12 @@
-package clustercamp.sale.repository;
+package io.sparktype.sales.repository;
 
+import io.sparktype.commons.jpa.TimeAware;
 import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
-import io.sparktype.commons.jpa.TimeAware;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

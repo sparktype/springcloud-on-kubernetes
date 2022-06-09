@@ -1,25 +1,23 @@
-package clustercamp.user;
+package io.sparktype.user;
 
-import clustercamp.user.repository.User;
-import clustercamp.user.repository.UserRepository;
+import io.sparktype.user.repository.User;
+import io.sparktype.user.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableJpaAuditing
-@SpringCloudApplication
-public class Application {
+@SpringBootApplication
+public class Starter {
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(Starter.class, args);
   }
 
   @Bean
-  @ConditionalOnProperty(name = "app.initial.data", havingValue = "true")
   public CommandLineRunner loadData(UserRepository repository, PasswordEncoder encoder) {
     return args -> {
       var user = new User();
@@ -31,7 +29,6 @@ public class Application {
       user.setAccountNonLocked(true);
       user.setCredentialsNonExpired(true);
       user.setEnabled(true);
-      user.setCreateBy("INITIAL");
       repository.save(user);
     };
   }

@@ -1,12 +1,10 @@
-package clustercamp.sale.repository;
+package io.sparktype.sales.repository;
 
+import io.sparktype.commons.jpa.TimeAware;
 import javax.persistence.Entity;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import io.sparktype.commons.jpa.TimeAware;
 
 @Entity
 @Getter

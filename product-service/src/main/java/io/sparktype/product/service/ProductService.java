@@ -3,10 +3,9 @@ package io.sparktype.product.service;
 import io.sparktype.commons.exception.Exceptions;
 import io.sparktype.product.repository.Product;
 import io.sparktype.product.repository.ProductRepository;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor

@@ -1,8 +1,7 @@
-package clustercamp.ship.api;
+package io.sparktype.shipping.api;
 
-import clustercamp.ship.repository.Ship;
-import clustercamp.ship.service.ShipService;
-import io.swagger.annotations.Api;
+import io.sparktype.shipping.repository.Ship;
+import io.sparktype.shipping.service.ShipService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@Api(value = "Ship")
 @RestController
 @RequestMapping("/ship")
 @RequiredArgsConstructor
@@ -34,15 +32,15 @@ public class ShipController {
     var created = service.create(request);
 
     return ResponseEntity.created(MvcUriComponentsBuilder.fromController(getClass())
-      .path("/{id}").buildAndExpand(created.getId())
-      .toUri()
+        .path("/{id}").buildAndExpand(created.getId())
+        .toUri()
     ).body(created);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<Ship> modify(@PathVariable Long id, @RequestBody Ship request) {
     return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequestUri().build(id))
-      .body(service.modify(id, request));
+        .body(service.modify(id, request));
   }
 
   @DeleteMapping("/{id}")

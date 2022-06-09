@@ -1,4 +1,4 @@
-package clustercamp.user.repository;
+package io.sparktype.user.repository;
 
 import javax.persistence.Entity;
 
