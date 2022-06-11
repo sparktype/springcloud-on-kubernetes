@@ -19,9 +19,9 @@ allprojects {
   apply plugin: "java"
   apply plugin: "groovy"
   apply plugin: "io.spring.dependency-management"
-  
+
   sourceCompatibility = "17"
-  group = "sparktype"
+  group = "io.sparktype"
 
   repositories {
     mavenCentral()
@@ -37,12 +37,9 @@ allprojects {
 subprojects {
   apply plugin: "org.springframework.boot"
 
-
   dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   }
-
-
 }
