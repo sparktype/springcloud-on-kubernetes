@@ -1,0 +1,13 @@
+global:
+  name: ccs
+
+server:
+  replicas: 3
+  bootstrapExpect: 3
+  storageClass: nfs-client
+
+ui:
+  service:
+    type: NodePort
+    nodePort:
+      http: 30030

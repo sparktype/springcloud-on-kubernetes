@@ -1,0 +1,13 @@
+global:
+  name: consul
+
+server:
+  replicas: 3
+  bootstrapExpect: 3
+  storageClass: csi-cinder-sc-retain
+
+ui:
+  service:
+    type: NodePort
+    nodePort:
+      http: 32300

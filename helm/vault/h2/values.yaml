@@ -1,0 +1,58 @@
+global:
+  enabled: true
+server:
+  enabled: true
+  service:
+    enabled: true
+    externalTrafficPolicy: Cluster
+    port: 8200
+    targetPort: 8200
+    annotations: { }
+
+    # This configures the Vault Statefulset to create a PVC for data
+    # storage when using the file or raft backend storage engines.
+    # See https://www.vaultproject.io/docs/configuration/storage/index.html to know more
+  dataStorage:
+    enabled: true
+    size: 10Gi
+    mountPath: "/vault/data"
+    storageClass: csi-cinder-sc-retain
+    accessMode: ReadWriteOnce
+    annotations: { }
+  ha:
+    enabled: true
+    replicas: 5
+    config: |
+      ui = true
+      listener "tcp" {
+        tls_disable = 1
+        address = "[::]:8200"
+        cluster_address = "[::]:8201"
+      }
+      storage "consul" {
+        path = "vault"
+        address = "HOST_IP:8500"
+      }
+      service_registration "kubernetes" {}
+      # Example configuration for using auto-unseal, using Google Cloud KMS. The
+      # GKMS keys must already exist, and the cluster must have a service account
+      # that is authorized to access GCP KMS.
+      #seal "gcpckms" {
+      #   project     = "vault-helm-dev-246514"
+      #   region      = "global"
+      #   key_ring    = "vault-helm-unseal-kr"
+      #   crypto_key  = "vault-helm-unseal-key"
+      #}
+    # A disruption budget limits the number of pods of a replicated application
+    # that are down simultaneously from voluntary disruptions
+    disruptionBudget:
+      enabled: true
+      maxUnavailable: null
+ui:
+  enabled: true
+  publishNotReadyAddresses: true
+  activeVaultPodOnly: false
+  serviceType: "NodePort"
+  serviceNodePort: 32100
+  externalPort: 8200
+  targetPort: 8200
