@@ -4,7 +4,7 @@ global:
 server:
   replicas: 3
   bootstrapExpect: 3
-  storageClass: csi-cinder-sc-retain
+  storageClass: local-path
 
 ui:
   service:
