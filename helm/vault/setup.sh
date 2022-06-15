@@ -1,8 +1,8 @@
 helm repo add hashicorp https://helm.releases.hashicorp.com
-helm install vault hashicorp/vault -f values.yaml -n
+helm install vault hashicorp/vault -f values.yaml -n devops
 
 
-kubectl exec -ti vault-0 -n ccs -- vault operator init
+kubectl exec vault-0 -n devops -- vault operator init -key-shares=1 -key-threshold=1 -format=json > cluster-keys.json
 
 # US
 #Unseal Key 1: Kj0Dd9by8xkkBjlDiZEp4FfGe7yRdnWVscFXvx5fX2qt
