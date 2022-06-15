@@ -2,6 +2,7 @@ buildscript {
   ext {
     springBootVersion = "2.6.8"
     springCloudVersion = "2021.0.3"
+    jibVersion = "3.2.1"
   }
 
   repositories {
@@ -36,7 +37,7 @@ allprojects {
 
 subprojects {
   apply plugin: "org.springframework.boot"
-
+  
   dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
