@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: private-repo-creds
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repo-creds
+stringData:
+  type: git
+  url: https://code.hcloud.hmc.co.kr/ccs/devops
+  #  username: "7102758"
+  #  password: "ss72001827!!"
+  username: "gitlab+deploy-token-4"
+  password: "yiFKy6y_nA7saKytBztL"

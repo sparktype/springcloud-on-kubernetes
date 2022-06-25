@@ -1,0 +1,33 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger
+  namespace: observability
+spec:
+  strategy: production
+  collector:
+    maxReplicas: 5
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+  ingester:
+    options:
+      ingester:
+        deadlockInterval: 0s
+  ingress:
+    enabled: false
+  agent:
+    strategy: DaemonSet
+  ui:
+    options:
+      dependencies:
+        dagMaxNumServices: 200
+        menuEnabled: true
+      menu:
+        - label: "About Jaeger"
+          items:
+            - label: "Documentation"
+              url: "https://www.jaegertracing.io/docs/latest"
+      tracking:
+        gaID: UA-000000-2

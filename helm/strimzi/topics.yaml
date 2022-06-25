@@ -1,0 +1,9 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: sparktype.topic.order.created
+  labels:
+    strimzi.io/cluster: "sparktype"
+spec:
+  partitions: 2
+  replicas: 3
