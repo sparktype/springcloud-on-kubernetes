@@ -21,10 +21,10 @@ configure(subprojects.findAll { it.name != "commons" }) {
     to {
       image = "sparktype/${project.name}"
       tags = ['latest', "${project.version}"]
-      auth {
-        username = "${System.env.DOCKER_USERNAME}"
-        password = "${System.env.DOCKER_PASSWORD}"
-      }
+//      auth {
+//        username = "${System.env.DOCKER_USERNAME}"
+//        password = "${System.env.DOCKER_PASSWORD}"
+//      }
     }
 
     container {
