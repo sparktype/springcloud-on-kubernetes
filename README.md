@@ -1,3 +1,4 @@
+[![Java CI with Gradle](https://github.com/sparktype/springcloud-on-kubernetes/actions/workflows/gradle.yml/badge.svg)](https://github.com/sparktype/springcloud-on-kubernetes/actions/workflows/gradle.yml)
 ![](https://github.com/clustercamp/springcloud-java/workflows/build/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/clustercamp/springcloud-java/badge.svg?branch=master)](https://coveralls.io/github/clustercamp/springcloud-java?branch=master)
 
