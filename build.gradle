@@ -1,6 +1,6 @@
 buildscript {
   ext {
-    springBootVersion = "2.6.8"
+    springBootVersion = "2.7.1"
     springCloudVersion = "2021.0.3"
     jibVersion = "3.2.1"
   }
@@ -44,3 +44,5 @@ subprojects {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   }
 }
+
+apply from: 'gradle/jib.gradle'
