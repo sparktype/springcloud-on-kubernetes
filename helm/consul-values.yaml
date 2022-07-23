@@ -1,0 +1,20 @@
+global:
+  name: consul
+
+server:
+  replicas: 1
+  bootstrapExpect: 1
+  storage: 100Mi
+  resources:
+    limits:
+      cpu: 5000m
+      memory: 1000Mi
+    requests:
+      cpu: 200m
+      memory: 500Mi
+
+ui:
+  service:
+    type: NodePort
+    nodePort:
+      http: 30030
