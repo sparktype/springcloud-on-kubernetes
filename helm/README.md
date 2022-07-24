@@ -31,11 +31,54 @@ kubectl exec vault-0 -n devops -- vault operator init -key-shares=1 -key-thresho
 kubectl exec vault-0 -n vault -- vault operator init -key-shares=1 -key-threshold=1 -format=json > cluster-keys.json
 cat cluster-keys.json | jq -r ".unseal_keys_b64[]"
 VAULT_UNSEAL_KEY=$(cat cluster-keys.json | jq -r ".unseal_keys_b64[]")
+8XBuKuosYluCDL7N9MDgorf9l+n66UqXDQWMDqOp//Y=
 
 kubectl exec vault-0 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 kubectl exec vault-1 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 kubectl exec vault-2 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 ````
+
+```shell
+export VAULT_ADDR=http://localhost:30082
+vault operator init
+hvs.u5iap5Wx11oRpZByaJQAddWA
+export VAULT_TOKEN=hvs.u5iap5Wx11oRpZByaJQAddWA
+8XBuKuosYluCDL7N9MDgorf9l+n66UqXDQWMDqOp//Y=
+
+
+❯ vault token create
+Key                  Value
+---                  -----
+token                hvs.mQhKUlKaVUvyrynSEvBwDkCM
+token_accessor       qWzulkO9BgBEpFhJjlaMlojF
+token_duration       ∞
+token_renewable      false
+token_policies       ["root"]
+identity_policies    []
+policies             ["root"]
+
+❯ vault token create -policy=default
+Key                  Value
+---                  -----
+token                hvs.CAESILVFhkFkryy5QRNyrPYOjyIvfOnwJgQxIw7MDgnt49q8Gh4KHGh2cy5rRVhNZjV4VUl1dVhtV3NNUmo5ZXFtSDI
+token_accessor       YPI6xn4tkKhvXkUTGIKkBRp5
+token_duration       768h
+token_renewable      true
+token_policies       ["default"]
+identity_policies    []
+policies             ["default"]
+
+❯ vault token create -policy=springcloud
+Key                  Value
+---                  -----
+token                hvs.CAESIDYDqotw7x7F5DUcyFImeh1SVcQx79ls8wrsT3qZR0geGh4KHGh2cy5tTUs4dU9qeEJ3bWdzT2dITEd5amQ5Vkk
+token_accessor       CezXMg9Ii6vRrEfnbdHdaJvS
+token_duration       768h
+token_renewable      true
+token_policies       ["default" "springcloud"]
+identity_policies    []
+policies             ["default" "springcloud"]
+```
 
 https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube-consul
 
