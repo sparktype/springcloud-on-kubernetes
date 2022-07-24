@@ -1,19 +1,28 @@
-name: Java CI
+name: Java CI with Gradle
 
 on:
   push:
     branches: 
       - master
+      - feature/springboot-2.6.x
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    name: Checkout and Build
+
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
       with:
-        java-version: 11
+        java-version: 17
+        distribution: 'liberica'
+
     - name: Build with Gradle
-      run: ./gradlew build
+      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      with:
+        arguments: clean builds

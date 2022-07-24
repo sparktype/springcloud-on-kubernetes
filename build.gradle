@@ -1,8 +1,8 @@
 buildscript {
   ext {
-    springBootVersion = "2.1.10.RELEASE"
-    springCloudVersion = "Greenwich.SR4"
-    gradlePath = "${rootProject.projectDir}/gradle"
+    springBootVersion = "2.7.2"
+    springCloudVersion = "2021.0.3"
+    jibVersion = "3.2.1"
   }
 
   repositories {
@@ -19,36 +19,13 @@ buildscript {
 allprojects {
   apply plugin: "java"
   apply plugin: "groovy"
+  apply plugin: "io.spring.dependency-management"
+
+  sourceCompatibility = "17"
+  group = "io.sparktype"
 
   repositories {
     mavenCentral()
-  }
-}
-
-subprojects {
-  apply plugin: "org.springframework.boot"
-  apply plugin: "io.spring.dependency-management"
-
-  sourceCompatibility = "11"
-  group = "clustercamp"
-
-  configurations {
-    compile.exclude module: 'spring-boot-starter-tomcat'
-  }
-
-  dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.boot:spring-boot-starter-webflux"
-    implementation "org.springframework.boot:spring-boot-starter-undertow"
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
-
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-
-    compileOnly "org.projectlombok:lombok"
-    annotationProcessor "org.projectlombok:lombok"
-
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "io.projectreactor:reactor-test"
   }
 
   dependencyManagement {
@@ -58,6 +35,14 @@ subprojects {
   }
 }
 
-apply from: "${gradlePath}/api.gradle"
-apply from: "${gradlePath}/jib.gradle"
-apply from: "${gradlePath}/metric.gradle"
+subprojects {
+  apply plugin: "org.springframework.boot"
+  
+  dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+  }
+}
+
+apply from: 'gradle/jib.gradle'

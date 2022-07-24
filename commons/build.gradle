@@ -1,0 +1,9 @@
+version = "1.0.0"
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+  compileOnly 'org.springframework.boot:spring-boot-starter-web'
+  compileOnly 'org.springframework.boot:spring-boot-starter-data-jpa'
+}
