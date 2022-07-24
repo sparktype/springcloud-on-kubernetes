@@ -1,0 +1,47 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: product
+---
+spring:
+  config:
+    activate:
+      on-profile: ide
+  datasource:
+    url: jdbc:postgresql://localhost:30032/product
+    driver-class-name: org.postgresql.Driver
+    username: product
+    password: product1234
+  jpa:
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: true
+  cloud:
+    consul:
+      host: localhost
+      port: 30030
+      config:
+        enabled: true
+        watch:
+          enabled: true
+        prefix: configuration
+        defaultContext: apps
+        profileSeparator: '::'
+      discovery:
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        serviceName: ${spring.application.name}
+management:
+  endpoint:
+    metrics:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+

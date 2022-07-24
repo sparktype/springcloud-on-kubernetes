@@ -1,11 +1,18 @@
 
 # Install Component
 
+## Metric Server
+
+```shell
+helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+helm upgrade --install metrics-server metrics-server/metrics-server -f metric-pgsql-values.yaml -n kube-system
+```
+
 ## Consul
 
 ```shell
 helm repo add hashicorp https://helm.releases.hashicorp.com
-helm install consul hashicorp/consul --create-namespace -n consul -f consul-values.yaml
+helm install consul hashicorp/consul --create-namespace -n consul -f consul-pgsql-values.yaml
 ```
 
 
@@ -13,7 +20,7 @@ helm install consul hashicorp/consul --create-namespace -n consul -f consul-valu
 
 ```shell
 helm repo add hashicorp https://helm.releases.hashicorp.com
-helm install vault hashicorp/vault --create-namespace -n vault -f vault-values.yaml
+helm install vault hashicorp/vault --create-namespace -n vault -f vault-pgsql-values.yaml
 
 kubectl exec vault-0 -n devops -- vault operator init -key-shares=1 -key-threshold=1 -format=json > cluster-keys.json
 ```
@@ -63,4 +70,11 @@ argocd cluster add ap-northeast-2-stg-admin --name ap-northeast-2-stg --upsert
 helm repo add strimzi https://strimzi.io/charts/
 helm install strimzi strimzi/strimzi-kafka-operator --create-namespace -n kafka
 kubectl apply -f kafka.yaml -n kafka
+```
+
+## PostgreSQL
+
+```shell
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install pgsql bitnami/postgresql --create-namespace -n db -f pgsql-values.yaml
 ```
