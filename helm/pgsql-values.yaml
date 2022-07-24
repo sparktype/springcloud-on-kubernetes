@@ -1,0 +1,14 @@
+auth:
+  enablePostgresUser: false
+  postgresPassword: "springcloud2022"
+  username: "springcloud"
+  password: "springcloud2022"
+  database: "springcloud"
+architecture: standalone
+primary:
+  service:
+    type: NodePort
+    nodePorts:
+      postgresql: 30032
+  persistence:
+    size: 1Gi

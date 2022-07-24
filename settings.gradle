@@ -3,9 +3,9 @@ rootProject.name = 'springcloud-on-kubernetes'
 include 'commons'
 include 'gateway'
 include 'product'
-include 'order'
+include 'purchase'
 include 'shipping'
 include 'stock'
-include 'user'
+include 'users'
 
 
