@@ -7,5 +7,6 @@ include 'purchase'
 include 'shipping'
 include 'stock'
 include 'users'
+include 'oauth'
 
 

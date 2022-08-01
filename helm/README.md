@@ -30,9 +30,9 @@ kubectl exec vault-0 -n devops -- vault operator init -key-shares=1 -key-thresho
 ```shell
 kubectl exec vault-0 -n vault -- vault operator init -key-shares=1 -key-threshold=1 -format=json > cluster-keys.json
 cat cluster-keys.json | jq -r ".unseal_keys_b64[]"
-VAULT_UNSEAL_KEY=$(cat cluster-keys.json | jq -r ".unseal_keys_b64[]")
-8XBuKuosYluCDL7N9MDgorf9l+n66UqXDQWMDqOp//Y=
 
+8XBuKuosYluCDL7N9MDgorf9l+n66UqXDQWMDqOp//Y=
+VAULT_UNSEAL_KEY=$(cat cluster-keys.json | jq -r ".unseal_keys_b64[]")
 kubectl exec vault-0 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 kubectl exec vault-1 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 kubectl exec vault-2 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
