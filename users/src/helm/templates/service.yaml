@@ -7,7 +7,6 @@ metadata:
     chart: {{ template "users.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-    version: {{ .Values.image.tag }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -18,7 +17,6 @@ spec:
   selector:
     app: {{ template "users.name" . }}
     release: {{ .Release.Name }}
-    version: {{ .Values.image.tag }}
 ---
 apiVersion: v1
 kind: Service
@@ -29,7 +27,6 @@ metadata:
     chart: {{ template "users.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-    version: {{ .Values.image.tag }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -40,4 +37,3 @@ spec:
   selector:
     app: {{ template "users.name" . }}
     release: {{ .Release.Name }}
-    version: {{ .Values.image.tag }}
