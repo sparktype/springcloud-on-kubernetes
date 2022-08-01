@@ -1,27 +1,9 @@
 spring:
   application:
-    name: product
+    name: users
   cloud:
     consul:
       config:
         enabled: true
         format: FILES
         profileSeparator: '-'
----
-spring:
-  config:
-    activate:
-      on-profile: ide
-  cloud:
-    consul:
-      host: localhost
-      port: 30030
----
-spring:
-  config:
-    activate:
-      on-profile: prd
-  cloud:
-    consul:
-      host: consul-server.consul.svc.cluster.local
-      port: 8500

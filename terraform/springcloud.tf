@@ -16,15 +16,8 @@ terraform {
 }
 
 provider "kubernetes" {
-  config_context = "minikube"
+  config_context = "docker-desktop"
   config_path    = "~/.kube/config"
-}
-
-
-module devops {
-  source = "./modules/namespace"
-  name   = "devops"
-  params = var.params
 }
 
 module kafka {
@@ -33,20 +26,9 @@ module kafka {
   params = var.params
 }
 
-module data {
+module users {
   source = "./modules/namespace"
-  name   = "data"
+  name   = "users"
   params = var.params
 }
 
-module argocd {
-  source = "./modules/namespace"
-  name   = "argocd"
-  params = var.params
-}
-
-module argo-rollouts {
-  source = "./modules/namespace"
-  name   = "argo-rollouts"
-  params = var.params
-}

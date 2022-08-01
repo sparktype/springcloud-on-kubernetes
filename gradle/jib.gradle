@@ -3,7 +3,7 @@ configure(subprojects.findAll { it.name != "commons" }) {
 
   jib {
     from {
-      image = "ghcr.io/graalvm/graalvm-ce:ol8-java17-22.1.0"
+      image = "ghcr.io/graalvm/graalvm-ce:ol8-java17-22.2.0"
 
       platforms {
         platform {
@@ -21,10 +21,6 @@ configure(subprojects.findAll { it.name != "commons" }) {
     to {
       image = "sparktype/${project.name}"
       tags = ['latest', "${project.version}"]
-      auth {
-        username = "${System.env.DOCKER_USERNAME}"
-        password = "${System.env.DOCKER_PASSWORD}"
-      }
     }
 
     container {

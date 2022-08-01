@@ -1,18 +1,16 @@
-package io.sparktype.user.repository;
+package io.sparktype.users.repository;
 
+import io.sparktype.commons.jpa.TimeAware;
 import javax.persistence.Entity;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import io.sparktype.commons.jpa.TimeAware;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class User extends TimeAware {
+public class Users extends TimeAware {
 
   private String username;
 
@@ -30,16 +28,16 @@ public class User extends TimeAware {
 
   private Boolean enabled;
 
-  public static User of(Long id) {
-    var user = new User();
+  public static Users of(Long id) {
+    var user = new Users();
     user.setId(id);
     return user;
   }
 
-  public User from(User user) {
-    realname = user.getRealname();
-    password = user.getPassword();
-    enabled = user.getEnabled();
+  public Users from(Users users) {
+    realname = users.getRealname();
+    password = users.getPassword();
+    enabled = users.getEnabled();
     return this;
   }
 }

@@ -3,9 +3,7 @@ resource "kubernetes_namespace" "ns" {
     name = var.name
 
     labels = {
-      name    = var.name
-      country = var.params["country"]
-      profile = var.params["profile"]
+      name = var.name
     }
   }
 }
@@ -25,13 +23,13 @@ resource "kubernetes_resource_quota" "quota" {
 
 resource "kubernetes_config_map" "cm" {
   metadata {
-    name      = "namespace-config"
+    name      = "configs"
     namespace = kubernetes_namespace.ns.metadata[0].name
   }
 
   data = {
-    "profile" = var.params["profile"]
-    "configs" = var.params["configs"]
-    "secrets" = var.params["secrets"]
+    "profile"     = var.params["profile"]
+    "consul_host" = var.params["consul_host"]
+    "consul_port" = var.params["consul_port"]
   }
 }
