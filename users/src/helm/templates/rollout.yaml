@@ -24,6 +24,7 @@ spec:
       labels:
         app: {{ template "users.name" . }}
         release: {{ .Release.Name }}
+        version: {{ .Values.image.tag }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
