@@ -7,3 +7,22 @@ spring:
         enabled: true
         format: FILES
         profileSeparator: '-'
+---
+spring:
+  config:
+    activate:
+      on-profile: ide
+  cloud:
+    consul:
+      host: localhost
+      port: 30030
+    vault:
+      authentication: TOKEN
+      token: hvs.u5iap5Wx11oRpZByaJQAddWA
+      #      token: hvs.CAESIGYgiu4utqLLPB4kfCcvXFaDoyn5E8acwh02qW_h95NrGh4KHGh2cy5BbmU4ZzlWTnc1ek1KWWw4Y0pxOTgzdms
+      host: localhost
+      port: 30082
+      scheme: http
+      uri: http://localhost:30082
+      connection-timeout: 5000
+      read-timeout: 15000
