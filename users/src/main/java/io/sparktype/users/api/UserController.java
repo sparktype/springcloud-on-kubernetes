@@ -1,8 +1,8 @@
 package io.sparktype.user.api;
 
 
-import io.sparktype.user.repository.User;
-import io.sparktype.user.service.UserService;
+import io.sparktype.users.repository.Users;
+import io.sparktype.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,15 +21,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping("/user")
 public class UserController {
 
-  private final UserService service;
+  private final UsersService service;
 
   @GetMapping("/{id}")
-  public ResponseEntity<User> detail(@PathVariable Long id) {
+  public ResponseEntity<Users> detail(@PathVariable Long id) {
     return ResponseEntity.ok(service.detail(id));
   }
 
   @PostMapping("/")
-  public ResponseEntity<User> create(@RequestBody User request) {
+  public ResponseEntity<Users> create(
+      @RequestBody Users request) {
     var userDto = service.create(request);
 
     return ResponseEntity.created(
@@ -40,7 +41,8 @@ public class UserController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<User> modify(@PathVariable Long id, @RequestBody User request) {
+  public ResponseEntity<Users> modify(@PathVariable Long id,
+      @RequestBody Users request) {
     return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequestUri().build(id))
         .body(service.modify(id, request));
   }

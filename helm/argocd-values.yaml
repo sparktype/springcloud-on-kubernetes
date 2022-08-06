@@ -6,6 +6,8 @@ controller:
 
 server:
   replicas: 2
+  extraArgs:
+    - --insecure
   env:
     - name: ARGOCD_API_SERVER_REPLICAS
       value: 2

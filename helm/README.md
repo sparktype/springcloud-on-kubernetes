@@ -86,7 +86,8 @@ https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube-consul
 
 ```shell
 kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.7/manifests/install.yaml
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
 
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
 ```
@@ -95,7 +96,8 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 ```shell
 kubectl create namespace argo-rollouts
-kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/download/v1.2.1/install.yaml
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/download/v1.3.0-rc1/install.yaml
+
 ```
 
 ### User Management

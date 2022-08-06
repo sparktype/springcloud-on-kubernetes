@@ -1,37 +1,37 @@
-package io.sparktype.user.service;
+package io.sparktype.users.service;
 
 import io.sparktype.commons.exception.Exceptions;
-import io.sparktype.user.repository.User;
-import io.sparktype.user.repository.UserRepository;
+import io.sparktype.users.repository.Users;
+import io.sparktype.users.repository.UsersRepository;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UsersService {
 
-  private final UserRepository repository;
+  private final UsersRepository repository;
 
 
-  public User detail(Long id) {
+  public Users detail(Long id) {
     return repository.findById(id)
         .orElseThrow(Exceptions::notFound);
   }
 
-  public User _detail(Long id) {
-    return User.of(id);
+  public Users _detail(Long id) {
+    return Users.of(id);
   }
 
   @Transactional
-  public User create(User request) {
+  public Users create(Users request) {
     return repository.save(request);
   }
 
   @Transactional
-  public User modify(Long id, User request) {
+  public Users modify(Long id, Users request) {
     return repository.findById(id)
-        .map(user -> repository.save(user.from(request)))
+        .map(u -> repository.save(u.from(request)))
         .orElseThrow(Exceptions::notFound);
   }
 
