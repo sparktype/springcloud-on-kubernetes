@@ -28,8 +28,23 @@ resource "kubernetes_config_map" "cm" {
   }
 
   data = {
-    "profile"     = var.params["profile"]
-    "consul_host" = var.params["consul_host"]
-    "consul_port" = var.params["consul_port"]
+    "profile"      = var.params["profile"]
+    "consul_host"  = var.params["consul_host"]
+    "consul_port"  = var.params["consul_port"]
+    "vault_host"   = var.params["vault_host"]
+    "vault_port"   = var.params["vault_port"]
+    "vault_scheme" = var.params["vault_scheme"]
+    "vault_uri"    = var.params["vault_uri"]
+  }
+}
+
+resource "kubernetes_secret" "secret" {
+  metadata {
+    name      = "vault-token"
+    namespace = kubernetes_namespace.ns.metadata[0].name
+  }
+
+  data = {
+    "token" = var.params["vault_token"]
   }
 }

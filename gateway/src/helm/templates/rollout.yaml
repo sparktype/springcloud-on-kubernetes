@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: {{ template "users.fullname" . }}
+  name: {{ template "gateway.fullname" . }}
   labels:
-    app: {{ template "users.name" . }}
-    chart: {{ template "users.chart" . }}
+    app: {{ template "gateway.name" . }}
+    chart: {{ template "gateway.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -12,16 +12,16 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: {{ template "users.name" . }}
+      app: {{ template "gateway.name" . }}
       release: {{ .Release.Name }}
   strategy:
     blueGreen:
-      activeService: {{ template "users.fullname" . }}
-      previewService: {{ template "users.fullname" . }}-preview
+      activeService: {{ template "gateway.fullname" . }}
+      previewService: {{ template "gateway.fullname" . }}-preview
   template:
     metadata:
       labels:
-        app: {{ template "users.name" . }}
+        app: {{ template "gateway.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -81,3 +81,4 @@ spec:
             httpGet:
               path: /actuator/health/readiness
               port: http
+          resources:

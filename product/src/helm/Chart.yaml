@@ -1,0 +1,6 @@
+apiVersion: v2
+name: product
+description: A Helm chart for Product Micro Service
+type: application
+version: 1.0.0
+appVersion: 1.0.0

@@ -5,7 +5,6 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import io.sparktype.oauth.jose.Jwks;
-import java.util.UUID;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -31,6 +30,8 @@ import org.springframework.security.oauth2.server.authorization.config.ProviderS
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
+import java.util.UUID;
+
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfiguration {
 
@@ -38,32 +39,13 @@ public class AuthorizationServerConfiguration {
   @Order(Ordered.HIGHEST_PRECEDENCE)
   public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
     OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-    // @formatter:off
-    http
-        .exceptionHandling(exceptions ->
-            exceptions.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
-        );
-    // @formatter:on
+    http.exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")));
     return http.build();
   }
 
-  // @formatter:off
   @Bean
   public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
-    RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-        .clientId("messaging-client")
-        .clientSecret("{noop}secret")
-        .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-        .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-        .redirectUri("http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc")
-        .redirectUri("http://127.0.0.1:8080/authorized")
-        .scope(OidcScopes.OPENID)
-        .scope("message.read")
-        .scope("message.write")
-        .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
-        .build();
+    RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString()).clientId("messaging-client").clientSecret("{noop}secret").clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC).authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE).authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN).authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS).redirectUri("http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc").redirectUri("http://127.0.0.1:8080/authorized").scope(OidcScopes.OPENID).scope("message.read").scope("message.write").clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build()).build();
 
     // Save registered client in db as if in-memory
     JdbcRegisteredClientRepository registeredClientRepository = new JdbcRegisteredClientRepository(jdbcTemplate);
@@ -71,7 +53,7 @@ public class AuthorizationServerConfiguration {
 
     return registeredClientRepository;
   }
-  // @formatter:on
+
 
   @Bean
   public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
@@ -97,13 +79,6 @@ public class AuthorizationServerConfiguration {
 
   @Bean
   public EmbeddedDatabase embeddedDatabase() {
-    return new EmbeddedDatabaseBuilder()
-        .generateUniqueName(true)
-        .setType(EmbeddedDatabaseType.H2)
-        .setScriptEncoding("UTF-8")
-        .addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-schema.sql")
-        .addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-consent-schema.sql")
-        .addScript("org/springframework/security/oauth2/server/authorization/client/oauth2-registered-client-schema.sql")
-        .build();
+    return new EmbeddedDatabaseBuilder().generateUniqueName(true).setType(EmbeddedDatabaseType.H2).setScriptEncoding("UTF-8").addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-schema.sql").addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-consent-schema.sql").addScript("org/springframework/security/oauth2/server/authorization/client/oauth2-registered-client-schema.sql").build();
   }
 }

@@ -20,15 +20,44 @@ provider "kubernetes" {
   config_path    = "~/.kube/config"
 }
 
-module kafka {
-  source = "./modules/namespace"
-  name   = "kafka"
-  params = var.params
-}
-
 module users {
   source = "./modules/namespace"
   name   = "users"
   params = var.params
 }
 
+module stock {
+  source = "./modules/namespace"
+  name   = "stock"
+  params = var.params
+}
+
+module shipping {
+  source = "./modules/namespace"
+  name   = "shipping"
+  params = var.params
+}
+
+module purchase {
+  source = "./modules/namespace"
+  name   = "purchase"
+  params = var.params
+}
+
+module product {
+  source = "./modules/namespace"
+  name   = "product"
+  params = var.params
+}
+
+module oauth {
+  source = "./modules/namespace"
+  name   = "oauth"
+  params = var.params
+}
+
+module gateway {
+  source = "./modules/namespace"
+  name   = "gateway"
+  params = var.params
+}

@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: {{ template "users.fullname" . }}
+  name: {{ template "stock.fullname" . }}
   labels:
-    app: {{ template "users.name" . }}
-    chart: {{ template "users.chart" . }}
+    app: {{ template "stock.name" . }}
+    chart: {{ template "stock.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -12,12 +12,12 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: {{ template "users.name" . }}
+      app: {{ template "stock.name" . }}
       release: {{ .Release.Name }}
   strategy:
     blueGreen:
-      activeService: {{ template "users.fullname" . }}
-      previewService: {{ template "users.fullname" . }}-preview
+      activeService: {{ template "stock.fullname" . }}
+      previewService: {{ template "stock.fullname" . }}-preview
   template:
     metadata:
       labels:

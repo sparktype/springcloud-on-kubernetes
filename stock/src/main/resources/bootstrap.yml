@@ -1,6 +1,6 @@
 spring:
   application:
-    name: product
+    name: users
   cloud:
     consul:
       config:
@@ -16,12 +16,13 @@ spring:
     consul:
       host: localhost
       port: 30030
----
-spring:
-  config:
-    activate:
-      on-profile: prd
-  cloud:
-    consul:
-      host: consul-server.consul.svc.cluster.local
-      port: 8500
+    vault:
+      authentication: TOKEN
+      token: hvs.u5iap5Wx11oRpZByaJQAddWA
+      #      token: hvs.CAESIGYgiu4utqLLPB4kfCcvXFaDoyn5E8acwh02qW_h95NrGh4KHGh2cy5BbmU4ZzlWTnc1ek1KWWw4Y0pxOTgzdms
+      host: localhost
+      port: 30082
+      scheme: http
+      uri: http://localhost:30082
+      connection-timeout: 5000
+      read-timeout: 15000

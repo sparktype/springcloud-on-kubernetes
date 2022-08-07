@@ -1,0 +1,6 @@
+apiVersion: v2
+name: shipping
+description: A Helm chart for Shipping Micro Service
+type: application
+version: 1.0.0
+appVersion: 1.0.0
