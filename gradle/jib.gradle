@@ -6,6 +6,7 @@ configure(subprojects.findAll { it.name != "commons" }) {
       image = "ghcr.io/graalvm/graalvm-ce:ol8-java17-22.2.0"
 
       platforms {
+
         platform {
           architecture = 'amd64'
           os = 'linux'

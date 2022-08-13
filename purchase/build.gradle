@@ -1,6 +1,6 @@
 dependencies {
   implementation project(":commons")
-  implementation ('org.springframework.boot:spring-boot-starter-web') {
+  implementation('org.springframework.boot:spring-boot-starter-web') {
     exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
   }
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -9,11 +9,8 @@ dependencies {
   implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
   implementation 'org.springframework.cloud:spring-cloud-starter-consul-config'
   implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-
-//  implementation 'org.springframework.boot:spring-boot-starter-security'
-//  implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-//  implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure'
-
+  implementation 'org.springframework.boot:spring-boot-starter-security'
+  
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   implementation 'org.postgresql:postgresql:42.4.0'
 

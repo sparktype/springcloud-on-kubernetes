@@ -1,17 +1,18 @@
 package io.sparktype.product.repository;
 
-import io.sparktype.commons.jpa.TimeAware;
-import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class Product extends TimeAware {
+@Document(collection = "products")
+public class Product {
 
+  private Long id;
   private String name;
 
   private String description;
@@ -19,9 +20,9 @@ public class Product extends TimeAware {
   private Long price;
 
   public static Product of(Long id) {
-    var good = new Product();
-    good.setId(id);
-    return good;
+    var product = new Product();
+    product.setId(id);
+    return product;
   }
 
   public Product from(Product request) {
