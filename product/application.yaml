@@ -1,13 +1,4 @@
-server:
-  port: 8080
 spring:
-  application:
-    name: product
----
-spring:
-  config:
-    activate:
-      on-profile: ide
   datasource:
     url: jdbc:postgresql://localhost:30032/product
     driver-class-name: org.postgresql.Driver
@@ -43,5 +34,3 @@ management:
     web:
       exposure:
         include: '*'
-
-

@@ -1,11 +1,13 @@
 package io.sparktype.purchase.service;
 
-import io.sparktype.commons.exception.Exceptions;
 import io.sparktype.purchase.repository.Sale;
+import io.sparktype.purchase.repository.SaleItemRepository;
 import io.sparktype.purchase.repository.SaleRepository;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
+
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -13,9 +15,10 @@ public class SaleService {
 
   private final SaleRepository repository;
 
-  public Sale detail(Long id) {
-    return repository.findById(id)
-        .orElseThrow(Exceptions::notFound);
+  private final SaleItemRepository itemRepository;
+
+  public Mono<Sale> detail(Long id) {
+    return repository.findById(id);
   }
 
   public Sale _detail(Long id) {
@@ -24,15 +27,14 @@ public class SaleService {
 
   @Transactional
 
-  public Sale create(Sale request) {
+  public Mono<Sale> create(Sale request) {
     return repository.save(request);
   }
 
   @Transactional
-  public Sale modify(Long id, Sale request) {
+  public Mono<Sale> modify(Long id, Sale request) {
     return repository.findById(id)
-        .map(sale -> repository.save(sale.from(request)))
-        .orElseThrow(Exceptions::notFound);
+        .flatMap(s -> repository.save(s.from(request)));
   }
 
   @Transactional

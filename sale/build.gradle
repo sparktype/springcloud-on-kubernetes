@@ -1,16 +1,16 @@
 dependencies {
   implementation project(":commons")
-  implementation('org.springframework.boot:spring-boot-starter-web') {
-    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+  implementation 'org.springframework.boot:spring-boot-starter-webflux'
+  implementation('org.springframework.boot:spring-boot-starter-hateoas') {
+    exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
   }
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
-  implementation 'org.springframework.boot:spring-boot-starter-undertow'
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
   implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
   implementation 'org.springframework.cloud:spring-cloud-starter-consul-config'
   implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
   implementation 'org.springframework.boot:spring-boot-starter-security'
-  
+
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   implementation 'org.postgresql:postgresql:42.4.0'
 

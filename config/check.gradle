@@ -1,0 +1,32 @@
+subprojects {
+  apply plugin: 'com.github.kt3k.coveralls'
+  apply plugin: "checkstyle"
+  apply plugin: "pmd"
+
+  checkstyle {
+    ignoreFailures = true
+    toolVersion = "10.3.2"
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+    reportsDir = file("${buildDir}/reports")
+  }
+
+  checkstyleMain {
+    reports {
+      xml.required = true
+      html.required = true
+      xml.destination = file("${checkstyle.reportsDir}/checkstyle-report.xml")
+    }
+  }
+
+  pmd {
+    ignoreFailures = true
+    reportsDir = file("${buildDir}/reports")
+  }
+
+  pmdMain {
+    reports {
+      xml.destination = file("${pmd.reportsDir}/pmd-report.xml")
+      xml.enabled = true
+    }
+  }
+}

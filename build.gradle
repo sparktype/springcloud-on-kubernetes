@@ -1,8 +1,9 @@
 buildscript {
   ext {
-    springBootVersion = "2.7.2"
+    springBootVersion = "2.7.3"
     springCloudVersion = "2021.0.3"
     jibVersion = "3.2.1"
+    coveralls = "2.12.0"
   }
 
   repositories {
@@ -13,19 +14,30 @@ buildscript {
   dependencies {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
+    classpath "gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:${coveralls}"
   }
 }
 
 allprojects {
   apply plugin: "java"
   apply plugin: "groovy"
-  apply plugin: "io.spring.dependency-management"
 
   sourceCompatibility = "17"
   group = "io.sparktype"
 
   repositories {
     mavenCentral()
+  }
+}
+
+subprojects {
+  apply plugin: "org.springframework.boot"
+  apply plugin: "io.spring.dependency-management"
+
+  dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   }
 
   dependencyManagement {
@@ -35,14 +47,5 @@ allprojects {
   }
 }
 
-subprojects {
-  apply plugin: "org.springframework.boot"
-  
-  dependencies {
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-  }
-}
-
-apply from: 'gradle/jib.gradle'
+apply from: 'config/jib.gradle'
+//apply from: 'config/check.gradle'
