@@ -32,15 +32,15 @@ module stock {
   params = var.params
 }
 
-module shipping {
+module ship {
   source = "./modules/namespace"
-  name   = "shipping"
+  name   = "ship"
   params = var.params
 }
 
-module purchase {
+module sale {
   source = "./modules/namespace"
-  name   = "purchase"
+  name   = "sale"
   params = var.params
 }
 

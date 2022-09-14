@@ -1,0 +1,10 @@
+configure(subprojects.findAll { it.name != "commons" }) {
+  apply plugin: "org.springframework.experimental.aot"
+
+  bootBuildImage {
+    builder = "paketobuildpacks/builder:tiny"
+//    buildpacks = ["gcr.io/paketo-buildpacks/graalvm"]
+    environment = ['BP_NATIVE_IMAGE': 'true']
+  }
+}
+

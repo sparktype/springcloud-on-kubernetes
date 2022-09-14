@@ -1,4 +1,3 @@
-
 # Install Component
 
 ## Metric Server
@@ -15,7 +14,6 @@ helm repo add hashicorp https://helm.releases.hashicorp.com
 helm install consul hashicorp/consul --create-namespace -n consul -f consul-pgsql-values.yaml
 ```
 
-
 ## Vault
 
 ```shell
@@ -25,7 +23,7 @@ helm install vault hashicorp/vault --create-namespace -n vault -f vault-pgsql-va
 kubectl exec vault-0 -n devops -- vault operator init -key-shares=1 -key-threshold=1 -format=json > cluster-keys.json
 ```
 
-### Initialize and unseal Vault 
+### Initialize and unseal Vault
 
 ```shell
 kubectl exec vault-0 -n vault -- vault operator init -key-shares=1 -key-threshold=1 -format=json > cluster-keys.json
@@ -122,4 +120,11 @@ kubectl apply -f kafka.yaml -n kafka
 ```shell
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install pgsql bitnami/postgresql --create-namespace -n db -f pgsql-values.yaml
+```
+
+## RabbitMQ
+
+```shell
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install rabbitmq bitnami/rabbitmq-cluster-operator --create-namespace -n rabbitmq-system
 ```

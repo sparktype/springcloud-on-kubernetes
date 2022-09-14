@@ -1,19 +1,22 @@
 buildscript {
   ext {
-    springBootVersion = "2.7.3"
-    springCloudVersion = "2021.0.3"
-    jibVersion = "3.2.1"
+    springBootVersion = "2.7.1"
+    springCloudVersion = "2021.0.4"
+    springNativeVersion = "0.12.1"
+    jibVersion = "3.3.0"
     coveralls = "2.12.0"
   }
 
   repositories {
+    maven { url 'https://repo.spring.io/release' }
     mavenCentral()
     gradlePluginPortal()
   }
 
   dependencies {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-    classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
+    classpath "org.springframework.experimental:spring-aot-gradle-plugin:${springNativeVersion}"
+    classpath "com.google.cloud.tools:jib-gradle-plugin:${jibVersion}"
     classpath "gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:${coveralls}"
   }
 }
@@ -26,6 +29,7 @@ allprojects {
   group = "io.sparktype"
 
   repositories {
+    maven { url 'https://repo.spring.io/release' }
     mavenCentral()
   }
 }
@@ -33,7 +37,7 @@ allprojects {
 subprojects {
   apply plugin: "org.springframework.boot"
   apply plugin: "io.spring.dependency-management"
-
+  
   dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -48,4 +52,4 @@ subprojects {
 }
 
 apply from: 'config/jib.gradle'
-//apply from: 'config/check.gradle'
+apply from: 'config/aot.gradle'

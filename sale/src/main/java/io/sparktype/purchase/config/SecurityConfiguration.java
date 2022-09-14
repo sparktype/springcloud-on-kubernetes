@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
   private static final String[] SERVICE_PATH = {
-      "/", "/actuator/**", "/product/**"
+      "/", "/actuator/**", "/sale/**"
   };
 
   @Bean
